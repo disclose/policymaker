@@ -1,0 +1,5 @@
+# Simple Safe Harbor
+
+We recognize security testing activities conducted in good faith and in-line with this policy to be “authorized” access. If your activities violate certain restrictions in our Acceptable Use Policy, we will waive those restrictions for the limited purpose of allowing security research under this policy. We will not sue you for circumventing the technological safeguards we have put in place to protect the applications in scope. If a third party initiates legal action against you and you have complied with this policy, we will take steps to make it clear that your actions were in accordance with this policy. We will not take civil action or file a report with law enforcement for inadvertent, good-faith violations of this policy.
+
+Please contact us by submitted a report before doing anything that may e inconsistent or unaddressed by this policy.
