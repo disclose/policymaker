@@ -1,6 +1,6 @@
 <template>
     <div class="progress-steps">
-
+        <slot></slot>
     </div>    
 </template>
 
@@ -8,8 +8,10 @@
 import Vue from 'vue'
 export default Vue.extend({
     name: "ProgressSteps",
-
     
+    mounted() {
+        console.log(this as any)
+    }
 })
 </script>
 

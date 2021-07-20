@@ -1,17 +1,22 @@
 <template>
-    <div>
+    <div id="app">
         <nav>
-            <logo>disclose.io</logo>
+            <div>disclose.io</div>
 
             <Progress-Steps>
-                <Progress-Step>Introduction</Progress-Step>
-                <Progress-Step>Organization details</Progress-Step>
-                <Progress-Step>Policy settings</Progress-Step>
-                <Progress-Step>Download</Progress-Step>
+                <Progress-Step :index="1">Introduction</Progress-Step>
+                <Progress-Step :index="2">Organization details</Progress-Step>
+                <Progress-Step :index="3">Policy settings</Progress-Step>
+                <Progress-Step :index="4">Download</Progress-Step>
             </Progress-Steps>
 
         </nav>
-        <main></main>
+
+        <main>
+            <header>
+                header
+            </header>            
+        </main>
     </div>
 </template>
 
@@ -42,12 +47,20 @@ export default Vue.extend({
 
 
 <style lang="postcss">
+#app {
+    @apply container mx-auto h-screen;
+    @apply flex flex-1 flex-row flex-nowrap items-stretch justify-between;
+}
+
 nav {
     --nav-width: 320px;
-
-    height: 100vh;
     width: var(--nav-width);
     background: var(--white);
+}
+
+main {
+    background: var(--shade-050);
+    @apply flex-grow;
 }
 
 </style>
