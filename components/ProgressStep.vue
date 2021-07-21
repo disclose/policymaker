@@ -1,7 +1,9 @@
 <template>
-    <div class="progress-step">
-        {{ index }}
-        <slot></slot>
+    <div>
+        <NuxtLink class="progress-step" :to="route">
+            {{ index }}
+            <slot></slot>
+        </NuxtLink>
     </div>
 </template>
 
@@ -13,6 +15,9 @@ export default Vue.extend({
     props: {
         index: {
             type: Number
+        },
+        route: {
+            type: String
         }
     }
 })
