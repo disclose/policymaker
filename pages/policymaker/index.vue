@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Introduction</h2>
+        <page-title>Introduction</page-title>
     </div>
 </template>
 
@@ -8,12 +8,14 @@
 import Vue from 'vue'
 import ProgressSteps from '@/components/ProgressSteps.vue'
 import ProgressStep from '@/components/ProgressStep.vue'
+import PageTitle from '~/components/PageTitle.vue'
 
 export default Vue.extend({
     layout: 'policymaker-v2',
     components: {
         ProgressSteps,
-        ProgressStep
+        ProgressStep,
+        PageTitle
     },
 
     data() {

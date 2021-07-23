@@ -1,12 +1,15 @@
 <template>
     <div>
-        <h2>Download</h2>
+        <page-title>Download</page-title>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import PageTitle from '~/components/PageTitle.vue'
+
 export default Vue.extend({
+  components: { PageTitle },
     layout: 'policymaker-v2',
 })
 </script>

@@ -50,3 +50,16 @@
          url('/fonts/noto-sans-v12-latin-ext_latin-700italic.ttf') format('truetype'), /* Safari, Android, iOS */
          url('/fonts/noto-sans-v12-latin-ext_latin-700italic.svg#NotoSans') format('svg'); /* Legacy iOS */
   }
+
+    /* noto sans display */
+    @font-face {
+     font-family: 'Noto Sans Display';
+     src: url('/fonts/NotoSansDisplay-Bold.eot');
+     src: url('/fonts/NotoSansDisplay-Bold.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/NotoSansDisplay-Bold.woff2') format('woff2'),
+         url('/fonts/NotoSansDisplay-Bold.woff') format('woff'),
+         url('/fonts/NotoSansDisplay-Bold.svg#NotoSansDisplay-Bold') format('svg');
+     font-weight: bold;
+     font-style: normal;
+     font-display: swap;
+ }

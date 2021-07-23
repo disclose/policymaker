@@ -1,21 +1,23 @@
 <template>
     <div id="app">
-        <nav>
-            <div>disclose.io</div>
+        <header>
+            <div class="logo">
+                <img src="@/assets/images/logo-disclose-type.svg">
+            </div>
 
-            <Progress-Steps>
-                <Progress-Step :index="1" route="/policymaker">Introduction</Progress-Step>
-                <Progress-Step :index="2" route="/policymaker/organisation">Organization details</Progress-Step>
-                <Progress-Step :index="3" route="/policymaker/settings">Policy settings</Progress-Step>
-                <Progress-Step :index="4" route="/policymaker/download">Download</Progress-Step>
-            </Progress-Steps>
+            <nav>
+                <Progress-Steps>
+                    <Progress-Step :index="1" route="/policymaker">Introduction</Progress-Step>
+                    <Progress-Step :index="2" route="/policymaker/organisation">Organization details</Progress-Step>
+                    <Progress-Step :index="3" route="/policymaker/settings">Policy settings</Progress-Step>
+                    <Progress-Step :index="4" route="/policymaker/download">Download</Progress-Step>
+                </Progress-Steps>
 
-        </nav>
+            </nav>
+        </header>
+
 
         <main>
-            <header>
-                Mobile header
-            </header>
             <Nuxt />          
         </main>
     </div>
@@ -38,14 +40,25 @@
 }
 
 
-nav {
+header {
     --nav-width: 320px;
     width: var(--nav-width);
     background: var(--white);
+    @apply pt-8 pb-8;
+}
+
+nav {
+    @apply mt-12;
 }
 
 main {
     background: var(--shade-050);
     @apply flex-grow;
+    @apply pt-8 pb-8 pl-8;
 }
+
+.logo {
+
+}
+
 </style>

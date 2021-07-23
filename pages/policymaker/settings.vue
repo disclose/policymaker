@@ -1,12 +1,15 @@
 <template>
     <div>
-        <h2>Policy settings</h2>
+        <page-title>Policy settings</page-title>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import PageTitle from '~/components/PageTitle.vue'
+
 export default Vue.extend({
+  components: { PageTitle },
     layout: 'policymaker-v2',
 })
 </script>
