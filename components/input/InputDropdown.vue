@@ -3,7 +3,7 @@
     <!-- <span class="rounded-md shadow-sm"> -->
         <div @click="isOpen = !isOpen" class="trigger" type="button" aria-haspopup="true" aria-expanded="true" aria-controls="headlessui-menu-items-117">
             <slot v-if="hasValue" name="selectedValue" :value="localValue"></slot>
-            <span v-if="!hasValue">{{ placeholder }}</span>
+            <span v-if="!hasValue">{{ localPlaceholder }}</span>
             <svg class="w-5 h-5 ml-2 -mr-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </div>
     <!-- </span> -->
@@ -36,12 +36,15 @@ export default Vue.extend({
         },
         align: {
             type: String
+        },
+        placeholder: {
+            type: String
         }
     },
 
     data() {
         return {
-            placeholder: "Select region",
+            localPlaceholder: "",
             isOpen: false,
             localValue: null
         }
@@ -51,6 +54,7 @@ export default Vue.extend({
         const vm = this as any
 
         vm.localValue = vm.value
+        vm.localPlaceholder = vm.placeholder
     },
 
     computed: {

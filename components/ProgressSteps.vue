@@ -10,7 +10,7 @@ export default Vue.extend({
     name: "ProgressSteps",
     
     mounted() {
-        console.log(this as any)
+        
     }
 })
 </script>

@@ -53,9 +53,9 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import FieldText from './FieldText.vue'
-import FieldDropdown from './FieldDropdown.vue'
-import InputDropdown from './InputDropdown.vue'
+import FieldText from './v1/FieldText.vue'
+import FieldDropdown from './v1/FieldDropdown.vue'
+import InputDropdown from './input/InputDropdown.vue'
 import _uniq from 'lodash/uniq'
 import _get from 'lodash/get'
 import _keys from 'lodash/keys'

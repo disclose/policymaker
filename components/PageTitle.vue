@@ -21,7 +21,7 @@ export default Vue.extend({
 
 <style lang="postcss">
 .page-title {
-    @apply text-3xl font-bold mt-3;
+    @apply text-3xl font-bold mt-3 mb-16;
     font-family: 'Noto Sans Display';
 }
 </style>
