@@ -50,7 +50,6 @@ export default Vue.extend({
 
     mounted() {
         const vm = this as any
-        console.log("Setting initial value", vm.value)
         Vue.set(vm, 'localValue', _cloneDeep(vm.value))
     },
 
@@ -93,7 +92,7 @@ export default Vue.extend({
 
         removeSelf(): void {
             const vm = this as any
-            vm.$emit('removeContact', vm.index)
+            vm.$emit('remove', vm.index)
         },
         focus(): void {
             const vm = this as any
