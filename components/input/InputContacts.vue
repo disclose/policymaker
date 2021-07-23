@@ -6,6 +6,7 @@
                 :key="index"
                 :index="index"
                 :value="contact"
+                :ref="`contact${index}`"
                 @input="updateContact($event, index)"
                 @removeContact="removeContact">
             </input-contact>
@@ -49,6 +50,10 @@ export default Vue.extend({
             const vm = this as any
             vm.contacts.push({ type: 'url', address: ``})
             vm.emit()
+
+            Vue.nextTick(() => {
+                vm.$refs[`contact${vm.contacts.length-1}`][0].focus()
+            })
         },
         removeContact(index: number): void {
             const vm = this as any

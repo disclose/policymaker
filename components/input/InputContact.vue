@@ -3,6 +3,7 @@
         <span class="dio__input-prefix">{{ prefix }}</span>
         <input-text 
             v-model="localValue.address"
+            ref="inputText"
             @input="update"
             placeholder="Email address or URL" />
         <dio-button class="dio__input-contact-remove dio__focusable" 
@@ -84,15 +85,19 @@ export default Vue.extend({
     },
 
     methods: {
-        update() {
+        update(): void {
             const vm = this as any
             vm.localValue.type = vm.contactType
             vm.$emit('input', vm.localValue)
         },
 
-        removeSelf() {
+        removeSelf(): void {
             const vm = this as any
             vm.$emit('removeContact', vm.index)
+        },
+        focus(): void {
+            const vm = this as any
+            vm.$refs.inputText.focus()
         }
     },
 

@@ -1,6 +1,6 @@
 <template>
     <div class="dio__input dio__input--text dio__focusable">
-        <input type="text" class="input" @input="update" v-model="localValue" :placeholder="placeholder">
+        <input ref="input" type="text" class="input" @input="update" v-model="localValue" :placeholder="placeholder">
     </div>
 </template>
 
@@ -39,9 +39,14 @@ export default Vue.extend({
     },
 
     methods: {
-        update() {
+        update(): void {
             const vm = this as any
             vm.$emit('input', vm.localValue)
+        },
+
+        focus(): void {
+            const vm = this as any
+            vm.$refs.input.focus()
         }
     },
 
