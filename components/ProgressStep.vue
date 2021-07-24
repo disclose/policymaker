@@ -1,7 +1,9 @@
 <template>
     <div class="dio__step">
-        <NuxtLink class="dio__step-link" :to="route">
-            <div class="dio__step-anchor" :class="{ [`dio__step-anchor--active`]: active, [`dio__step-anchor--completed`]: completed }">{{ index }}</div>
+        <NuxtLink class="dio__step-link" :to="route" @click.native="changeStep">
+            <div class="dio__step-anchor"
+                :style="anchorStyle"
+                :class="{ [`dio__step-anchor--active`]: active, [`dio__step-anchor--completed`]: completed }">{{ index }}</div>
             <slot></slot>
         </NuxtLink>
     </div>
@@ -24,6 +26,42 @@ export default Vue.extend({
         },
         completed: {
             type: Boolean
+        },
+        size: {
+            type: Number,
+            default: 40
+        }
+    },
+
+    data() {
+        return {
+            anchor: {
+                localSize: 40
+            }
+        }
+    },
+
+    mounted() {
+        const vm = this as any
+        vm.anchor.localSize = vm.size
+    },
+
+    computed: {
+        anchorStyle() {
+            const vm = this as any
+
+            return {
+                width: `${vm.anchor.localSize}px`,
+                height: `${vm.anchor.localSize}px`,
+                lineHeight: `${vm.anchor.localSize-4}px`
+            }
+        }
+    },
+
+    methods: {
+        changeStep(): void {
+            const vm = this as any
+            vm.$emit('changeStep', vm.index)
         }
     }
 })
@@ -31,13 +69,14 @@ export default Vue.extend({
 
 <style lang="postcss">
     .dio__step {
-        @apply mt-8 mb-8;
+        @apply mt-8 mb-8 z-20 flex relative bg-white;
         font-family: 'Noto Sans Display';
         color: var(--shade-700);
     }
 
     .dio__step-anchor {
-        @apply text-center leading-loose h-9 w-9 rounded-full border-solid border-2 mr-4;
+        @apply text-center rounded-full border-solid border-2 mr-4;
+        @apply transition-all duration-200 ease-in-out delay-100;
 
         &--completed {
             background: var(--white);

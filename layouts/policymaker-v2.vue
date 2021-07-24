@@ -6,16 +6,11 @@
             </div>
 
             <nav>
-                <Progress-Steps>
-                    <Progress-Step :index="1" :active="false" :completed="true" route="/policymaker">Introduction</Progress-Step>
-                    <Progress-Step :index="2" :active="true" route="/policymaker/organisation">Organization details</Progress-Step>
-                    <Progress-Step :index="3" route="/policymaker/settings">Policy settings</Progress-Step>
-                    <Progress-Step :index="4" route="/policymaker/download">Download</Progress-Step>
+                <Progress-Steps orientation="vertical" :steps="navSteps">
                 </Progress-Steps>
-
             </nav>
 
-            <pre>{{ configuration }}</pre>
+            <small><pre>{{ configuration }}</pre></small>
         </header>
 
 
@@ -34,6 +29,17 @@ import { policymaker } from '~/store'
 
 export default Vue.extend({
     
+    data() {
+        return {
+            navSteps: [
+                { route: '/policymaker', name: 'Introduction' },
+                { route: '/policymaker/organisation', name: 'Organisation details' },
+                { route: '/policymaker/settings', name: 'Policy settings' },
+                { route: '/policymaker/download', name: 'Download' }
+            ]
+        }
+    },
+
     computed: {
         configuration() {
             return policymaker.configuration
@@ -65,7 +71,7 @@ header {
 }
 
 nav {
-    @apply mt-12 mb-12;
+    @apply mt-12 mb-12 pl-3;
 }
 
 main {
