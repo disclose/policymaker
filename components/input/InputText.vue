@@ -75,15 +75,22 @@ export default Vue.extend({
 }
 
 .dio__focusable {
-    &:focus-within {
+    -moz-outline-style: none;
+    
+    &:focus-within, &:focus {
         box-shadow: 0 0 0 2px var(--purple);
-
+        -moz-outline-style: none;
     }
+
 }
 
 input {
     outline: none;
 }
 
+::-moz-focus-inner, :active, :focus {
+    outline:none;
+    -moz-outline-style: none;
+}
 
 </style>

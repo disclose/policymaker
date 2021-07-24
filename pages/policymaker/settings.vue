@@ -21,6 +21,11 @@
             <small>* required for security.txt / DNS security.txt</small>
         </div>
 
+        <footer>
+            <dio-link route="/policymaker/download">Next</dio-link>
+            <dio-link route="/policymaker/organisation" theme="muted">Back</dio-link>
+        </footer>
+
     </div>
 </template>
 

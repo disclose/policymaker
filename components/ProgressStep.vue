@@ -1,9 +1,15 @@
 <template>
     <div class="dio__step">
-        <NuxtLink class="dio__step-link" :to="route" @click.native="changeStep">
+        <NuxtLink class="dio__step-link"
+            :to="route"
+            :class="{ [`dio__step-link--completed`]: completed }"
+            :event="disabled ? '' : 'click'"
+            @click.native="changeStep">
             <div class="dio__step-anchor"
                 :style="anchorStyle"
-                :class="{ [`dio__step-anchor--active`]: active, [`dio__step-anchor--completed`]: completed }">{{ index }}</div>
+                :class="{ [`dio__step-anchor--active`]: active, [`dio__step-anchor--completed`]: completed }">
+                {{ index }}
+            </div>
             <slot></slot>
         </NuxtLink>
     </div>
@@ -30,6 +36,10 @@ export default Vue.extend({
         size: {
             type: Number,
             default: 40
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -61,7 +71,9 @@ export default Vue.extend({
     methods: {
         changeStep(): void {
             const vm = this as any
-            vm.$emit('changeStep', vm.index)
+            if (!vm.disabled) {
+                vm.$emit('changeStep', vm.index)
+            }
         }
     }
 })
@@ -71,21 +83,13 @@ export default Vue.extend({
     .dio__step {
         @apply mt-8 mb-8 z-20 flex relative bg-white;
         font-family: 'Noto Sans Display';
-        color: var(--shade-700);
+        color: var(--shade-500);
     }
 
     .dio__step-anchor {
         @apply text-center rounded-full border-solid border-2 mr-4;
         @apply transition-all duration-200 ease-in-out delay-100;
 
-        &--completed {
-            background: var(--white);
-            border-color: var(--purple);
-        }
-
-        &--active {
-
-        }
     }
 
     .dio__step-link {
@@ -99,6 +103,15 @@ export default Vue.extend({
                 color: var(--white);
                 background: var(--purple);
                 border-color: var(--purple);
+            }
+        }
+        &--completed {
+            color: var(--dark-purple);
+
+            .dio__step-anchor {
+                background: var(--white);
+                border-color: var(--purple);
+                color: var(--purple);
             }
         }
     }

@@ -1,6 +1,9 @@
 <template>
     <div>
         <page-title>Introduction</page-title>
+        <footer>
+            <dio-link route="/policymaker/organisation">Begin</dio-link>
+        </footer>
     </div>
 </template>
 
@@ -9,13 +12,15 @@ import Vue from 'vue'
 import ProgressSteps from '@/components/ProgressSteps.vue'
 import ProgressStep from '@/components/ProgressStep.vue'
 import PageTitle from '~/components/PageTitle.vue'
+import DioLink from '~/components/DioLink.vue'
 
 export default Vue.extend({
     layout: 'policymaker-v2',
     components: {
         ProgressSteps,
         ProgressStep,
-        PageTitle
+        PageTitle,
+        DioLink
     },
 
     data() {

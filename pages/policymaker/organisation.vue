@@ -15,6 +15,11 @@
             <input-channels></input-channels>
         </div>
 
+        <footer>
+            <dio-link route="/policymaker/settings">Next</dio-link>
+            <dio-link route="/policymaker" theme="muted">Back</dio-link>
+        </footer>
+
     </div>
 </template>
 

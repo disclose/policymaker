@@ -1,6 +1,10 @@
 <template>
     <div>
         <page-title>Download</page-title>
+        <footer>
+            <dio-link route="/policymaker/download">Done</dio-link>
+            <dio-link route="/policymaker/settings" theme="muted">Back</dio-link>
+        </footer>
     </div>
 </template>
 

@@ -78,6 +78,10 @@ main {
     background: var(--shade-050);
     @apply flex-grow;
     @apply pt-8 pb-8 pl-8;
+
+    footer {
+        @apply flex flex-row-reverse justify-between items-center;
+    }
 }
 
 .logo {
