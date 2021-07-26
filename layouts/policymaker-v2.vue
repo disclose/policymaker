@@ -32,7 +32,7 @@ export default Vue.extend({
     data() {
         return {
             navSteps: [
-                { route: '/policymaker', name: 'Introduction' },
+                { route: '/policymaker/introduction', name: 'Introduction' },
                 { route: '/policymaker/organisation', name: 'Organisation details' },
                 { route: '/policymaker/settings', name: 'Policy settings' },
                 { route: '/policymaker/download', name: 'Download' }
@@ -80,7 +80,7 @@ main {
     @apply pt-8 pb-8 pl-8;
 
     footer {
-        @apply flex flex-row-reverse justify-between items-center;
+        @apply flex flex-row-reverse justify-between items-center mt-24;
     }
 }
 

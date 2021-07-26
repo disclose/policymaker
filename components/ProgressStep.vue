@@ -95,7 +95,7 @@ export default Vue.extend({
     .dio__step-link {
         @apply flex flex-row items-center;
 
-        &.nuxt-link-exact-active {
+        &.nuxt-link-active {
             @apply font-bold;
             color: var(--dark-purple);
             
