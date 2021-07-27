@@ -12,8 +12,8 @@
                 </input-dropdown>
             </div>
             <div>
-                <dio-button theme="transparent" @click="downloadPolicy(renderedPolicy, 'text/markdown')" :disabled="!isValid">Save as markdown</dio-button>
-                <dio-button theme="transparent" @click="downloadPolicy($md.render(renderedPolicy), 'text/html')" :disabled="!isValid">Save as HTML</dio-button>
+                <dio-button theme="transparent" @click="downloadPolicy(renderedPolicy, 'text/markdown')">Save as markdown</dio-button>
+                <dio-button theme="transparent" @click="downloadPolicy($md.render(renderedPolicy), 'text/html')">Save as HTML</dio-button>
             </div>
         </div>
     </div>

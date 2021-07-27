@@ -23,9 +23,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import DioTab from '~/components/DioTab.vue'
-import DioTabGroup from '~/components/DioTabGroup.vue'
+import { mapActions } from 'vuex'
+import DioTab from '~/components/tab/DioTab.vue'
+import DioTabGroup from '~/components/tab/DioTabGroup.vue'
 import PageTitle from '~/components/PageTitle.vue'
+import { store } from '~/store'
 
 export default Vue.extend({
     components: { PageTitle, DioTab, DioTabGroup },
@@ -40,6 +42,15 @@ export default Vue.extend({
                 { route: '/policymaker/download/dnssecuritytxt', name: 'DNS Security.txt' },
             ]
         }
+    },
+
+    mounted() {
+        store.dispatch('policymaker/fetchTerms')
+        
+    },
+
+    methods: {
+        
     }
 })
 </script>

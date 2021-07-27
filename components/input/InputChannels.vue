@@ -5,13 +5,15 @@
                 v-for="(channel, index) in channels"
                 :key="index"
                 :index="index"
-                :value="channel"
+                v-model="channels[index]"
                 :ref="`channel${index}`"
-                @input="updateChannel($event, index)"
                 @remove="removeChannel">
             </input-channel>
         </div>
-        <dio-button @click="addChannel" theme="transparent">Add another</dio-button>
+        <dio-button 
+            @click="addChannel" 
+            theme="transparent"
+            size="small">Add another</dio-button>
     </div>
 </template>
 
@@ -21,7 +23,7 @@ import { mapState } from 'vuex'
 import DioButton from '../DioButton.vue'
 import InputChannel from './InputChannel.vue'
 import _cloneDeep from 'lodash/cloneDeep'
-import { policymaker } from '~/store'
+import { store } from '~/store'
 
 export default Vue.extend({
     components: { InputChannel, DioButton },
@@ -42,26 +44,24 @@ export default Vue.extend({
 
     computed: {
         ...mapState('policymaker', ['policyConfiguration']),
-        channels() {
-            return policymaker.configuration.channels
-        }
+        channels: () => store.getters['policymaker/getConfiguration'].channels
     },
 
     methods: {
         addChannel(): void {
             const vm = this as any
-            policymaker.addChannel()
+            store.commit('policymaker/addChannel')
 
             Vue.nextTick(() => {
                 vm.$refs[`channel${vm.channels.length-1}`][0].focus()
             })
         },
         removeChannel(index: number): void {
-            policymaker.removeChannel(index)
+            store.commit('policymaker/removeChannel', index)
         },
         updateChannel($event: any, index: number): void {
             const vm = this as any
-            policymaker.updateChannel({ value: $event, index })
+            store.commit('policymaker/updateChannel', { value: $event, index })
         },
         emit(): void {
             const vm = this as any

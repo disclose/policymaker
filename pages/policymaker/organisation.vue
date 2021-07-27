@@ -1,19 +1,22 @@
 <template>
     <div>
-        <page-title>Organisation details</page-title>
+        <page-title>{{ $t('policymaker.organization_details.page_title') }}</page-title>
 
-        <div class="field">
-            <label class="field__title">What is the name of your organization? *</label>
-            <p class="field__description">The organization that this policy will apply to</p>
-            <input-text :value="configuration.organisationName" @input="updateOrganisationName"></input-text>
-            <small class="field__subtext">* required</small>
-        </div>
+        <dio-field>
+            <label>{{ $t('policymaker.organization_details.organization_name_label') }} *</label>
+            <p>{{ $t('policymaker.organization_details.organization_name_desc') }}</p>
+            <input-text
+                :value="configuration.organisationName"
+                @input="updateOrganisationName" />
+            <small>* {{ $t('policymaker.organization_details.organization_name_required') }}</small>
+        </dio-field>
 
-        <div class="field">
-            <label class="field__title">Who/where are your disclosure points of contact? *</label>
-            <div class="field__description">Please provide at least 1 (one) <u>email address</u> or <u>webform url</u> for people to send vulnerability information to your organization.</div>
+        <dio-field>
+            <label>Who/where are your disclosure points of contact? *</label>
+            <p>Please provide at least 1 (one) <u>email address</u> or <u>webform url</u> for 
+            people to send vulnerability information to your organization.</p>
             <input-channels></input-channels>
-        </div>
+        </dio-field>
 
         <footer>
             <dio-link route="/policymaker/settings">Next</dio-link>
@@ -25,13 +28,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import DioField from '~/components/input/DioField.vue'
 import InputChannels from '~/components/input/InputChannels.vue'
 import InputText from '~/components/input/InputText.vue'
 import PageTitle from '~/components/PageTitle.vue'
-import { policymaker } from '~/store'
+import { store } from '~/store'
 
 export default Vue.extend({
-    components: { PageTitle, InputText, InputChannels },
+    components: { PageTitle, InputText, InputChannels, DioField },
     layout: 'policymaker-v2',
 
     mounted() {
@@ -39,29 +43,14 @@ export default Vue.extend({
     },
 
     computed: {
-        configuration() {
-            return policymaker.configuration
-        }
+        configuration: () => store.getters['policymaker/getConfiguration']
+
     },
 
     methods: {
         updateOrganisationName(name: string): void {
-            policymaker.setOrganisationName(name)
+            store.commit('policymaker/setOrganisationName', name)
         }
     }
 })
 </script>
-
-<style lang="postcss">
-    .field {
-        @apply mt-12 mb-12;
-    }
-
-    .field__title {
-        font-family: 'Noto Sans Display';
-    }
-
-    .field__description {
-        @apply text-sm;
-    }
-</style>

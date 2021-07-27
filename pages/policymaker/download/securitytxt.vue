@@ -1,6 +1,7 @@
 <template>
     <div>
-        Security.txt
+        <h3>Security.txt</h3>
+        
     </div>
 </template>
 

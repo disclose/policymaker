@@ -13,7 +13,6 @@
             <small><pre>{{ configuration }}</pre></small>
         </header>
 
-
         <main>
             <Nuxt />          
         </main>
@@ -25,7 +24,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { policymaker } from '~/store'
+import { store } from '~/store'
 
 export default Vue.extend({
     
@@ -41,10 +40,10 @@ export default Vue.extend({
     },
 
     computed: {
-        configuration() {
-            return policymaker.configuration
-        }
-    }
+        configuration: () => store.getters['policymaker/getConfiguration']
+        
+    },
+
 })
 </script>
 

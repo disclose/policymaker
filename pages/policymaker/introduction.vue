@@ -1,6 +1,9 @@
 <template>
     <div>
         <page-title>Introduction</page-title>
+
+        <nuxt-content :document="content"></nuxt-content>
+
         <footer>
             <dio-link route="/policymaker/organisation">Begin</dio-link>
         </footer>
@@ -23,8 +26,17 @@ export default Vue.extend({
         DioLink
     },
 
+    async asyncData({ $content, params, route}) {
+        const content = await $content(route.fullPath).fetch()
+        console.log("content", content)
+        return {
+            content
+        }
+    },
+
     data() {
-        return {}
+        return {
+        }
     },
 
     computed: {},

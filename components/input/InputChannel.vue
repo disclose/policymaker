@@ -1,16 +1,24 @@
 <template>
-    <div class="dio__input-contact">
+    <div class="dio__input-channel">
         <span class="dio__input-prefix">{{ prefix }}</span>
         <input-text 
             v-model="localValue.address"
             ref="inputText"
             @input="update"
             placeholder="Email address or URL" />
-        <dio-button class="dio__input-contact-remove dio__focusable" 
+        <dio-button 
+            size="small" 
+            @click="openUrl(localValue.address)"
+            theme="transparent">
+            Check
+        </dio-button>
+        <dio-button class="dio__input-channel-remove dio__focusable" 
             theme="muted"
             size="small" 
             @click="removeSelf" 
-            v-if="showRemove">Remove</dio-button>
+            v-if="showRemove">
+            Remove
+        </dio-button>
     </div>
 </template>
 
@@ -26,7 +34,7 @@ export default Vue.extend({
     
     props: {
         value: {
-            type: Object,
+            type: [Object, String],
             default: () => {
                 return {
                     type: '',
@@ -73,7 +81,7 @@ export default Vue.extend({
                 return "https://"
             }
         },
-        contactType(): string {
+        channelType(): string {
             const vm = this as any
             return (vm.isEmail) ? 'email' : 'url';
         },
@@ -86,7 +94,7 @@ export default Vue.extend({
     methods: {
         update(): void {
             const vm = this as any
-            vm.localValue.type = vm.contactType
+            vm.localValue.type = vm.channelType
             vm.$emit('input', vm.localValue)
         },
 
@@ -97,6 +105,10 @@ export default Vue.extend({
         focus(): void {
             const vm = this as any
             vm.$refs.inputText.focus()
+        },
+        openUrl(url: string): void {
+            const vm = this as any
+            window.open(`${vm.prefix}${url}`, "_blank")
         }
     },
 
@@ -115,15 +127,15 @@ export default Vue.extend({
 
 <style lang="postcss">
 
-.dio__input-contact {
-    @apply flex flex-row items-center;
+.dio__input-channel {
+    @apply flex flex-row items-center gap-2;
 }
 
 .dio__input-prefix {
-    @apply flex items-center justify-center mr-2;
+    @apply flex items-center justify-center;
     color: var(--shade-600);
 }
-.dio__input-contact-remove {
+.dio__input-channel-remove {
     @apply ml-2;
 }
 
