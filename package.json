@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@growthbunker/vueflags": "^0.1.14",
+    "@heroicons/vue": "^1.0.3",
     "@nuxt/content": "^1.14.0",
     "@nuxtjs/axios": "^5.13.1",
     "@nuxtjs/markdownit": "^2.0.0",
@@ -30,6 +31,7 @@
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^6.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/tailwindcss": "^4.0.1",
     "@types/lodash": "^4.14.170",
     "babel-eslint": "^10.1.0",

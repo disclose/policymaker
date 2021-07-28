@@ -2,25 +2,12 @@
     <div>
         <h3>Vulnerability Disclosure Policy</h3>
 
-        <div class="flex flex-row justify-between items-center">
-            <div class="flex flex-row items-center gap-x-2">
-                <input-dropdown :options="[]" v-model="language">
-                    <template v-slot:selectedValue="{ value }">
-                        {{ $t(`language.${value}`) }}
-                    </template>
-                    <template v-slot:option="{ option }">
-                        {{ $t(`language.${option}`) }}
-                    </template>
-                </input-dropdown>
-            </div>
-            
-            <div>
-                <dio-button theme="transparent" @click="downloadPolicy(renderedPolicy, 'text/markdown')">Save as markdown</dio-button>
-                <dio-button theme="transparent" @click="downloadPolicy($md.render(renderedPolicy), 'text/html')">Save as HTML</dio-button>
-            </div>
-        </div>
+        <label><input type="checkbox" v-model="isFullVDP"> Full VDP</label>
 
-        <dio-term-preview :content="vdp" />
+        <dio-term-preview 
+            :content="content"
+            :filename="downloadFilename"
+        />
 
 
     </div>
@@ -36,12 +23,27 @@ export default Vue.extend({
     
     data() {
         return {
+            isFullVDP: true
         }
     },
 
     computed: {
-        vdp: () => (store.state as any).policymaker.templates.vdp.text,
-        language: () => store.getters['policymaker/getConfiguration'].language
+        content() {
+            const vm = this as any
+            if (vm.configuration.cvdTimelineDays > 0) {
+                return (vm.isFullVDP) ? vm.vdpCVD : vm.safeHarbor
+            } else {
+                return (vm.isFullVDP) ? vm.vdp : vm.safeHarbor
+            }
+        },
+        downloadFilename() {
+            const vm = this as any
+            return (vm.isFullVDP) ? 'disclose-io-vdp' : 'disclose-io-safe-harbor'
+        },
+        vdp: () => store.getters['policymaker/getTermsVDP'],
+        vdpCVD: () => store.getters['policymaker/getTermsVDPCVD'],
+        safeHarbor: () => store.getters['policymaker/getTermsSafeHarbor'],
+        configuration: () => store.getters['policymaker/getConfiguration']
     }
 })
 </script>

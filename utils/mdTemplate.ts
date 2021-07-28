@@ -1,31 +1,33 @@
 
 import _reduce from 'lodash/reduce'
 import _keys from 'lodash/keys'
-
+import _get from 'lodash/get'
+import _set from 'lodash/set'
 
 const templateVars = {
     "organization": 'organizationName',
+    "channel": 'channels[0].address',
     "disclosure_window": 'cvdTimelineDays',
     "policy_url": 'hostUrl'
 }
 
-export class Template {
-    template: string = ''
-
-    
-}
-
-
 export function renderTemplate(template: string, valueObject: object) {
-    let policy = _reduce(_keys(valueObject), (policy, option) => {
 
-        // regex to identify all option variables specified in template
-        let varRegex = new RegExp(`{{${option}}}`, 'gm');
+    let policy = template
+    let varRegex, newValue
 
-        const newValue = vm.policyConfiguration[option] ? vm.policyConfiguration[option] : '______________'
+    // Replace Organisation Name
+    varRegex = new RegExp(`{{organization}}`, 'gm');
+    newValue = _get(valueObject, _get(templateVars, 'organization'))
+    policy = policy.replace(varRegex, newValue)
 
-        policy = policy.replace(varRegex, newValue)
-        // console.log("Option:", varRegex, option, newValue)
-        return policy
-    }, vm.activeTemplate)
+
+    // Replace Channels
+    varRegex = new RegExp(`{{channel}}`, 'gm');
+    newValue = _get(valueObject, _get(templateVars, 'channel'))
+    policy = policy.replace(varRegex, newValue)
+
+    // Replace CVD Timeline
+
+    return policy
 }

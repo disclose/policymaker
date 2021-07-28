@@ -36,8 +36,8 @@ export default Vue.extend({
     data() {
         return {
             sections: [
-                { route: '/policymaker/download/vdp', name: 'VDP' },
-                { route: '/policymaker/download/safe-harbor-clause', name: 'Safe Harbor Clause' },
+                { route: '/policymaker/download/vdp', name: 'Vulnerability Disclosure Policy' },
+                // { route: '/policymaker/download/safe-harbor-clause', name: 'Safe Harbor Clause' },
                 { route: '/policymaker/download/securitytxt', name: 'Security.txt' },
                 { route: '/policymaker/download/dnssecuritytxt', name: 'DNS Security.txt' },
             ]

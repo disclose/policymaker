@@ -6,6 +6,8 @@ import _cloneDeep from 'lodash/cloneDeep'
 import _map from 'lodash/map'
 import _reduce from 'lodash/reduce'
 
+import { renderTemplate } from '~/utils/mdTemplate'
+
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({})
@@ -46,6 +48,7 @@ export class PolicyMaker extends VuexModule {
         { value: 30, label: '30 days' },
         { value: 0, label: 'Opt-out of CVD Timeline' }]
 
+    // Term Templates
     templates: any = {
         vdp: { url_root: '/templates/disclose-io-vdp', text: '' },
         vdp_with_cvd: { url_root: '/templates/disclose-io-vdp-with-cvd', text: '' },
@@ -63,6 +66,18 @@ export class PolicyMaker extends VuexModule {
 
     get getCurrentLocale() {
         return `${this.policyConfiguration.language.toLowerCase()}-${this.policyConfiguration.region.toUpperCase()}`
+    }
+
+    get getTermsVDP() {
+        return renderTemplate(this.templates.vdp.text, this.policyConfiguration)
+    }
+
+    get getTermsVDPCVD() {
+        return renderTemplate(this.templates.vdp_with_cvd.text, this.policyConfiguration)
+    }
+
+    get getTermsSafeHarbor() {
+        return renderTemplate(this.templates.safe_harbor.text, this.policyConfiguration)
     }
 
     @Mutation

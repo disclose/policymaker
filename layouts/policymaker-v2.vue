@@ -91,8 +91,11 @@ main {
     }
 }
 
-.logo {
-
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Noto Sans Display'
 }
 
+h3 {
+    @apply text-2xl;
+}
 </style>
