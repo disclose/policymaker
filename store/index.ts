@@ -29,7 +29,7 @@ export class PolicyMaker extends VuexModule {
     policyConfiguration = {
         language: 'en',
         region: 'US',
-        organisationName: '',
+        organizationName: '',
         channels: <Channels>[{ type:'', address:'' }],
         cvdTimelineDays: 90,
         hostUrl: {
@@ -67,7 +67,7 @@ export class PolicyMaker extends VuexModule {
 
     @Mutation
     setOrganisationName(name: string) {
-        this.policyConfiguration.organisationName = name
+        this.policyConfiguration.organizationName = name
     }
 
     @Mutation
@@ -106,8 +106,8 @@ export class PolicyMaker extends VuexModule {
     }
 
     @Mutation
-    setHostUrl(url: string) {
-        this.policyConfiguration.hostUrl = url
+    setHostUrl(channel: Channel) {
+        this.policyConfiguration.hostUrl = channel
     }
 
     @Action({ rawError: true })

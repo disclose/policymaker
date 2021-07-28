@@ -14,7 +14,9 @@
         </header>
 
         <main>
-            <Nuxt />          
+            <div id="content">
+                <Nuxt />          
+            </div>
         </main>
     </div>
 
@@ -53,6 +55,7 @@ export default Vue.extend({
     background: linear-gradient(90deg, var(--white) 50%, var(--shade-050) 50%);
     /* font-family: "Noto Sans", Roboto, "Helvetica Neue", ui-sans-serif, system-ui, -apple-system, system-ui; */
     font-family: "Noto Sans";
+    --nav-width: 320px;
 }
 
 #app {
@@ -62,11 +65,11 @@ export default Vue.extend({
 
 
 header {
-    --nav-width: 320px;
     width: var(--nav-width);
     min-width: var(--nav-width);
     background: var(--white);
     @apply pt-8 pb-8;
+    @apply fixed h-full;
 }
 
 nav {
@@ -74,9 +77,14 @@ nav {
 }
 
 main {
-    background: var(--shade-050);
     @apply flex-grow;
-    @apply pt-8 pb-8 pl-8;
+    background: var(--shade-050);
+    padding-left: var(--nav-width);
+
+    #content {
+        background: var(--shade-050);
+        @apply pt-8 pb-8 pl-8;
+    }
 
     footer {
         @apply flex flex-row-reverse justify-between items-center mt-24;

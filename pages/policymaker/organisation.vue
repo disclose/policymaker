@@ -6,7 +6,7 @@
             <label>{{ $t('policymaker.organization_details.organization_name_label') }} *</label>
             <p>{{ $t('policymaker.organization_details.organization_name_desc') }}</p>
             <input-text
-                :value="configuration.organisationName"
+                :value="configuration.organizationName"
                 @input="updateOrganisationName" />
             <small>* {{ $t('policymaker.organization_details.organization_name_required') }}</small>
         </dio-field>
