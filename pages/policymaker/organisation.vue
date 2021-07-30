@@ -19,8 +19,8 @@
         </dio-field>
 
         <footer>
-            <dio-link route="/policymaker/settings">Next</dio-link>
-            <dio-link route="/policymaker" theme="muted">Back</dio-link>
+            <dio-button route="/policymaker/settings" @click="goto(3)">Next</dio-button>
+            <dio-button route="/policymaker" theme="muted" @click="goto(1)">Back</dio-button>
         </footer>
 
     </div>
@@ -50,7 +50,9 @@ export default Vue.extend({
     methods: {
         updateOrganisationName(name: string): void {
             store.commit('policymaker/setOrganisationName', name)
-        }
+        },
+        goto: (step: number) => store.dispatch('policymaker/gotoStep', step)
+
     }
 })
 </script>

@@ -10,7 +10,8 @@
                 </Progress-Steps>
             </nav>
 
-            <small><pre>{{ configuration }}</pre></small>
+            <!-- <small><pre>{{ configuration }}</pre></small> -->
+
         </header>
 
         <main>
@@ -32,18 +33,18 @@ export default Vue.extend({
     
     data() {
         return {
-            navSteps: [
-                { route: '/policymaker/introduction', name: 'Introduction' },
-                { route: '/policymaker/organisation', name: 'Organisation details' },
-                { route: '/policymaker/settings', name: 'Policy settings' },
-                { route: '/policymaker/download', name: 'Download' }
-            ]
         }
     },
 
+    mounted() {
+        this.$nextTick(() => {
+            store.dispatch('policymaker/syncStepFromRoute', this.$route.fullPath)
+        })
+    },
+
     computed: {
-        configuration: () => store.getters['policymaker/getConfiguration']
-        
+        navSteps: () => store.getters['policymaker/getNavSteps'],
+        configuration: () => store.getters['policymaker/getConfiguration'],
     },
 
 })
@@ -59,8 +60,9 @@ export default Vue.extend({
 }
 
 #app {
-    @apply container mx-auto h-screen;
+    @apply container mx-auto h-screen max-w-7xl;
     @apply flex flex-1 flex-row flex-nowrap items-stretch justify-between;
+    
 }
 
 

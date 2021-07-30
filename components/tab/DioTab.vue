@@ -41,12 +41,15 @@ export default Vue.extend({
             @apply border-b-2 border-solid;
             border-bottom-color: var(--shade-200);
             @apply whitespace-nowrap overflow-ellipsis;
+            color: var(--shade-700);
 
             &.nuxt-link-exact-active {
                 @apply border-t-4;
                 background: transparent;
                 border-top-color: var(--purple);
                 border-bottom-color: transparent;
+                color: var(--dark-purple);
+                font-family: 'Noto Sans Display';
             }
         }
 

@@ -1,25 +1,39 @@
 <template>
     <div>
         <h3>Security.txt</h3>
-        <p>Please copy the text below or download as security.txt file and place on your website root</p>
-        <code>
-            Contact: mailto:jeremy@disclose.io<br>
-            Contact: https://disclose.io/contact<br>
-            Expires: 2021-07-31T11:36:00.000Z<br>
-            Acknowledgments: https://disclose.io<br>
-            Preferred-Languages: en<br>
-            Policy: https://discose.io/vdp<br>
-        </code>
+        <nuxt-content :document="copy"></nuxt-content>
+        
+        <div class="dio__securitytxt">
+            <pre>{{ securitytxt }}</pre>
+        </div>
+
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { store } from '~/store'
+
 export default Vue.extend({
-    
+
+    async asyncData({ $content, params, route}) {
+        const copy = await $content("policymaker/securitytxt").fetch()
+        return {
+            copy
+        }
+    },
+
+    computed: {
+        configuration: () => store.getters['policymaker/getConfiguration'],
+        securitytxt: () => store.getters['policymaker/getSecurityTxt']
+    }
+
 })
 </script>
 
 <style lang="postcss">
-
+    .dio__securitytxt {
+        @apply p-4 bg-white border border-solid font-mono;
+        border-color: var(--shade-400);
+    }
 </style>

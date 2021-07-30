@@ -15,8 +15,8 @@
 
         <footer>
             <p></p>
-            <dio-link route="/policymaker/download" v-if="false">Done</dio-link>
-            <dio-link route="/policymaker/settings" theme="muted">Back</dio-link>
+            <dio-button v-if="false">Done</dio-button>
+            <dio-button @click="goto(3)" theme="muted">Back</dio-button>
         </footer>
     </div>
 </template>
@@ -45,12 +45,21 @@ export default Vue.extend({
     },
 
     mounted() {
-        store.dispatch('policymaker/fetchTerms')
+        // Check validation
+
+        store.dispatch('policymaker/fetchTerms').then(() => {
+            this.$router.push(this.sections[0].route)
+        })
         
     },
 
+    computed: {
+        configuration: () => store.getters['policymaker/getConfiguration']
+    },
+
     methods: {
-        
+        goto: (step: number) => store.dispatch('policymaker/gotoStep', step)
+
     }
 })
 </script>

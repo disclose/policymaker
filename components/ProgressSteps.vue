@@ -10,6 +10,7 @@
                 :active="false"
                 :completed="isStepCompleted(index)"
                 :size="40"
+                :disabled="isStepClickable(index)"
                 @changeStep="setActiveStep"
                 :route="step.route">{{ step.name }}</Progress-Step>
         </div>
@@ -18,6 +19,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { store } from '~/store'
+
 export default Vue.extend({
     name: "ProgressSteps",
     
@@ -37,7 +40,6 @@ export default Vue.extend({
 
     data() {
         return {
-            activeStep: 0
         }
     },
 
@@ -46,6 +48,8 @@ export default Vue.extend({
     },
 
     computed: {
+        activeStep: () => store.getters['policymaker/getCurrentStep'],
+            
         isVertical(): boolean {
             const vm = this as any
             return (vm.orientation.toLowerCase().trim() === 'vertical')
@@ -74,7 +78,14 @@ export default Vue.extend({
     methods: {
         setActiveStep(step: number) {
             const vm = this as any
-            vm.activeStep = step
+            if (vm.step !== vm.activeStep) {
+                store.commit('policymaker/setStep', step)
+            }
+        },
+
+        isStepClickable(index: number): boolean {
+            const vm = this as any
+            return index >= vm.activeStep
         },
 
         isStepCompleted(index: number): boolean {

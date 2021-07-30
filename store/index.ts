@@ -5,8 +5,11 @@ import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 import _cloneDeep from 'lodash/cloneDeep'
 import _map from 'lodash/map'
 import _reduce from 'lodash/reduce'
+import _isEmpty from 'lodash/isEmpty'
+import _findIndex from 'lodash/findIndex'
+import _startsWith from 'lodash/startsWith'
 
-import { renderTemplate } from '~/utils/mdTemplate'
+import { renderTemplate, renderSecurityTxt } from '~/utils/mdTemplate'
 
 Vue.use(Vuex)
 
@@ -25,10 +28,17 @@ export class PolicyMaker extends VuexModule {
     // Wizard
     currentStep: number = 1
 
+    navSteps: Array<any> = [
+        { route: '/policymaker/introduction', name: 'Introduction' },
+        { route: '/policymaker/organisation', name: 'Organisation details' },
+        { route: '/policymaker/settings', name: 'Policy settings' },
+        { route: '/policymaker/download', name: 'Download' }
+    ]
+
     templateRoot: string = '/templates'
 
     // Policy settings
-    policyConfiguration = {
+    policyConfiguration: PolicyConfiguration = {
         language: 'en',
         region: 'US',
         organizationName: '',
@@ -42,42 +52,73 @@ export class PolicyMaker extends VuexModule {
 
     // CVD Timeline Options
     cvdTimelineOptions = [
-        { value: 90, label: '90 days' }, 
-        { value: 60, label: '60 days' }, 
-        { value: 45, label: '45 days' },
-        { value: 30, label: '30 days' },
+        { value: 180, label: '180 days (6 months)' },
+        { value: 120, label: '120 days (4 months)' },
+        { value: 90, label: '90 days (3 months)' },
+        { value: 60, label: '60 days (2 months)' },
+        { value: 45, label: '45 days (1.5 months)' },
+        { value: 30, label: '30 days (1 month)' },
         { value: 0, label: 'Opt-out of CVD Timeline' }]
 
     // Term Templates
     templates: any = {
-        vdp: { url_root: '/templates/disclose-io-vdp', text: '' },
-        vdp_with_cvd: { url_root: '/templates/disclose-io-vdp-with-cvd', text: '' },
-        safe_harbor: { url_root: '/templates/disclose-io-safe-harbor', text: '' }
+        vdp: { url: '/templates/disclose-io-vdp/{{locale}}.md', text: '' },
+        vdp_with_cvd: { url: '/templates/disclose-io-vdp-with-cvd/{{locale}}.md', text: '' },
+        safe_harbor: { url: '/templates/disclose-io-safe-harbor/{{locale}}.md', text: '' },
+        securitytxt: { url: '/templates/securitytxt/securitytxt.md', text: '' }
     }
 
+    get getCurrentStep(): number {
+        return this.currentStep
+    }
 
-    get getConfiguration() {
+    get getNavSteps(): Array<any> {
+        return this.navSteps
+    }
+
+    get getConfiguration(): object {
         return this.policyConfiguration
     }
 
-    get getChannels() {
+    get getChannels(): Channels {
         return this.policyConfiguration.channels
     }
 
-    get getCurrentLocale() {
+    get getCurrentLocale(): string {
         return `${this.policyConfiguration.language.toLowerCase()}-${this.policyConfiguration.region.toUpperCase()}`
     }
 
-    get getTermsVDP() {
+    get getTermsVDP(): string {
         return renderTemplate(this.templates.vdp.text, this.policyConfiguration)
     }
 
-    get getTermsVDPCVD() {
+    get getTermsVDPCVD(): string {
         return renderTemplate(this.templates.vdp_with_cvd.text, this.policyConfiguration)
     }
 
-    get getTermsSafeHarbor() {
+    get getTermsSafeHarbor(): string {
         return renderTemplate(this.templates.safe_harbor.text, this.policyConfiguration)
+    }
+
+    get getSecurityTxt(): string {
+        return renderSecurityTxt(this.templates.securitytxt.text, this.policyConfiguration)
+    }
+
+    get validOrganizationName(): boolean {
+        return !_isEmpty(this.policyConfiguration.organizationName)
+    }
+
+    get validChannels(): boolean {
+        return this.policyConfiguration.channels.length > 0 && !_isEmpty(this.policyConfiguration.channels[0].address)
+    }
+
+    get validHostUrl(): boolean {
+        return !_isEmpty(this.policyConfiguration.hostUrl.address)
+    }
+
+    @Mutation
+    setStep(stepNumber: number) {
+        this.currentStep = stepNumber
     }
 
     @Mutation
@@ -130,7 +171,8 @@ export class PolicyMaker extends VuexModule {
 
         return Promise.all(
             _map(this.templates, async (template, key) => {
-                let url = `${template.url_root}/${this.getCurrentLocale}.md`
+                let url = template.url
+                url = url.replace("{{locale}}", this.getCurrentLocale)
                 console.log("Loading template ", url);
                 const response = await fetch(url)
                 const text = await response.text()
@@ -139,17 +181,23 @@ export class PolicyMaker extends VuexModule {
         )
     }
 
-}
+    @Action
+    gotoStep(step: number) {
+        this.context.commit('setStep', step)
+        
+        // @ts-ignore
+        $nuxt.$router.push(this.context.getters['getNavSteps'][step-1].route)
+    }
 
-type Channel = {
-    type: string,
-    address: string
-}
+    @Action
+    syncStepFromRoute(route: string) {
+        
+        let index = _findIndex(this.context.getters['getNavSteps'], (step: any) => { 
+            return _startsWith(route, step.route)
+        })
+        index ++
+        console.log('Syncing', route, index)
+        this.context.commit('setStep', index)
+    }
 
-type Channels = Channel[]
-
-
-type SetTemplateTextRequest = {
-    type: string,
-    text: string
 }

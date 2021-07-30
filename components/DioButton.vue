@@ -1,6 +1,6 @@
 <template>
     <button class="dio__button dio__focusable"
-        @click="click"
+        @click="click($event)"
         :class="{ [`dio__button-${theme}`]: true, [`dio__button-${size}`]: true }">
         <slot></slot>
     </button>
@@ -22,9 +22,9 @@ export default Vue.extend({
     },
 
     methods: {
-        click(): void {
+        click($event: any): void {
             const vm = this as any
-            vm.$emit('click')
+            vm.$emit('click', $event)
         }
     }
 })

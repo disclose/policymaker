@@ -28,8 +28,8 @@
         </dio-field> -->
 
         <footer>
-            <dio-link route="/policymaker/download">Next</dio-link>
-            <dio-link route="/policymaker/organisation" theme="muted">Back</dio-link>
+            <dio-button @click="goto(4)">Next</dio-button>
+            <dio-button @click="goto(2)" theme="muted">Back</dio-button>
         </footer>
         
     </div>
@@ -86,8 +86,9 @@ export default Vue.extend({
     methods: {
         addChannel: () => {
             store.commit('policymaker/addChannel')
-            
-        }
+        },
+        goto: (step: number) => store.dispatch('policymaker/gotoStep', step)
+
     }
 })
 </script>

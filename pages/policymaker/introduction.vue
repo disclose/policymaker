@@ -5,7 +5,7 @@
         <nuxt-content :document="content"></nuxt-content>
 
         <footer>
-            <dio-link route="/policymaker/organisation">Begin</dio-link>
+            <dio-button @click="goto(2)">Begin</dio-button>
         </footer>
     </div>
 </template>
@@ -16,6 +16,7 @@ import ProgressSteps from '@/components/ProgressSteps.vue'
 import ProgressStep from '@/components/ProgressStep.vue'
 import PageTitle from '~/components/PageTitle.vue'
 import DioLink from '~/components/DioLink.vue'
+import { store } from '~/store'
 
 export default Vue.extend({
     layout: 'policymaker-v2',
@@ -41,7 +42,9 @@ export default Vue.extend({
 
     computed: {},
 
-    methods: {},
+    methods: {
+        goto: (step: number) => store.dispatch('policymaker/gotoStep', step)
+    },
 
     watch: {}
     

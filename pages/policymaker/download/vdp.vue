@@ -1,8 +1,31 @@
 <template>
     <div>
-        <h3>Vulnerability Disclosure Policy</h3>
-
-        <label><input type="checkbox" v-model="isFullVDP"> Full VDP</label>
+        <br>
+        <div class="dio__checkbox-panels">
+            <div class="dio__checkbox-panel" :class="{ 'dio__checkbox-panel--selected': isFullVDP }" @click="isFullVDP=true">
+                <div class="dio__checkbox-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div class="dio__checkbox-label">
+                    <label>Full Vulnerability Disclosure Policy</label>
+                    <p>Use this version if you require a full policy to be generated</p>
+                </div>
+            </div>
+            <div class="dio__checkbox-panel" :class="{ 'dio__checkbox-panel--selected': !isFullVDP }" @click="isFullVDP=false">
+                <div class="dio__checkbox-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div class="dio__checkbox-label">
+                    <label>Safe Harbor clause only</label>
+                    <p>Use this version if you already have a policy in place and would like to add a Safe Harbor clause</p>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
 
         <dio-term-preview 
             :content="content"
@@ -19,7 +42,14 @@ import DioButton from '~/components/DioButton.vue'
 import { store } from '~/store'
 
 export default Vue.extend({
-  components: { DioButton },
+    components: { DioButton },
+
+    async asyncData({ $content, params, route}) {
+        const copy = await $content("policymaker/vdp").fetch()
+        return {
+            copy
+        }
+    },
     
     data() {
         return {
@@ -49,7 +79,74 @@ export default Vue.extend({
 </script>
 
 <style lang="postcss">
-    .dio__policy-preview {
-
+    .dio__checkbox-panels {
+        @apply flex;
+        @apply flex-row;
     }
+
+    .dio__checkbox-panel {
+        @apply flex flex-row items-center;
+        @apply pt-4 pb-4 pl-5 pr-10 cursor-pointer max-w-md;
+        @apply border-2 border-transparent;
+        @apply transition-all duration-150;
+        background: var(--shade-100);
+        color: var(--shade-800);
+
+        .dio__checkbox-icon {
+            @apply pr-5;
+            opacity: 0;
+            @apply transition-all duration-300;
+        }
+
+        .dio__checkbox-label {
+            label {
+                font-family: 'Noto Sans Display';
+                @apply block font-bold;
+                @apply text-xl;
+            }
+
+            p {
+                @apply text-sm;
+            }
+
+        }
+
+        
+        &:first-child {
+            @apply rounded-l-lg;
+        }
+
+        &:last-child {
+            @apply rounded-r-lg;
+        }
+
+        &:hover {
+            background: var(--shade-300);
+            label {
+                color: var(--dark-purple);
+            }
+        }
+
+        &.dio__checkbox-panel--selected {
+            @apply border-solid;
+            background: var(--white);
+            color: var(--dark-purple);
+            border-color: var(--purple);
+
+
+            &:hover {
+                /* background: var(--dark-purple); */
+            }
+
+            .dio__checkbox-icon {
+                opacity: 1;
+                 
+                svg {
+                    stroke: var(--purple)
+                }
+            }
+        }
+    }
+
+
 </style>
