@@ -1,24 +1,32 @@
 <template>
     <div class="dio__input-channel">
-        <span class="dio__input-prefix">{{ prefix }}</span>
         <input-text 
             v-model="localValue.address"
             ref="inputText"
             @input="update"
-            placeholder="Email address or URL" />
-        <dio-button 
+            :placeholder="placeholder" 
+            :required="index == 0"
+            :isValid="isValid"
+            @blur="cleanInput"
+            :prefix="localValue.prefix"
+            />
+        <!-- <dio-button 
+            v-if="hasValue"
             size="small" 
-            @click="openUrl(localValue.address)"
-            theme="transparent">
-            Check
-        </dio-button>
-        <dio-button class="dio__input-channel-remove dio__focusable" 
-            theme="muted"
-            size="small" 
+            
+            theme="transparent"> -->
+            <svg v-if="hasValue" @click="openUrl(localValue.address)" xmlns="http://www.w3.org/2000/svg" class="dio__channel-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path v-if="isEmail" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                <path v-if="isWebsite" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+        <!-- </dio-button> -->
+
+        <svg class="dio__input-channel-remove"
             @click="removeSelf" 
-            v-if="showRemove">
-            Remove
-        </dio-button>
+            v-if="showRemove"
+            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
     </div>
 </template>
 
@@ -26,6 +34,7 @@
 import Vue from 'vue'
 import _isEmpty from 'lodash/isEmpty'
 import _cloneDeep from 'lodash/cloneDeep'
+import _startsWith from 'lodash/startsWith'
 import DioButton from '../DioButton.vue'
 import InputText from './InputText.vue'
 
@@ -51,8 +60,9 @@ export default Vue.extend({
         return {
             localValue: {
                 type: '',
+                prefix: '',
                 address: ''
-            }
+            },
         }
     },
 
@@ -64,12 +74,49 @@ export default Vue.extend({
     computed: {
         hasValue(): boolean {
             const vm = this as any
-            return !_isEmpty(vm.localValue)
+            return !_isEmpty(vm.localValue.address)
+        },
+
+        isValid(): boolean {
+            const vm = this as any
+            const isValid = vm.hasValue && (vm.isEmail || vm.isWebsite);
+            vm.$emit('valid', isValid)
+            return isValid
+            
+
         },
 
         isEmail(): boolean {
             const vm = this as any
-            return (vm.localValue && vm.localValue.address.indexOf("@") > 0)
+            const atIndex = vm.localValue.address.indexOf("@")
+            const lastDotIndex = vm.localValue.address.lastIndexOf(".")
+            let isEmail = (vm.localValue && atIndex > 0)
+            isEmail = isEmail && lastDotIndex > atIndex
+            return isEmail
+        },
+
+        placeholder(): string {
+            const vm = this as any
+
+            if (vm.localValue.prefix == "mailto:") {
+                return "Email address"
+            }
+
+            if (_startsWith(vm.localValue.prefix, "http")) {
+                return "website.com/contact-us"
+            }
+
+            return "Email address or webform url"
+        },
+
+        isUrl(): boolean {
+            const vm = this as any
+            return _startsWith(vm.localValue.address, "https://") || _startsWith(vm.localValue.address, "http://")
+        },
+
+        isWebsite(): boolean {
+            const vm = this as any
+            return _startsWith(vm.localValue.prefix, "https://") || _startsWith(vm.localValue.prefix, "http://")
         },
 
         prefix(): string {
@@ -77,9 +124,16 @@ export default Vue.extend({
             
             if (vm.isEmail) {
                 return "mailto:"
-            } else {
-                return "https://"
             }
+            if (vm.isUrl) {
+                if (_startsWith(vm.localValue.address, "http")) {
+                    const match = vm.localValue.address.match(/(https?:\/\/)/g)
+                    return (match) ? match[0] : ""
+                } else {
+                    return "https://"
+                }
+            }
+            return ""
         },
         channelType(): string {
             const vm = this as any
@@ -108,7 +162,18 @@ export default Vue.extend({
         },
         openUrl(url: string): void {
             const vm = this as any
-            window.open(`${vm.prefix}${url}`, "_blank")
+            window.open(`${vm.localValue.prefix}${url}`, "_blank")
+        },
+        cleanInput(): void {
+            const vm = this as any
+            if (vm.isEmail) {
+                vm.localValue.address = vm.localValue.address.replace("mailto:", "")
+            }
+
+            if (vm.isUrl) {
+                vm.localValue.address = vm.localValue.address.replace("https://", "")
+                vm.localValue.address = vm.localValue.address.replace("http://", "")
+            }
         }
     },
 
@@ -119,6 +184,13 @@ export default Vue.extend({
                 vm.localValue.address = newValue
             },
             deep: true
+        },
+        'prefix': function(newValue){
+            const vm = this as any
+            if (!_isEmpty(newValue)) {
+                vm.localValue.prefix = newValue
+                vm.cleanInput()
+            }
         }
     }
 
@@ -136,7 +208,10 @@ export default Vue.extend({
     color: var(--shade-600);
 }
 .dio__input-channel-remove {
-    @apply ml-2;
+    @apply ml-2 h-6 w-6 cursor-pointer stroke-current text-red-600;
+}
+.dio__channel-icon {
+    @apply h-5 w-5 stroke-current text-purple-600 cursor-pointer;
 }
 
 </style>

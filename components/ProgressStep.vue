@@ -81,7 +81,7 @@ export default Vue.extend({
 
 <style lang="postcss">
     .dio__step {
-        @apply mt-8 mb-8 z-20 flex relative bg-white;
+        @apply mt-8 mb-8 z-20 flex relative bg-white select-none;
         font-family: 'Noto Sans Display';
         color: var(--shade-500);
     }
@@ -93,7 +93,7 @@ export default Vue.extend({
     }
 
     .dio__step-link {
-        @apply flex flex-row items-center;
+        @apply flex flex-row items-center cursor-default;
 
         &.nuxt-link-active {
             @apply font-bold;
@@ -107,6 +107,7 @@ export default Vue.extend({
         }
         &--completed {
             color: var(--dark-purple);
+            @apply cursor-pointer;
 
             .dio__step-anchor {
                 background: var(--white);

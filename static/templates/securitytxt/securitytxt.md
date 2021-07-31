@@ -1,6 +1,14 @@
-# {{organization}}
+# {{organization}} security contacts and policy
 
+# Our security contact channels
 {{channel}}
-Acknowledgments: https://disclose.io
-Preferred-Languages: {{languages}}
+
+# Link to our vulnerability disclosure policy
 Policy: {{policy_url}}
+
+# Policy created with help from disclose.io
+Acknowledgments: https://disclose.io
+
+# Languages that our team speaks and understands
+Preferred-Languages: {{languages}}
+

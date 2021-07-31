@@ -1,6 +1,7 @@
 
 type Channel = {
     type: string,
+    prefix: string,
     address: string
 }
 
@@ -16,6 +17,7 @@ type PolicyConfiguration = {
     language: string,
     region: string,
     organizationName: string,
+    organizationDomain: string,
     channels: Channels,
     cvdTimelineDays: number,
     hostUrl: Channel

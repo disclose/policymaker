@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h3>Security.txt</h3>
         <nuxt-content :document="copy"></nuxt-content>
         
         <div class="dio__securitytxt">

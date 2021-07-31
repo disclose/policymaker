@@ -18,7 +18,7 @@
         <dio-field>
             <label>Where do you intend to host this policy? *</label>
             <p>Enter the web address where people can find this policy on your website.</p>
-            <input-channel :index="0" v-model="hostUrl"></input-channel>
+            <input-channel :index="0" v-model="hostUrl" @valid="updateValid"></input-channel>
             <!-- <small>* required for security.txt / DNS security.txt</small> -->
         </dio-field>
 
@@ -28,7 +28,7 @@
         </dio-field> -->
 
         <footer>
-            <dio-button @click="goto(4)">Next</dio-button>
+            <dio-button @click="goto(4)" :disabled="!isValid">Next</dio-button>
             <dio-button @click="goto(2)" theme="muted">Back</dio-button>
         </footer>
         
@@ -50,7 +50,7 @@ export default Vue.extend({
 
     data() {
         return {
-
+            localValid: false
         }
     },
 
@@ -78,6 +78,10 @@ export default Vue.extend({
             set (value) {
                 store.commit('policymaker/setHostUrl', value)
             }
+        },
+        isValid() {
+            const vm = this as any
+            return vm.localValid
         }
 
 
@@ -87,7 +91,11 @@ export default Vue.extend({
         addChannel: () => {
             store.commit('policymaker/addChannel')
         },
-        goto: (step: number) => store.dispatch('policymaker/gotoStep', step)
+        goto: (step: number) => store.dispatch('policymaker/gotoStep', step),
+        updateValid(isValid: boolean) {
+            const vm = this as any
+            vm.localValid = isValid
+        }
 
     }
 })

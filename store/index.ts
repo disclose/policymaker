@@ -42,9 +42,11 @@ export class PolicyMaker extends VuexModule {
         language: 'en',
         region: 'US',
         organizationName: '',
-        channels: <Channels>[{ type:'', address:'' }],
+        organizationDomain: '',
+        channels: <Channels>[{ prefix: '', type:'', address:'' }],
         cvdTimelineDays: 90,
         hostUrl: {
+            prefix: '',
             type:'',
             address: ''
         }
@@ -109,7 +111,7 @@ export class PolicyMaker extends VuexModule {
     }
 
     get validChannels(): boolean {
-        return this.policyConfiguration.channels.length > 0 && !_isEmpty(this.policyConfiguration.channels[0].address)
+        return this.policyConfiguration.channels.length > 0 && !_isEmpty(this.policyConfiguration.channels[0].address.trim())
     }
 
     get validHostUrl(): boolean {
@@ -122,8 +124,13 @@ export class PolicyMaker extends VuexModule {
     }
 
     @Mutation
-    setOrganisationName(name: string) {
+    setOrganizationName(name: string) {
         this.policyConfiguration.organizationName = name
+    }
+
+    @Mutation
+    setOrganizationDomain(domain: string) {
+        this.policyConfiguration.organizationDomain = domain.trim()
     }
 
     @Mutation
@@ -131,7 +138,7 @@ export class PolicyMaker extends VuexModule {
         if (channel) {
             this.policyConfiguration.channels.push(channel)
         } else {
-            this.policyConfiguration.channels.push({ type: 'url', address: ''})
+            this.policyConfiguration.channels.push({ prefix: '', type: '', address: ''})
         }
     }
 

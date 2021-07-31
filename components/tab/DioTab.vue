@@ -33,6 +33,7 @@ export default Vue.extend({
 
 <style lang="postcss">
     .dio__tab {
+        @apply select-none;
 
         > a {
             @apply pl-4 pr-4 pt-4 pb-4 mr-0.5;

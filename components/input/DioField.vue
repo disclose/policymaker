@@ -6,7 +6,7 @@
 
 <style lang="postcss">
     .dio__field {
-        @apply mt-12 mb-12;
+        @apply mt-6 mb-6;
 
         label {
             @apply block mb-1 text-xl;

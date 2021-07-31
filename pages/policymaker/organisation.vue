@@ -2,24 +2,28 @@
     <div>
         <page-title>{{ $t('policymaker.organization_details.page_title') }}</page-title>
 
-        <dio-field>
-            <label>{{ $t('policymaker.organization_details.organization_name_label') }} *</label>
-            <p>{{ $t('policymaker.organization_details.organization_name_desc') }}</p>
-            <input-text
-                :value="configuration.organizationName"
-                @input="updateOrganisationName" />
-            <small>* {{ $t('policymaker.organization_details.organization_name_required') }}</small>
-        </dio-field>
+        <dio-field-group>
+            <dio-field>
+                <label>{{ $t('policymaker.organization_details.organization_name_label') }} </label>
+                <p>{{ $t('policymaker.organization_details.organization_name_desc') }}</p>
+                <input-text
+                    :value="configuration.organizationName"
+                    @input="updateOrganisationName"
+                    :required="true"
+                    :isValid="validOrganizationName" />
+                <!-- <small>* {{ $t('policymaker.organization_details.organization_name_required') }}</small> -->
+            </dio-field>
 
-        <dio-field>
-            <label>Who/where are your disclosure points of contact? *</label>
-            <p>Please provide at least 1 (one) <u>email address</u> or <u>webform url</u> for 
-            people to send vulnerability information to your organization.</p>
-            <input-channels></input-channels>
-        </dio-field>
+            <dio-field>
+                <label>Who/where are your disclosure points of contact? *</label>
+                <p>Please provide at least 1 (one) <u>email address</u> or <u>webform url</u> for 
+                people to send vulnerability information to your organization.</p>
+                <input-channels></input-channels>
+            </dio-field>
+        </dio-field-group>
 
         <footer>
-            <dio-button route="/policymaker/settings" @click="goto(3)">Next</dio-button>
+            <dio-button route="/policymaker/settings" @click="goto(3)" :disabled="!isValid">Next</dio-button>
             <dio-button route="/policymaker" theme="muted" @click="goto(1)">Back</dio-button>
         </footer>
 
@@ -29,13 +33,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import DioField from '~/components/input/DioField.vue'
+import DioFieldGroup from '~/components/input/DioFieldGroup.vue'
 import InputChannels from '~/components/input/InputChannels.vue'
 import InputText from '~/components/input/InputText.vue'
 import PageTitle from '~/components/PageTitle.vue'
 import { store } from '~/store'
 
 export default Vue.extend({
-    components: { PageTitle, InputText, InputChannels, DioField },
+    components: { PageTitle, InputText, InputChannels, DioField, DioFieldGroup },
     layout: 'policymaker-v2',
 
     mounted() {
@@ -43,13 +48,16 @@ export default Vue.extend({
     },
 
     computed: {
-        configuration: () => store.getters['policymaker/getConfiguration']
-
+        configuration: () => store.getters['policymaker/getConfiguration'],
+        validOrganizationName: () => store.getters['policymaker/validOrganizationName'],
+        isValid() {
+            return store.getters['policymaker/validOrganizationName'] && store.getters['policymaker/validChannels']
+        }
     },
 
     methods: {
         updateOrganisationName(name: string): void {
-            store.commit('policymaker/setOrganisationName', name)
+            store.commit('policymaker/setOrganizationName', name)
         },
         goto: (step: number) => store.dispatch('policymaker/gotoStep', step)
 

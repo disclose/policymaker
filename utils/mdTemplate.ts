@@ -67,7 +67,7 @@ export function renderSecurityTxt(template: string, config: PolicyConfiguration)
 }
 
 // Flattens the Channels array to fully qualified URIs
-function channelURIs(channels: Channels): Array<string> {
+export function channelURIs(channels: Channels): Array<string> {
     return _map(channels, (channel: Channel) => {
         switch(channel.type) {
             case "url":

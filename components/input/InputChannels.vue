@@ -45,6 +45,7 @@ export default Vue.extend({
     computed: {
         ...mapState('policymaker', ['policyConfiguration']),
         channels: () => store.getters['policymaker/getConfiguration'].channels
+
     },
 
     methods: {

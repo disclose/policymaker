@@ -1,7 +1,9 @@
 <template>
     <button class="dio__button dio__focusable"
         @click="click($event)"
-        :class="{ [`dio__button-${theme}`]: true, [`dio__button-${size}`]: true }">
+        :class="{ [`dio__button-${theme}`]: true, [`dio__button-${size}`]: true, [`dio__button-disabled`]: disabled }"
+        :disabled="disabled"
+        >
         <slot></slot>
     </button>
 </template>
@@ -18,6 +20,10 @@ export default Vue.extend({
         size: {
             type: String,
             default: 'normal'
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -67,6 +73,12 @@ export default Vue.extend({
 
         &-small {
             @apply text-sm p-1 pl-3 pr-3;
+        }
+
+
+        &.dio__button-disabled {
+            background: var(--shade-500);
+            @apply cursor-default;
         }
     }
 </style>

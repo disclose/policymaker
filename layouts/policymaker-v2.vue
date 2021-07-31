@@ -10,8 +10,6 @@
                 </Progress-Steps>
             </nav>
 
-            <!-- <small><pre>{{ configuration }}</pre></small> -->
-
         </header>
 
         <main>
@@ -89,7 +87,7 @@ main {
     }
 
     footer {
-        @apply flex flex-row-reverse justify-between items-center mt-24;
+        @apply flex flex-row-reverse justify-between items-center mt-16;
     }
 }
 

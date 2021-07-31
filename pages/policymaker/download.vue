@@ -12,12 +12,12 @@
         </dio-tab-group>
 
         <NuxtChild />
-
+<!-- 
         <footer>
             <p></p>
             <dio-button v-if="false">Done</dio-button>
             <dio-button @click="goto(3)" theme="muted">Back</dio-button>
-        </footer>
+        </footer> -->
     </div>
 </template>
 
