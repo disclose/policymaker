@@ -33,9 +33,6 @@ export function renderTemplate(template: string, config: PolicyConfiguration) {
 
 export function renderSecurityTxt(template: string, config: PolicyConfiguration) {
 
-    console.log("Rendering", template);
-    
-
     let securitytxt = template
     let varRegex, newValue
 

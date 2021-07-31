@@ -3,7 +3,7 @@
 
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-row items-center gap-x-2">
-                <input-dropdown :options="[]" v-model="language">
+                <input-dropdown :options="[]" v-model="language" v-if="showLanguage">
                     <template v-slot:selectedValue="{ value }">
                         {{ $t(`language.${value}`) }}
                     </template>
@@ -14,14 +14,19 @@
             </div>
             
             <div>
-                <dio-button theme="transparent" @click="download(content, 'text/markdown')">Download as markdown</dio-button>
-                <dio-button theme="transparent" @click="download($md.render(content), 'text/html')">Download as HTML</dio-button>
+                <template v-for="(downloadButton, index) in downloads">
+                    <dio-button v-if="downloadButton.type === 'text/plain'" :key="index" theme="transparent" @click="download(content, downloadButton)">{{ downloadButton.label }}</dio-button>
+                    <dio-button v-if="downloadButton.type === 'text/markdown'" :key="index" theme="transparent" @click="download(content, downloadButton)">{{ downloadButton.label }}</dio-button>
+                    <dio-button v-if="downloadButton.type === 'text/html'" :key="index" theme="transparent" @click="download($md.render(content), downloadButton)">{{ downloadButton.label }}</dio-button>
+                </template>
             </div>
         </div>
         <br>
 
-        <div class="dio__term-content" v-html="$md.render(content)">
-
+        <div v-if="format === 'text/markdown'" class="dio__term-content" v-html="$md.render(content)">
+        </div>
+        <div v-if="format === 'text/plain'" class="dio__term-content">
+            <pre>{{ content }}</pre>
         </div>
     </div>
 </template>
@@ -36,8 +41,20 @@ export default Vue.extend({
         content: {
             type: String
         },
-        filename: {
-            type: String
+        format: {
+            type: String,
+            default: 'text/plain'
+        },
+        downloads: {
+            type: Array
+        },
+        showLanguage: {
+            type: Boolean,
+            default: false
+        },
+        trackingEvent: {
+            type: Object,
+            default() { return null }
         }
     },
 
@@ -49,20 +66,31 @@ export default Vue.extend({
 
 
     methods: {
-        download(policyText: string, type: string) {
+        download(policyText: string, download: any) {
             const vm = this as any
 
             const link = document.createElement('a')
 
             // construct download blob
-            let fileBlob = new Blob([policyText], {type})
+            let fileBlob = new Blob([policyText], {type: download.type})
             link.href = URL.createObjectURL(fileBlob)
-            link.download = this.filename
+            link.download = download.filename
             link.click()
 
             // clean up
             URL.revokeObjectURL(link.href)
 
+            if (vm.trackingEvent) {
+                vm.track(download)
+            }
+        },
+
+        track(download: any): void {
+            const vm = this as any
+
+            const event = { ...vm.trackingEvent, ...download.trackingEvent }
+            
+            vm.$ga.event(event)
         }
     }
 

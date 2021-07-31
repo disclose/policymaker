@@ -29,7 +29,6 @@ export default Vue.extend({
 
     async asyncData({ $content, params, route}) {
         const content = await $content(route.fullPath).fetch()
-        console.log("content", content)
         return {
             content
         }

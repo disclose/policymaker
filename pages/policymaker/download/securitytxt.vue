@@ -2,9 +2,13 @@
     <div>
         <nuxt-content :document="copy"></nuxt-content>
         
-        <div class="dio__securitytxt">
-            <pre>{{ securitytxt }}</pre>
-        </div>
+        <dio-term-preview 
+            format="text/plain"
+            :content="securitytxt"
+            :downloads="downloads"
+            :showLanguage="false"
+            :trackingEvent="trackingEvent"
+        />
 
     </div>
 </template>
@@ -22,17 +26,29 @@ export default Vue.extend({
         }
     },
 
+    data() {
+        return {
+            downloads: [
+                { type: 'text/plain', label: 'Download', filename: 'security.txt' },
+            ]
+        }
+    },
+
     computed: {
         configuration: () => store.getters['policymaker/getConfiguration'],
-        securitytxt: () => store.getters['policymaker/getSecurityTxt']
+        securitytxt: () => store.getters['policymaker/getSecurityTxt'],
+        trackingEvent() {
+            const vm = this as any
+            return {
+                eventCategory: 'security.txt',
+                eventAction: 'download'
+            }
+        },
     }
 
 })
 </script>
 
 <style lang="postcss">
-    .dio__securitytxt {
-        @apply p-4 bg-white border border-solid font-mono;
-        border-color: var(--shade-400);
-    }
+
 </style>

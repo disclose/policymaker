@@ -147,7 +147,7 @@ export default Vue.extend({
                 const newValue = vm.policyConfiguration[option] ? vm.policyConfiguration[option] : '______________'
 
                 policy = policy.replace(varRegex, newValue)
-                // console.log("Option:", varRegex, option, newValue)
+
                 return policy
             }, vm.activeTemplate)
             

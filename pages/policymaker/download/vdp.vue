@@ -28,8 +28,11 @@
         <br><br><br>
 
         <dio-term-preview 
+            format="text/markdown"
+            :downloads="downloads"
+            :showLanguage="true"
             :content="content"
-            :filename="downloadFilename"
+            :trackingEvent="trackingEvent"
         />
 
 
@@ -53,7 +56,7 @@ export default Vue.extend({
     
     data() {
         return {
-            isFullVDP: true
+            isFullVDP: true,
         }
     },
 
@@ -69,6 +72,20 @@ export default Vue.extend({
         downloadFilename() {
             const vm = this as any
             return (vm.isFullVDP) ? 'disclose-io-vdp' : 'disclose-io-safe-harbor'
+        },
+        downloads() {
+            const vm = this as any
+            return [
+                { type: 'text/markdown', label: 'Save as markdown', filename: `${vm.downloadFilename}.md`, trackingEvent: { eventLabel: 'markdown' } },
+                { type: 'text/html', label: 'Save as HTML', filename: `${vm.downloadFilename}.html`, trackingEvent: { eventLabel: 'html' } }
+            ]
+        },
+        trackingEvent() {
+            const vm = this as any
+            return {
+                eventCategory: (vm.isFullVDP) ? 'vdp' : 'safe-harbor',
+                eventAction: 'download'
+            }
         },
         vdp: () => store.getters['policymaker/getTermsVDP'],
         vdpCVD: () => store.getters['policymaker/getTermsVDPCVD'],

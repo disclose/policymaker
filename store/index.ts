@@ -180,7 +180,7 @@ export class PolicyMaker extends VuexModule {
             _map(this.templates, async (template, key) => {
                 let url = template.url
                 url = url.replace("{{locale}}", this.getCurrentLocale)
-                console.log("Loading template ", url);
+                // console.log("Loading template ", url);
                 const response = await fetch(url)
                 const text = await response.text()
                 this.setTemplateText({ type: key, text })
@@ -203,7 +203,7 @@ export class PolicyMaker extends VuexModule {
             return _startsWith(route, step.route)
         })
         index ++
-        console.log('Syncing', route, index)
+        // console.log('Syncing', route, index)
         this.context.commit('setStep', index)
     }
 
