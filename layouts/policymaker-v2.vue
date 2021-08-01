@@ -137,19 +137,22 @@ h3 {
     }
 
     a {
-        @apply text-blue-600 underline;
+        @apply text-purple-800 border-purple-600 hover:text-purple-600 hover:border-purple-600 border-b-2;
+        font-family: 'Noto Sans Display';
+        /* border-bottom: 1px solid; */
+
     }
 
     p {
-        @apply pb-4;
+        @apply my-4;
     }
 
     ul {
-        @apply list-disc list-outside pl-6 pb-4;
+        @apply list-disc list-outside pl-6 my-4;
     }
 
     ol {
-        @apply list-decimal list-outside pl-6 pb-4;
+        @apply list-decimal list-outside pl-6 my-4;
     }
 
     li {
@@ -158,6 +161,19 @@ h3 {
 
     code {
         @apply bg-yellow-100 text-yellow-700 rounded-sm pl-1 pr-1 text-sm;
+    }
+
+    blockquote {
+        @apply bg-yellow-100 text-yellow-700 rounded-md px-4 py-4 flex flex-row items-center;
+
+        p {
+            @apply my-1;
+        }
+
+        a {
+            @apply text-yellow-800 border-yellow-800 hover:text-yellow-600 hover:border-yellow-600;
+            font-family: 'Noto Sans Display';
+        }
     }
 }
 </style>
