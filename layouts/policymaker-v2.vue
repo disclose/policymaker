@@ -66,16 +66,16 @@ export default Vue.extend({
 
 header {
     background: var(--white);
-    @apply flex flex-row items-center h-16 px-4;
-    @apply lg:pt-8 lg:pb-8 lg:w-80 w-full z-10;
-    @apply fixed lg:flex-col lg:h-full min-w-max overflow-hidden;
+    @apply fixed flex flex-row items-center h-16 px-4 overflow-hidden min-w-max;
+    @apply w-full z-10;
+    @apply lg:flex-col lg:h-full lg:items-start lg:pt-8 lg:pb-8 lg:w-80 ;
 
     .logo img {
         @apply h-12;
     }
 
     nav {
-        @apply mt-12 mb-12 pl-3 hidden lg:block;
+        @apply mt-12 mb-12 hidden lg:block;
     }
 }
 
