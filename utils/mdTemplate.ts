@@ -27,6 +27,9 @@ export function renderTemplate(template: string, config: PolicyConfiguration) {
     policy = policy.replace(varRegex, newValue)
 
     // Replace CVD Timeline
+    varRegex = new RegExp(`{{disclosure_window}}`, 'gm')
+    newValue = `${config.cvdTimelineDays}`
+    policy = policy.replace(varRegex, newValue)
 
     return policy
 }

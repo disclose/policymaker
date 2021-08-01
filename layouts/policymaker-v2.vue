@@ -71,7 +71,9 @@ header {
     @apply lg:flex-col lg:h-full lg:items-start lg:pt-8 lg:pb-8 lg:w-80 ;
 
     .logo img {
-        @apply h-12;
+        @apply h-10;
+        @apply lg:h-16;
+        @apply transition-all duration-300;
     }
 
     nav {
