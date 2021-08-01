@@ -20,8 +20,10 @@
                 <p>Provide at least one email address or webform url for people to send vulnerability information 
                     to your organization. Combinations are welcome and supported, however we strongly recommend 
                     keeping the number of communication channels to a minimum to avoid confusion.</p>
-                <small>For email addresses please start with mailto://. For webforms please start with https:// or http:// .</small>
+                    <br>
+                    <small>Note: Please begin email addresses with mailto:// or webforms with https:// or http://</small>
                 <input-channels></input-channels>
+
             </dio-field>
         </dio-field-group>
 
