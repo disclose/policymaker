@@ -9,7 +9,6 @@ export default {
 
   //https://nuxtjs.org/docs/2.x/deployment/github-pages
   router: {
-    base: '/'
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
