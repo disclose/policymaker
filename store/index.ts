@@ -64,10 +64,10 @@ export class PolicyMaker extends VuexModule {
 
     // Term Templates
     templates: any = {
-        vdp: { url: '/templates/disclose-io-vdp/{{locale}}.md', text: '' },
-        vdp_with_cvd: { url: '/templates/disclose-io-vdp-with-cvd/{{locale}}.md', text: '' },
-        safe_harbor: { url: '/templates/disclose-io-safe-harbor/{{locale}}.md', text: '' },
-        securitytxt: { url: '/templates/securitytxt/securitytxt.md', text: '' }
+        vdp: { url: 'templates/disclose-io-vdp/{{locale}}.md', text: '' },
+        vdp_with_cvd: { url: 'templates/disclose-io-vdp-with-cvd/{{locale}}.md', text: '' },
+        safe_harbor: { url: 'templates/disclose-io-safe-harbor/{{locale}}.md', text: '' },
+        securitytxt: { url: 'templates/securitytxt/securitytxt.md', text: '' }
     }
 
     get getCurrentStep(): number {
