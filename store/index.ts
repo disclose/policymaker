@@ -175,10 +175,11 @@ export class PolicyMaker extends VuexModule {
 
     @Action({ rawError: true })
     async fetchTerms() {
-
+        
         return Promise.all(
             _map(this.templates, async (template, key) => {
-                let url = template.url
+                // @ts-ignore
+                let url = `${$nuxt.$router.options.base}${template.url}`
                 url = url.replace("{{locale}}", this.getCurrentLocale)
                 // console.log("Loading template ", url);
                 const response = await fetch(url)

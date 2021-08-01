@@ -12,12 +12,7 @@
         </dio-tab-group>
 
         <NuxtChild />
-<!-- 
-        <footer>
-            <p></p>
-            <dio-button v-if="false">Done</dio-button>
-            <dio-button @click="goto(3)" theme="muted">Back</dio-button>
-        </footer> -->
+
     </div>
 </template>
 
@@ -37,7 +32,6 @@ export default Vue.extend({
         return {
             sections: [
                 { route: '/policymaker/download/vdp', name: 'Vulnerability Disclosure Policy' },
-                // { route: '/policymaker/download/safe-harbor-clause', name: 'Safe Harbor Clause' },
                 { route: '/policymaker/download/securitytxt', name: 'Security.txt' },
                 { route: '/policymaker/download/dnssecuritytxt', name: 'DNS Security.txt' },
             ]
