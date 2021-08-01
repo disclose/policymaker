@@ -1,11 +1,7 @@
 <template>
     <div>
         <page-title>
-            Policymaker
-            <template slot="subtitle">
-                Open-source vulnerability disclosure program policy, security.txt, and DNS Security TXT generator<br>
-                Part of the <a href="https://twitter.com/disclose_io" target="_blank">@disclose_io</a> Project
-            </template>
+            Introduction
         </page-title>
 
         <nuxt-content :document="content"></nuxt-content>
