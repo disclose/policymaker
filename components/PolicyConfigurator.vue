@@ -97,7 +97,7 @@ export default Vue.extend({
                 "organization": {
                     "inputType": "FieldText",
                     "label": "Organization Name",
-                    "placeholder": "Name of your organisation",
+                    "placeholder": "Name of your organization",
                     "required": true
                 },
                 "channel": {

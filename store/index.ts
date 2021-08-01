@@ -30,7 +30,7 @@ export class PolicyMaker extends VuexModule {
 
     navSteps: Array<any> = [
         { route: '/policymaker/introduction', name: 'Introduction' },
-        { route: '/policymaker/organisation', name: 'Organisation details' },
+        { route: '/policymaker/organization', name: 'Organization details' },
         { route: '/policymaker/settings', name: 'Policy settings' },
         { route: '/policymaker/download', name: 'Download' }
     ]

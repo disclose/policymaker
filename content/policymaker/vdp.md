@@ -1,1 +1,1 @@
-See below for a Vulnerability Disclosure Policy configured for your organisation
+See below for a Vulnerability Disclosure Policy configured for your organization
