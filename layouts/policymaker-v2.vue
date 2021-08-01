@@ -98,4 +98,46 @@ h1,h2,h3,h4,h5,h6 {
 h3 {
     @apply text-2xl;
 }
+
+.nuxt-content {
+    h1 {
+        @apply text-2xl font-bold;
+
+        &:not(:first-child) {
+            @apply  pt-6;
+        }
+    }
+
+    h2 {
+        @apply text-xl font-bold pt-5;
+    }
+
+    h3 {
+        @apply text-lg font-bold pt-4;
+    }
+
+    a {
+        @apply text-blue-600 underline;
+    }
+
+    p {
+        @apply pb-4;
+    }
+
+    ul {
+        @apply list-disc list-outside pl-6 pb-4;
+    }
+
+    ol {
+        @apply list-decimal list-outside pl-6 pb-4;
+    }
+
+    li {
+        @apply mb-2;
+    }
+
+    code {
+        @apply bg-yellow-100 text-yellow-700 rounded-sm pl-1 pr-1 text-sm;
+    }
+}
 </style>

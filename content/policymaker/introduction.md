@@ -1,8 +1,11 @@
 # Welcome to the Policymaker!
 
+> This site is currently in Beta. Please post comments/feedback/suggestions [here](https://community.disclose.io/t/policymaker-is-live-in-beta/255).
+
 ## Who is this for?
 
-Policymaker is a "one-stop-shop" policy tool for anyone who is implementing a vulnerability disclosure program (VDP) for the first time, or who already has a VDP and would like to add:
+
+*Policymaker is a "one-stop-shop" policy tool for anyone who is implementing a vulnerability disclosure program (VDP) for the first time, or who already has a VDP and would like to add:*
 
 - Safe harbour standards,
 - A security.txt file, and

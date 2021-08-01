@@ -7,6 +7,11 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  //https://nuxtjs.org/docs/2.x/deployment/github-pages
+  router: {
+    base: '/policymaker'
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Policy Maker | disclose.io',
