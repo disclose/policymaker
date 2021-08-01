@@ -98,11 +98,11 @@ export default Vue.extend({
 <style lang="postcss">
     .dio__checkbox-panels {
         @apply flex;
-        @apply flex-row;
+        @apply flex-col md:flex-row;
     }
 
     .dio__checkbox-panel {
-        @apply flex flex-row items-center;
+        @apply flex flex-1 flex-row items-center;
         @apply pt-4 pb-4 pl-5 pr-10 cursor-pointer max-w-md;
         @apply border-2 border-transparent;
         @apply transition-all duration-150;
@@ -130,11 +130,11 @@ export default Vue.extend({
 
         
         &:first-child {
-            @apply rounded-l-lg;
+            @apply rounded-t-lg md:rounded-l-lg md:rounded-r-none;
         }
 
         &:last-child {
-            @apply rounded-r-lg;
+            @apply rounded-b-lg md:rounded-r-lg md:rounded-l-none;
         }
 
         &:hover {

@@ -10,16 +10,11 @@
             @blur="cleanInput"
             :prefix="localValue.prefix"
             />
-        <!-- <dio-button 
-            v-if="hasValue"
-            size="small" 
-            
-            theme="transparent"> -->
-            <svg v-if="hasValue" @click="openUrl(localValue.address)" xmlns="http://www.w3.org/2000/svg" class="dio__channel-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path v-if="isEmail" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-                <path v-if="isWebsite" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-            </svg>
-        <!-- </dio-button> -->
+
+        <svg class="dio__input-channel-preview dio__channel-icon" v-if="hasValue" @click="openUrl(localValue.address)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path v-if="isEmail" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+            <path v-if="isWebsite" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+        </svg>
 
         <svg class="dio__input-channel-remove"
             @click="removeSelf" 
@@ -53,7 +48,8 @@ export default Vue.extend({
         },
         index: {
             type: Number
-        }
+        },
+
     },
 
     data() {
@@ -111,12 +107,22 @@ export default Vue.extend({
 
         isUrl(): boolean {
             const vm = this as any
-            return _startsWith(vm.localValue.address, "https://") || _startsWith(vm.localValue.address, "http://")
+            
+            if (vm.localValue.address.match(/^https?:\/\//gim)) {
+                return true
+            } else {
+                return false
+            }
         },
 
         isWebsite(): boolean {
             const vm = this as any
-            return _startsWith(vm.localValue.prefix, "https://") || _startsWith(vm.localValue.prefix, "http://")
+            
+            if (vm.localValue.prefix.match(/^https?:\/\//gim)) {
+                return true
+            } else {
+                return false
+            }
         },
 
         prefix(): string {
@@ -126,8 +132,8 @@ export default Vue.extend({
                 return "mailto:"
             }
             if (vm.isUrl) {
-                if (_startsWith(vm.localValue.address, "http")) {
-                    const match = vm.localValue.address.match(/(https?:\/\/)/g)
+                if (vm.localValue.address.match(/^https?:\/\//gim)) {
+                    const match = vm.localValue.address.match(/(https?:\/\/)/gim)
                     return (match) ? match[0] : ""
                 } else {
                     return "https://"
@@ -171,8 +177,8 @@ export default Vue.extend({
             }
 
             if (vm.isUrl) {
-                vm.localValue.address = vm.localValue.address.replace("https://", "")
-                vm.localValue.address = vm.localValue.address.replace("http://", "")
+                // vm.localValue.address = vm.localValue.address.replace("https://", "")
+                vm.localValue.address = vm.localValue.address.replace(/^https?:\/\//gim, '')
             }
         }
     },
@@ -181,7 +187,7 @@ export default Vue.extend({
         'value.address': {
             handler: function(newValue) {
                 const vm = this as any
-                vm.localValue.address = newValue
+                
             },
             deep: true
         },
