@@ -10,7 +10,7 @@
                 :active="false"
                 :completed="isStepCompleted(index)"
                 :size="40"
-                :disabled="isStepClickable(index)"
+                :disabled="isStepDisabled(index + 1)"
                 @changeStep="setActiveStep"
                 :route="step.route">{{ step.name }}</Progress-Step>
         </div>
@@ -83,9 +83,9 @@ export default Vue.extend({
             }
         },
 
-        isStepClickable(index: number): boolean {
+        isStepDisabled(index: number): boolean {
             const vm = this as any
-            return index >= vm.activeStep
+            return (index) >= vm.activeStep
         },
 
         isStepCompleted(index: number): boolean {

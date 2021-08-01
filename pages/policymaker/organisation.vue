@@ -5,19 +5,22 @@
         <dio-field-group>
             <dio-field>
                 <label>{{ $t('policymaker.organization_details.organization_name_label') }} </label>
-                <p>{{ $t('policymaker.organization_details.organization_name_desc') }}</p>
+                <p>This is the organization authorizing the policy, who is responsible for the assets that are in scope.</p>
                 <input-text
                     :value="configuration.organizationName"
                     @input="updateOrganisationName"
                     :required="true"
-                    :isValid="validOrganizationName" />
+                    :isValid="validOrganizationName"
+                    placeholder="Organization name" />
                 <!-- <small>* {{ $t('policymaker.organization_details.organization_name_required') }}</small> -->
             </dio-field>
 
             <dio-field>
                 <label>Who/where are your disclosure points of contact? *</label>
-                <p>Please provide at least 1 (one) <u>email address</u> or <u>webform url</u> for 
-                people to send vulnerability information to your organization.</p>
+                <p>Provide at least one email address or webform url for people to send vulnerability information 
+                    to your organization. Combinations are welcome and supported, however we strongly recommend 
+                    keeping the number of communication channels to a minimum to avoid confusion.</p>
+                <small>For email addresses please start with mailto://. For webforms please start with https:// or http:// .</small>
                 <input-channels></input-channels>
             </dio-field>
         </dio-field-group>

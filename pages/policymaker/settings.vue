@@ -17,7 +17,8 @@
 
         <dio-field>
             <label>Where do you intend to host this policy? *</label>
-            <p>Enter the web address where people can find this policy on your website.</p>
+            <p>Enter the web address where people can find this policy on your website, . Note that this only impacts 
+                security.txt and DNS Security TXT records, and can be changed before deployment if needed.</p>
             <input-channel :index="0" v-model="hostUrl" @valid="updateValid"></input-channel>
             <!-- <small>* required for security.txt / DNS security.txt</small> -->
         </dio-field>

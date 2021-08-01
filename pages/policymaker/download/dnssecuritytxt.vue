@@ -3,7 +3,7 @@
         <nuxt-content :document="copy"></nuxt-content>
 
         <dio-field>
-            <p>Enter your domain to customise configure the DNS records below</p>
+            <p>Enter your domain to customize the DNS records below:</p>
             <input-text class="w-64" v-model="domain" placeholder="Enter your domain" />
         </dio-field>
 

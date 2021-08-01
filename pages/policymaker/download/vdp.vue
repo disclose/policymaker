@@ -10,7 +10,7 @@
                 </div>
                 <div class="dio__checkbox-label">
                     <label>Full Vulnerability Disclosure Policy</label>
-                    <p>Use this version if you require a full policy to be generated</p>
+                    <p>Use this version if you're creating a brand new VDP or fully replacing an existing VDP policy.</p>
                 </div>
             </div>
             <div class="dio__checkbox-panel" :class="{ 'dio__checkbox-panel--selected': !isFullVDP }" @click="isFullVDP=false">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="dio__checkbox-label">
                     <label>Safe Harbor clause only</label>
-                    <p>Use this version if you already have a policy in place and would like to add a Safe Harbor clause</p>
+                    <p>Use this version if you already have a VDP policy in place and would like to add a Safe Harbor clause.</p>
                 </div>
             </div>
         </div>

@@ -1,5 +1,8 @@
 <template>
-    <h2 class="page-title"><slot></slot></h2>
+    <div class="page-title">
+        <h2><slot></slot></h2>
+        <slot name="subtitle"></slot>
+    </div>
 </template>
 
 <script lang="ts">
@@ -21,7 +24,16 @@ export default Vue.extend({
 
 <style lang="postcss">
 .page-title {
-    @apply text-3xl font-bold mt-3 mb-16;
-    font-family: 'Noto Sans Display';
+    @apply mb-16;
+
+    h2 {
+        @apply text-3xl font-bold mt-3;
+        font-family: 'Noto Sans Display';
+    }
+
+    h5 {
+        @apply text-lg;
+        font-family: 'Noto Sans'
+    }
 }
 </style>
