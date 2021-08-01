@@ -54,36 +54,40 @@ export default Vue.extend({
     background: linear-gradient(90deg, var(--white) 50%, var(--shade-050) 50%);
     /* font-family: "Noto Sans", Roboto, "Helvetica Neue", ui-sans-serif, system-ui, -apple-system, system-ui; */
     font-family: "Noto Sans";
-    --nav-width: 320px;
 }
 
 #app {
     @apply container mx-auto h-screen max-w-7xl;
-    @apply flex flex-1 flex-row flex-nowrap items-stretch justify-between;
+    @apply flex flex-nowrap flex-col content-center justify-start items-stretch;
+    @apply lg:flex lg:flex-1 lg:flex-row lg:items-stretch lg:justify-between;
     
 }
 
 
 header {
-    width: var(--nav-width);
-    min-width: var(--nav-width);
     background: var(--white);
-    @apply pt-8 pb-8;
-    @apply fixed h-full;
+    @apply flex flex-row items-center h-16 px-4;
+    @apply lg:pt-8 lg:pb-8 lg:w-80 w-full z-10;
+    @apply fixed lg:flex-col lg:h-full min-w-max overflow-hidden;
+
+    .logo img {
+        @apply h-12;
+    }
+
+    nav {
+        @apply mt-12 mb-12 pl-3 hidden lg:block;
+    }
 }
 
-nav {
-    @apply mt-12 mb-12 pl-3;
-}
 
 main {
-    @apply flex-grow;
+    @apply pt-16 flex-1;    
+    @apply lg:flex-grow lg:pl-80 lg:pt-0;
     background: var(--shade-050);
-    padding-left: var(--nav-width);
 
     #content {
         background: var(--shade-050);
-        @apply pt-8 pb-8 pl-8;
+        @apply py-8 px-8;
     }
 
     footer {

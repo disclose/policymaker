@@ -29,7 +29,7 @@ export default Vue.extend({
     data() {
         return {
             downloads: [
-                { type: 'text/plain', label: 'Download', filename: 'security.txt' },
+                { type: 'text/plain', label: 'Download', filename: 'security.txt', trackingEvent: { eventLabel: 'text' } },
             ]
         }
     },
