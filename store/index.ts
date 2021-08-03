@@ -46,8 +46,8 @@ export class PolicyMaker extends VuexModule {
         channels: <Channels>[{ prefix: '', type:'', address:'' }],
         cvdTimelineDays: 90,
         hostUrl: {
-            prefix: '',
-            type:'',
+            prefix: 'https://',
+            type:'url',
             address: ''
         }
     }

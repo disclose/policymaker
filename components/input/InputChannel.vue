@@ -3,6 +3,7 @@
         <input-text 
             v-model="localValue.address"
             ref="inputText"
+            :type="channelType"
             @input="update"
             :placeholder="placeholder" 
             :required="index == 0"
@@ -143,7 +144,13 @@ export default Vue.extend({
         },
         channelType(): string {
             const vm = this as any
-            return (vm.isEmail) ? 'email' : 'url';
+            if (vm.isEmail) {
+                return 'email'
+            }
+            if (vm.isWebsite) {
+                return 'url'
+            }
+            return 'text'
         },
         showRemove(): boolean {
             const vm = this as any

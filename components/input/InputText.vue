@@ -1,7 +1,17 @@
 <template>
     <div class="dio__input dio__input--text dio__focusable">
         <span class="dio__input-prefix">{{ prefix }}</span>
-        <input ref="input" type="text" class="input" @input="update" @blur="$emit('blur')" v-model="localValue" :placeholder="placeholder">
+        <input
+            ref="input"
+            :type="type"
+            class="input"
+            @input="update"
+            @blur="$emit('blur')"
+            v-model="localValue"
+            :placeholder="placeholder"
+            autocapitalize="off"
+            spellcheck="false"
+            >
         <span v-if="required" 
             class="dio__input-required py-1 px-3 rounded-full text-xs"
             :class="{ 'dio__input-required--complete': isValid }">Required</span>
@@ -31,6 +41,10 @@ export default Vue.extend({
         isValid: {
             type: Boolean,
             default: () => false
+        },
+        type: {
+            type: String,
+            default: 'text'
         }
     },
 
@@ -82,7 +96,7 @@ export default Vue.extend({
     @apply flex flex-1 justify-items-stretch p-2;
     border-color: var(--shade-300);
 
-    input[type='text'] {
+    input {
         @apply bg-transparent flex-grow;
         @apply text-base;
     }
