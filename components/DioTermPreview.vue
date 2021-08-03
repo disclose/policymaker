@@ -99,7 +99,7 @@ export default Vue.extend({
 
 <style lang="postcss">
     .dio__term-content {
-        @apply p-7 border border-gray-400 rounded-sm shadow-md mb-10 select-none;
+        @apply p-7 border border-gray-400 rounded-sm shadow-md mb-10;
         @apply bg-white;
 
         h1 {
