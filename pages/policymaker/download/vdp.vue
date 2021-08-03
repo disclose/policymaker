@@ -30,7 +30,7 @@
         <dio-term-preview 
             format="text/markdown"
             :downloads="downloads"
-            :showLanguage="true"
+            :showLanguage="false"
             :content="content"
             :trackingEvent="trackingEvent"
         />
