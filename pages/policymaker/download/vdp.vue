@@ -11,6 +11,7 @@
                 <div class="dio__checkbox-label">
                     <label>Full Vulnerability Disclosure Policy</label>
                     <p>Use this version if you're creating a brand new VDP or fully replacing an existing VDP policy.</p>
+                    <small class="dio__pill">Version 2021.1</small>
                 </div>
             </div>
             <div class="dio__checkbox-panel" :class="{ 'dio__checkbox-panel--selected': !isFullVDP }" @click="isFullVDP=false">
@@ -22,6 +23,7 @@
                 <div class="dio__checkbox-label">
                     <label>Safe Harbor clause only</label>
                     <p>Use this version if you already have a VDP policy in place and would like to add a Safe Harbor clause.</p>
+                    <small class="dio__pill">Version 2021.1</small>
                 </div>
             </div>
         </div>
@@ -101,6 +103,10 @@ export default Vue.extend({
         @apply flex-col md:flex-row;
     }
 
+    .dio__pill {
+        @apply rounded-full py-1 px-2 text-xs bg-yellow-100 text-yellow-600 border border-solid;
+    }
+
     .dio__checkbox-panel {
         @apply flex flex-1 flex-row items-center;
         @apply pt-4 pb-4 pl-5 pr-10 cursor-pointer max-w-md;
@@ -119,13 +125,20 @@ export default Vue.extend({
             label {
                 font-family: 'Noto Sans Display';
                 @apply block font-bold;
-                @apply text-xl;
+                @apply text-lg;
             }
 
             p {
                 @apply text-sm;
             }
 
+        }
+
+        .dio__pill {
+            @apply mt-2 inline-block border border-solid;
+            background: var(--shade-100);
+            color: var(--shade-900);
+            border-color: var(--shade-200);
         }
 
         
@@ -150,6 +163,9 @@ export default Vue.extend({
             color: var(--dark-purple);
             border-color: var(--purple);
 
+            .dio__pill {
+                @apply bg-purple-100 text-purple-800 border-purple-400;
+            }
 
             &:hover {
                 /* background: var(--dark-purple); */
@@ -164,6 +180,8 @@ export default Vue.extend({
             }
         }
     }
+
+
 
 
 </style>

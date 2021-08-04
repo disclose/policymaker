@@ -27,10 +27,10 @@
             </dio-field>
         </dio-field-group>
 
-        <footer>
+        <div class="dio__action-bar">
             <dio-button route="/policymaker/settings" @click="goto(3)" :disabled="!isValid">Next</dio-button>
             <dio-button route="/policymaker" theme="muted" @click="goto(1)">Back</dio-button>
-        </footer>
+        </div>
 
     </div>
 </template>

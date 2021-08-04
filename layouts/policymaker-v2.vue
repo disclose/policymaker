@@ -1,9 +1,9 @@
 <template>
     <div id="app">
         <header>
-            <div class="logo">
+            <NuxtLink class="logo" to="/policymaker">
                 <img src="@/assets/images/logo-disclose-type.svg">
-            </div>
+            </NuxtLink>
 
             <nav>
                 <Progress-Steps orientation="vertical" :steps="navSteps">
@@ -15,6 +15,9 @@
         <main>
             <div id="content">
                 <Nuxt />          
+                <footer>
+                    &copy; Copyright 2021
+                </footer>
             </div>
         </main>
     </div>
@@ -103,11 +106,15 @@ main {
 
     #content {
         background: var(--shade-050);
-        @apply py-8 px-8;
+        @apply py-8 px-8 lg:min-h-screen flex flex-col justify-between;
+    }
+
+    .dio__action-bar {
+        @apply flex flex-row-reverse justify-between items-center mt-16;
     }
 
     footer {
-        @apply flex flex-row-reverse justify-between items-center mt-16;
+        @apply text-sm mt-6;
     }
 }
 

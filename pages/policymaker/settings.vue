@@ -25,10 +25,10 @@
             </dio-field>
         </dio-field-group>
 
-        <footer>
+        <div class="dio__action-bar">
             <dio-button @click="goto(4)" :disabled="!isValid">Next</dio-button>
             <dio-button @click="goto(2)" theme="muted">Back</dio-button>
-        </footer>
+        </div>
         
     </div>
 </template>

@@ -6,9 +6,9 @@
 
         <nuxt-content :document="content"></nuxt-content>
 
-        <footer>
+        <div class="dio__action-bar">
             <dio-button @click="goto(2)">Begin</dio-button>
-        </footer>
+        </div>
     </div>
 </template>
 
