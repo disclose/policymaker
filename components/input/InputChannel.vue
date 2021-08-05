@@ -138,8 +138,6 @@ export default Vue.extend({
                 if (vm.localValue.address.match(/^https?:\/\//gim)) {
                     const match = vm.localValue.address.match(/(https?:\/\/)/gim)
                     return (match) ? match[0] : ""
-                } else {
-                    return "https://"
                 }
             }
             return ""
