@@ -16,7 +16,7 @@
             <div id="content">
                 <Nuxt />          
                 <footer>
-                    &copy; Copyright <a href=https://disclose.io>Disclose.io</a> - Made with ♥️ &nbsp;by Jeremy Manoto and Casey Ellis.
+                    &copy; Copyright <a href=https://disclose.io>Disclose.io</a> - Made with ♥️ by Jeremy Manoto and Casey Ellis.
                 </footer>
             </div>
         </main>
@@ -110,7 +110,7 @@ main {
     }
 
     .dio__action-bar {
-        @apply flex flex-row-reverse justify-between items-center mt-16;
+        @apply flex flex-row-reverse justify-end items-center my-8 gap-4;
     }
 
     footer {

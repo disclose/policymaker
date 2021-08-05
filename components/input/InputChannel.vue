@@ -111,6 +111,8 @@ export default Vue.extend({
             
             if (vm.localValue.address.match(/^https?:\/\//gim)) {
                 return true
+            } else if (vm.localValue.address.match(/\//gim)) {
+                return true
             } else {
                 return false
             }
