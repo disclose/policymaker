@@ -16,7 +16,7 @@
             <div id="content">
                 <Nuxt />          
                 <footer>
-                    &copy; Copyright 2021
+                    &copy; Copyright <a href=https://disclose.io>Disclose.io</a> - Made with ❤️ by Jeremy Manoto and Casey Ellis.
                 </footer>
             </div>
         </main>
