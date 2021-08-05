@@ -127,8 +127,10 @@ h3 {
 }
 
 .nuxt-content {
+    @apply text-sm lg:text-base;
+
     h1 {
-        @apply text-2xl font-bold;
+        @apply text-lg lg:text-2xl font-bold;
 
         &:not(:first-child) {
             @apply  pt-6;
@@ -136,11 +138,11 @@ h3 {
     }
 
     h2 {
-        @apply text-xl font-bold pt-5;
+        @apply text-base lg:text-xl font-bold pt-5;
     }
 
     h3 {
-        @apply text-lg font-bold pt-4;
+        @apply text-sm lg:text-lg font-bold pt-4;
     }
 
     a {

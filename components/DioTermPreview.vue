@@ -99,11 +99,11 @@ export default Vue.extend({
 
 <style lang="postcss">
     .dio__term-content {
-        @apply p-7 border border-gray-400 rounded-sm shadow-md mb-10;
+        @apply p-3 lg:p-7 border border-gray-400 rounded-sm shadow-md mb-10 text-xs lg:text-base;
         @apply bg-white;
 
         h1 {
-            @apply text-2xl font-bold;
+            @apply text-lg lg:text-2xl font-bold;
 
             &:not(:first-child) {
                 @apply  pt-6;
@@ -111,11 +111,11 @@ export default Vue.extend({
         }
 
         h2 {
-            @apply text-xl font-bold pt-5;
+            @apply text-base lg:text-xl font-bold pt-5;
         }
 
         h3 {
-            @apply text-lg font-bold pt-4;
+            @apply text-sm lg:text-lg font-bold pt-4;
         }
 
         a {

@@ -27,12 +27,12 @@ export default Vue.extend({
     @apply mb-16;
 
     h2 {
-        @apply text-3xl font-bold mt-3;
+        @apply text-2xl lg:text-3xl font-bold mt-3;
         font-family: 'Noto Sans Display';
     }
 
     h5 {
-        @apply text-lg;
+        @apply text-base lg:text-lg;
         font-family: 'Noto Sans'
     }
 }

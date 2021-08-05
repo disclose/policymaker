@@ -9,12 +9,12 @@
         @apply mt-6 mb-6;
 
         label {
-            @apply block mb-1 text-xl;
+            @apply block mb-1 text-base lg:text-xl;
             font-family: 'Noto Sans Display';
         }
         p {
             @apply mb-2;
-            @apply text-base;
+            @apply text-sm lg:text-base;
         }
         
         .dio__field-input {

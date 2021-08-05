@@ -36,7 +36,7 @@ export default Vue.extend({
         @apply select-none;
 
         > a {
-            @apply pl-4 pr-4 pt-4 pb-4 mr-0.5;
+            @apply pl-4 pr-4 pt-4 pb-4 mr-0.5 text-sm lg:text-base;
             @apply transition-all duration-150;
             background: var(--shade-100);
             @apply border-b-2 border-solid;
