@@ -10,6 +10,10 @@
             :isValid="isValid"
             @blur="cleanInput"
             :prefix="localValue.prefix"
+            :autocapitalize="false"
+            :autocorrect="false"
+            :spellcheck="false"
+            :autocomplete="false"
             />
 
         <svg class="dio__input-channel-preview dio__channel-icon" v-if="hasValue" @click="openUrl(localValue.address)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -33,6 +37,9 @@ import _cloneDeep from 'lodash/cloneDeep'
 import _startsWith from 'lodash/startsWith'
 import DioButton from '../DioButton.vue'
 import InputText from './InputText.vue'
+
+const DEFAULT_URLPREFIX = 'https://'
+const DEFAULT_EMAILPREFIX = 'mailto://'
 
 export default Vue.extend({
   components: { DioButton, InputText },
@@ -95,7 +102,7 @@ export default Vue.extend({
         placeholder(): string {
             const vm = this as any
 
-            if (vm.localValue.prefix == "mailto:") {
+            if (vm.localValue.prefix == DEFAULT_EMAILPREFIX) {
                 return "Email address"
             }
 
@@ -132,12 +139,19 @@ export default Vue.extend({
             const vm = this as any
             
             if (vm.isEmail) {
-                return "mailto:"
+                if (vm.localValue.address.match(/^mailto:(\/\/)?/gim)) {
+                    const match = vm.localValue.address.match(/(mailto:(\/\/)?)/gim)
+                    return (match) ? DEFAULT_EMAILPREFIX : ""
+                } else {
+                    return DEFAULT_EMAILPREFIX
+                }
             }
             if (vm.isUrl) {
-                if (vm.localValue.address.match(/^https?:\/\//gim)) {
-                    const match = vm.localValue.address.match(/(https?:\/\/)/gim)
-                    return (match) ? match[0] : ""
+                if (vm.isWebsite || vm.localValue.address.match(/^https?:\/?\/?/gim)) {
+                    const match = vm.localValue.address.match(/(https?:\/\/.)/gim)
+                    return (match) ? match[0].substring(0, match[0].length - 1) : ""
+                } else {
+                    return DEFAULT_URLPREFIX
                 }
             }
             return ""
@@ -161,7 +175,7 @@ export default Vue.extend({
     methods: {
         update(): void {
             const vm = this as any
-            vm.localValue.type = vm.channelType
+            // vm.localValue.type = vm.channelType
             vm.$emit('input', vm.localValue)
         },
 
@@ -180,7 +194,7 @@ export default Vue.extend({
         cleanInput(): void {
             const vm = this as any
             if (vm.isEmail) {
-                vm.localValue.address = vm.localValue.address.replace("mailto:", "")
+                vm.localValue.address = vm.localValue.address.replace(/mailto:(\/\/)?/gim, '')
             }
 
             if (vm.isUrl) {
@@ -221,7 +235,7 @@ export default Vue.extend({
     color: var(--shade-600);
 }
 .dio__input-channel-remove {
-    @apply ml-2 h-6 w-6 cursor-pointer stroke-current text-red-600;
+    @apply h-5 w-5 cursor-pointer stroke-current text-red-600;
 }
 .dio__channel-icon {
     @apply h-5 w-5 stroke-current text-purple-600 cursor-pointer;

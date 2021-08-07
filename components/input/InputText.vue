@@ -9,8 +9,10 @@
             @blur="$emit('blur')"
             v-model="localValue"
             :placeholder="placeholder"
-            autocapitalize="off"
-            spellcheck="false"
+            :autocapitalize="autocapitalize ? 'on' : 'off'"
+            :autocorrect="autocorrect ? 'on' : 'off'"
+            :autocomplete="autocomplete ? 'on' : 'off'"
+            :spellcheck="spellcheck"
             >
         <span v-if="required" 
             class="dio__input-required py-1 px-3 rounded-full text-xs"
@@ -45,6 +47,22 @@ export default Vue.extend({
         type: {
             type: String,
             default: 'text'
+        },
+        autocapitalize: {
+            type: Boolean,
+            default: false
+        },
+        autocorrect: {
+            type: Boolean,
+            default: false
+        },
+        autocomplete: {
+            type: Boolean,
+            default: false
+        },
+        spellcheck: {
+            type: Boolean,
+            default: false
         }
     },
 
