@@ -12,8 +12,7 @@ $ yarn dev
 ```
 
 
-### Build and deploy
+### Build
 ```bash
 $ npx nuxt generate
-$ npm run deploy
 ```
