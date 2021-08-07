@@ -11,6 +11,9 @@
                     @input="updateOrganisationName"
                     :required="true"
                     :isValid="validOrganizationName"
+                    :autocorrect="false"
+                    :autocapitalize="false"
+                    :spellcheck="false"
                     placeholder="Organization name" />
                 <!-- <small>* {{ $t('policymaker.organization_details.organization_name_required') }}</small> -->
             </dio-field>
