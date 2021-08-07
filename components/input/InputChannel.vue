@@ -14,6 +14,7 @@
             :autocorrect="false"
             :spellcheck="false"
             :autocomplete="false"
+            :allowSpaces="false"
             />
 
         <svg class="dio__input-channel-preview dio__channel-icon" v-if="hasValue" @click="openUrl(localValue.address)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -175,7 +176,7 @@ export default Vue.extend({
     methods: {
         update(): void {
             const vm = this as any
-            // vm.localValue.type = vm.channelType
+            vm.localValue.type = vm.channelType
             vm.$emit('input', vm.localValue)
         },
 

@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { PropType } from 'vue'
 import _isEmpty from 'lodash/isEmpty'
 
 export default Vue.extend({
@@ -63,6 +63,10 @@ export default Vue.extend({
         spellcheck: {
             type: Boolean,
             default: false
+        },
+        allowSpaces: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -88,6 +92,12 @@ export default Vue.extend({
     methods: {
         update(): void {
             const vm = this as any
+
+            // Remove blacklisted characters
+            if (!vm.allowSpaces) {
+                vm.localValue = vm.localValue.replace(/ /g, '')
+            }
+
             vm.$emit('input', vm.localValue)
         },
 
