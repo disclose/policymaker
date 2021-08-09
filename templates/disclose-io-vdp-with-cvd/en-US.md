@@ -1,57 +1,82 @@
-# {{organization}} Vulnerability Disclosure Policy
+# <p dir='rtl' align='right'> {{organization}} - سياسات الافصاح عن الثغرات الامنية</p>
 
-## Introduction
+## <p dir='rtl' align='right'>المقدمة</p>
 
-{{organization}} welcomes feedback from security researchers and the general public to help improve our security. If you believe you have discovered a vulnerability, privacy issue, exposed data, or other security issues in any of our assets, we want to hear from you. This policy outlines steps for reporting vulnerabilities to us, what we expect, what you can expect from us.
 
-## Systems in Scope
+<p dir='rtl' align='right'>
+{{organization}} ,يرحب بالتعليقات الامنية من الباحثين الامنيين في تحسين مستوي الامان لدينا
+اذا كنت تعتقد ان لديك ثغرة امنية او مشكلة بخصوص الخصوصية للبيانات مكشوفة او تم تسريبها او مشكلات امنية اخري في اي من منتجاتنا او خدماتنا, فنحن نريد ان نسمع ونري من تقريرك وسوف ناخذه علي محمل الجد وهنا سوف نحدد كيفية الابلاغ عن الثغرات وما نبعده وما هو داخل النطاق المسموح لمختبرين الاختراق ومكتشفين الثغرات.
+</p>
 
-This policy applies to any digital assets owned, operated, or maintained by {{organization}}.
+## <p dir='rtl' align='right'>انظمة النطاق المسموح للاختبار</p>
 
-## Out of Scope
+<p dir='rtl' align='right'>
+السياسة تطبق علي كل ماهو موجود او معروف او منتمي باسم {{organization}}.
+</p>
 
-- Assets or other equipment not owned by parties participating in this policy. 
+## <p dir='rtl' align='right'>خارج النطاق</p>
 
-Vulnerabilities discovered or suspected in out-of-scope systems should be reported to the appropriate vendor or applicable authority.
+<p dir='rtl' align='right'>
+النطاقات والخدمات التي تكون مغير مسؤولة من خلالنا وهي من نطاق خارج عن خدماتنا.
+<br>
+يجب الإبلاغ عن الثغرات المكتشفة أو المشتبه بها في الأنظمة خارج النطاق إلى البائع المناسب أو السلطة المناسبة.
+</p>
 
-## Our Commitments
+## <p dir='rtl' align='right'> التزاماتنا </p>
 
-When working with us, according to this policy, you can expect us to:
+<p dir='rtl' align='right'> 
+عند العمل معنا ، وفقًا لهذه السياسة ، يمكنك أن تتوقع منا:
 
-- Respond to your report promptly, and work with you to understand and validate your report;
-- Strive to keep you informed about the progress of a vulnerability as it is processed;
-- Work to remediate discovered vulnerabilities in a timely manner, within our operational constraints; and
-- Extend Safe Harbor for your vulnerability research that is related to this policy.
+- الرد على تقريرك على الفور ، والعمل معك لفهم التقرير والتحقق من صحته.
+- الحرص علي ابقائك علي اطلاع بجميع المستجدات عن التقرير الخاص بك.
+- العمل على معالجة نقاط الضعف المكتشفة في الوقت المناسب ، ضمن قيودنا التشغيلية.
+- قم بتوسيع Safe Harbor لأبحاث الثغرات الأمنية المرتبطة بهذه السياسة.
+</p> 
 
-## Our Expectations
 
-In participating in our vulnerability disclosure program in good faith, we ask that you:
+## <p dir='rtl' align='right'>توقعاتنا</p>
 
-- Play by the rules, including following this policy and any other relevant agreements. If there is any inconsistency between this policy and any other applicable terms, the terms of this policy will prevail;
-- Report any vulnerability you’ve discovered promptly;
-- Avoid violating the privacy of others, disrupting our systems, destroying data, and/or harming user experience;
-- Use only the Official Channels to discuss vulnerability information with us;
-- Provide us a reasonable amount of time (at least {{disclosure_window}} days from the initial report) to resolve the issue before you disclose it publicly;
-- Perform testing only on in-scope systems, and respect systems and activities which are out-of-scope;
-- If a vulnerability provides unintended access to data: Limit the amount of data you access to the minimum required for effectively demonstrating a Proof of Concept; and cease testing and submit a report immediately if you encounter any user data during testing, such as Personally Identifiable Information (PII), Personal Healthcare Information (PHI), credit card data, or proprietary information;
-- You should only interact with test accounts you own or with explicit permission from the account holder; and
-- Do not engage in extortion.  
+<p dir='rtl' align='right'>
+من خلال المشاركة في برنامج الكشف عن الثغرات الأمنية بحسن نية ، نطلب منك:
+</p>
 
-## Official Channels 
 
-Please report security issues via {{channel}}, providing all relevant information. The more details you provide, the easier it will be for us to triage and fix the issue.
+-  العب واكتشف في حدود سياساتنا, بما في ذلك السياسة او اي اتفاقيات اخري يتم اجرائها, اذا تعارضت هذة السياسة مع اخري فان هذة السياسة هي التي تسود.
+- .عند اكتشافك لثغرة عليك الابلاغ عنها حالا
+- تجنب ان تعطل الموقع او اي خدمات من خدماتنا او التاثير علي المستخدمين باي طريقة تكن او مسح اي بيانات.
+- استخدم وسائل التواصل الرسمية التي نقول عنها فقط للابلاغ عن اي ثغرات امنية.
+- يجب ان تعطنا الوقت الكافي لكي يتم اصلاح الثغرة قبل ان تفصح عنها.
+- عليك العمل علي النطاق المحدد واحترام ماخارجه بدون التاثير عليه.
+- إذا كانت هناك ثغرة أمنية توفر وصولاً غير مقصود إلى البيانات: حدد كمية البيانات التي تصل إليها بالحد الأدنى المطلوب لإثبات إثبات المفهوم بشكل فعال ؛ والتوقف عن الاختبار وتقديم تقرير على الفور إذا واجهت أي بيانات مستخدم أثناء الاختبار ، مثل معلومات التعريف الشخصية (PII) أو معلومات الرعاية الصحية الشخصية (PHI) أو بيانات بطاقة الائتمان أو معلومات الملكية.
+- يجب أن تتفاعل فقط مع حسابات الاختبار التي تمتلكها أو بإذن صريح من صاحب الحساب.
+- لا تبتز احدا.
 
-## Safe Harbor
 
-When conducting vulnerability research, according to this policy, we consider this research conducted under this policy to be:
+## <p dir='rtl' align='right'>القنوات الرسمية</p>
 
-- Authorized concerning any applicable anti-hacking laws, and we will not initiate or support legal action against you for accidental, good-faith violations of this policy;
-- Authorized concerning any relevant anti-circumvention laws, and we will not bring a claim against you for circumvention of technology controls;
-- Exempt from restrictions in our Terms of Service (TOS) and/or Acceptable Usage Policy (AUP) that would interfere with conducting security research, and we waive those restrictions on a limited basis; and
-- Lawful, helpful to the overall security of the Internet, and conducted in good faith.
+<p dir='rtl' align='right'>
+الرجاء الإبلاغ عن مشكلات الأمان عبر {{channel}} ، مع تقديم جميع المعلومات ذات الصلة. كلما زادت التفاصيل التي تقدمها ، كان من الأسهل علينا فرز المشكلة وحلها.
+</p>
 
-You are expected, as always, to comply with all applicable laws. If legal action is initiated by a third party against you and you have complied with this policy, we will take steps to make it known that your actions were conducted in compliance with this policy.
+## <p dir='rtl' align='right'> قانون الملاذ الامن</p>
 
-If at any time you have concerns or are uncertain whether your security research is consistent with this policy, please submit a report through one of our Official Channels before going any further.
+<p dir='rtl' align='right'>
+عند إجراء بحث حول نقاط الضعف ، وفقًا لهذه السياسة ، فإننا نعتبر أن هذا البحث الذي يتم إجراؤه بموجب هذه السياسة هو:
+</p>
 
-> Note that the Safe Harbor applies only to legal claims under the control of the organization participating in this policy, and that the policy does not bind independent third parties.
+- مُصرح به فيما يتعلق بأي قوانين سارية لمكافحة القرصنة ، ولن نبدأ أو ندعم أي إجراء قانوني ضدك بسبب الانتهاكات العرضية بحسن نية لهذه السياسة ؛
+- مُصرح به فيما يتعلق بأي قوانين مكافحة التحايل ذات الصلة ، ولن نرفع دعوى ضدك بسبب التحايل على ضوابط التكنولوجيا ؛
+- الإعفاء من القيود الواردة في شروط الخدمة (TOS) و / أو سياسة الاستخدام المقبول (AUP) التي قد تتداخل مع إجراء البحوث الأمنية ، ونحن نتنازل عن هذه القيود على أساس محدود ؛ و
+- قانوني ، ومفيد للأمن العام للإنترنت ، ويتم إجراؤه بحسن نية.
+
+<p dir='rtl' align='right'>
+يُتوقع منك ، كما هو الحال دائمًا ، الامتثال لجميع القوانين المعمول بها. إذا تم اتخاذ إجراء قانوني من قبل طرف ثالث ضدك وامتثلت لهذه السياسة ، فسوف نتخذ خطوات لإعلامك بأن أفعالك قد تمت وفقًا لهذه السياسة.
+</p>
+
+<p dir='rtl' align='right'>
+إذا كانت لديك مخاوف في أي وقت أو لم تكن متأكدًا مما إذا كان بحثك الأمني ​​متوافقًا مع هذه السياسة ، فيرجى إرسال تقرير عبر إحدى قنواتنا الرسمية قبل المضي قدمًا.
+</p>
+
+<p dir='rtl' align='right'>
+> لاحظ أن قانون الملاذ الآمن ينطبق فقط على المطالبات القانونية الواقعة تحت سيطرة المنظمة المشاركة في هذه السياسة ، وأن السياسة لا تُلزم الأطراف الثالثة المستقلة.
+</p>
