@@ -36,11 +36,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState, mapGetters, mapMutations } from 'vuex'
-import PageTitle from '~/components/PageTitle.vue'
-import InputChannel from '~/components/input/InputChannel.vue'
-import DioDropdown from '~/components/DioDropdown.vue'
-import DioField from '~/components/input/DioField.vue'
-import DioFieldGroup from '~/components/input/DioFieldGroup.vue'
+import PageTitle from '~/components/PageTitle/PageTitle.vue'
+import InputChannel from '~/components/InputChannel/InputChannel.vue'
+import DioDropdown from '~/components/DioDropdown/DioDropdown.vue'
+import DioField from '~/components/DioField/DioField.vue'
+import DioFieldGroup from '~/components/DioField/DioFieldGroup.vue'
 import { store } from '@/store'
 
 export default Vue.extend({

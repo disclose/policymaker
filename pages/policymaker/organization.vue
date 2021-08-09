@@ -40,11 +40,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import DioField from '~/components/input/DioField.vue'
-import DioFieldGroup from '~/components/input/DioFieldGroup.vue'
-import InputChannels from '~/components/input/InputChannels.vue'
-import InputText from '~/components/input/InputText.vue'
-import PageTitle from '~/components/PageTitle.vue'
+import DioField from '~/components/DioField/DioField.vue'
+import DioFieldGroup from '~/components/DioField/DioFieldGroup.vue'
+import InputChannels from '~/components/InputChannel/InputChannels.vue'
+import InputText from '~/components/InputText/InputText.vue'
+import PageTitle from '~/components/PageTitle/PageTitle.vue'
 import { store } from '~/store'
 
 export default Vue.extend({

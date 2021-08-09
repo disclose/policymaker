@@ -43,7 +43,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import DioButton from '~/components/DioButton.vue'
+import DioButton from '~/components/DioButton/DioButton.vue'
 import { store } from '~/store'
 
 export default Vue.extend({

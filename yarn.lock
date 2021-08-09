@@ -7279,7 +7279,7 @@ nuxt-i18n@^6.27.0:
     ufo "^0.7.7"
     vue-i18n "^8.24.5"
 
-nuxt@^2.15.3:
+nuxt@^2.15.7:
   version "2.15.7"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-2.15.7.tgz#45332e3b00ba5c1cf04688d42373c8ed7ef4dca7"
   integrity sha512-opxIwaiX4/MvPD5yHEHvtPSEkQKPxg4WPscstnvWC8zX2n74/3DzlNQQAbxtLngW7tze9wsWavxgSMtJXsA8Uw==

@@ -35,8 +35,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import DioField from '~/components/input/DioField.vue'
-import InputText from '~/components/input/InputText.vue'
+import DioField from '~/components/DioField/DioField.vue'
+import InputText from '~/components/InputText/InputText.vue'
 import { store } from '~/store'
 import { channelURIs } from '~/utils/mdTemplate'
 

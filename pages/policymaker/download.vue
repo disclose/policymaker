@@ -19,9 +19,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapActions } from 'vuex'
-import DioTab from '~/components/tab/DioTab.vue'
-import DioTabGroup from '~/components/tab/DioTabGroup.vue'
-import PageTitle from '~/components/PageTitle.vue'
+import DioTab from '~/components/DioTab/DioTab.vue'
+import DioTabGroup from '~/components/DioTab/DioTabGroup.vue'
+import PageTitle from '~/components/PageTitle/PageTitle.vue'
 import { store } from '~/store'
 
 export default Vue.extend({

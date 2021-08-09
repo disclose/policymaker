@@ -20,7 +20,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState } from 'vuex'
-import DioButton from '../DioButton.vue'
+import DioButton from '../DioButton/DioButton.vue'
 import InputChannel from './InputChannel.vue'
 import _cloneDeep from 'lodash/cloneDeep'
 import { store } from '~/store'
