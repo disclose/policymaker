@@ -1,6 +1,7 @@
 # Policymaker: UI Application
 ## Open-source vulnerability disclosure program policy, security.txt, and DNS Security TXT generator - Part of the @disclose_io Project.
 
+[![Build and Deploy](https://github.com/disclose/policymaker/actions/workflows/deploy.yml/badge.svg?branch=develop)](https://github.com/disclose/policymaker/actions/workflows/deploy.yml)
 
 This branch of `policymaker` is the home of the code driving the public facing UI application that generates VDP terms and (dns)security.txt files. 
 
