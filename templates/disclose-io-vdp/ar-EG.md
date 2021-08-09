@@ -1,4 +1,4 @@
-# {{organization}} سياسات الافصاح عن الثغرات الامنية
+# <p dir='rtl' align='right'> {{organization}} - سياسات الافصاح عن الثغرات الامنية</p>
 
 ## <p dir='rtl' align='right'>المقدمة</p>
 
