@@ -18,7 +18,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapActions } from 'vuex'
 import DioTab from '~/components/DioTab/DioTab.vue'
 import DioTabGroup from '~/components/DioTab/DioTabGroup.vue'
 import PageTitle from '~/components/PageTitle/PageTitle.vue'
@@ -33,7 +32,6 @@ export default Vue.extend({
             sections: [
                 { route: '/policymaker/download/vdp', name: 'Vulnerability Disclosure Policy' },
                 { route: '/policymaker/download/securitytxt', name: 'Security.txt' },
-                { route: '/policymaker/download/dnssecuritytxt', name: 'DNS Security.txt' },
             ]
         }
     },

@@ -3,7 +3,7 @@
         <div class="dio__stem" :style="stemStyle"></div>
         <div class="dio__stem--progress" :style="progressStyle"></div>
         <div ref="steps">
-            <Progress-Step 
+            <progress-step 
                 v-for="(step, index) in steps"
                 :key="index"
                 :index="index+1"
@@ -20,8 +20,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { store } from '~/store'
+import ProgressStep from './ProgressStep.vue'
 
 export default Vue.extend({
+  components: { ProgressStep },
     name: "ProgressSteps",
     
     props: {

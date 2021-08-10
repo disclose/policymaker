@@ -14,8 +14,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import ProgressSteps from '~/components/DioProgressStep/ProgressSteps.vue'
-import ProgressStep from '~/components/DioProgressStep/ProgressStep.vue'
 import PageTitle from '~/components/PageTitle/PageTitle.vue'
 import DioLink from '~/components/DioLink/DioLink.vue'
 import { store } from '~/store'
@@ -23,8 +21,6 @@ import { store } from '~/store'
 export default Vue.extend({
     layout: 'policymaker-v2',
     components: {
-        ProgressSteps,
-        ProgressStep,
         PageTitle,
         DioLink
     },

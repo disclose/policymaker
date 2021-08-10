@@ -50,9 +50,8 @@ export default Vue.extend({
 
     methods: {
         select(value: any) {
-            console.log("Panel select", value);
-            this.$emit('input', value)
             this.localValue = value
+            this.$emit('input', value)
         },
         panelIsSelected(testValue: any): boolean {
             const isSelected = _isEqual(this.localValue, testValue)

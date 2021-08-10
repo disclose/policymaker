@@ -1,33 +1,20 @@
 <template>
     <div>
-        <br>
-        <div class="dio__checkbox-panels">
-            <div class="dio__checkbox-panel" :class="{ 'dio__checkbox-panel--selected': isFullVDP }" @click="isFullVDP=true">
-                <div class="dio__checkbox-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-                <div class="dio__checkbox-label">
-                    <label>Full Vulnerability Disclosure Policy</label>
-                    <p>Use this version if you're creating a brand new VDP or fully replacing an existing VDP policy.</p>
-                    <small class="dio__pill">Version 2021.1</small>
-                </div>
-            </div>
-            <div class="dio__checkbox-panel" :class="{ 'dio__checkbox-panel--selected': !isFullVDP }" @click="isFullVDP=false">
-                <div class="dio__checkbox-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
+
+        <dio-checkbox-panels v-model="isFullVDP" class="mt-4 mb-16">
+            <dio-checkbox-panel :value="true">
+                <label>Full Vulnerability Disclosure Policy</label>
+                <p>Use this version if you're creating a brand new VDP or fully replacing an existing VDP policy.</p>
+                <small class="dio__pill">Version 2021.1</small>
+            </dio-checkbox-panel>
+            <dio-checkbox-panel :value="false">
                 <div class="dio__checkbox-label">
                     <label>Safe Harbor clause only</label>
                     <p>Use this version if you already have a VDP policy in place and would like to add a Safe Harbor clause.</p>
                     <small class="dio__pill">Version 2021.1</small>
                 </div>
-            </div>
-        </div>
-        <br><br><br>
+            </dio-checkbox-panel>
+        </dio-checkbox-panels>
 
         <dio-term-preview 
             format="text/markdown"
@@ -106,82 +93,5 @@ export default Vue.extend({
     .dio__pill {
         @apply rounded-full py-1 px-2 text-xs bg-yellow-100 text-yellow-600 border border-solid;
     }
-
-    .dio__checkbox-panel {
-        @apply flex flex-1 flex-row items-center;
-        @apply pt-4 pb-4 pl-5 pr-10 cursor-pointer max-w-md;
-        @apply border-2 border-transparent;
-        @apply transition-all duration-150;
-        background: var(--shade-100);
-        color: var(--shade-800);
-
-        .dio__checkbox-icon {
-            @apply pr-5;
-            opacity: 0;
-            @apply transition-all duration-300;
-        }
-
-        .dio__checkbox-label {
-            label {
-                font-family: 'Noto Sans Display';
-                @apply block font-bold;
-                @apply text-lg;
-            }
-
-            p {
-                @apply text-sm;
-            }
-
-        }
-
-        .dio__pill {
-            @apply mt-2 inline-block border border-solid;
-            background: var(--shade-100);
-            color: var(--shade-900);
-            border-color: var(--shade-200);
-        }
-
-        
-        &:first-child {
-            @apply rounded-t-lg md:rounded-l-lg md:rounded-r-none;
-        }
-
-        &:last-child {
-            @apply rounded-b-lg md:rounded-r-lg md:rounded-l-none;
-        }
-
-        &:hover {
-            background: var(--shade-300);
-            label {
-                color: var(--dark-purple);
-            }
-        }
-
-        &.dio__checkbox-panel--selected {
-            @apply border-solid;
-            background: var(--white);
-            color: var(--dark-purple);
-            border-color: var(--purple);
-
-            .dio__pill {
-                @apply bg-purple-100 text-purple-800 border-purple-400;
-            }
-
-            &:hover {
-                /* background: var(--dark-purple); */
-            }
-
-            .dio__checkbox-icon {
-                opacity: 1;
-                 
-                svg {
-                    stroke: var(--purple)
-                }
-            }
-        }
-    }
-
-
-
 
 </style>
