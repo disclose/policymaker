@@ -6,7 +6,7 @@
             </NuxtLink>
 
             <nav>
-                <Progress-Steps orientation="vertical" :steps="navSteps">
+                <progress-steps orientation="vertical" :steps="navSteps">
                 </Progress-Steps>
             </nav>
 
@@ -28,9 +28,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import ProgressSteps from '~/components/DioProgressStep/ProgressSteps.vue'
 import { store } from '~/store'
 
 export default Vue.extend({
+  components: { ProgressSteps },
     
     data() {
         return {

@@ -20,7 +20,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState } from 'vuex'
-import DioButton from '../DioButton.vue'
+import DioButton from '../DioButton/DioButton.vue'
 import InputChannel from './InputChannel.vue'
 import _cloneDeep from 'lodash/cloneDeep'
 import { store } from '~/store'
@@ -59,10 +59,6 @@ export default Vue.extend({
         },
         removeChannel(index: number): void {
             store.commit('policymaker/removeChannel', index)
-        },
-        updateChannel($event: any, index: number): void {
-            const vm = this as any
-            store.commit('policymaker/updateChannel', { value: $event, index })
         },
         emit(): void {
             const vm = this as any

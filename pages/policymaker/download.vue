@@ -18,43 +18,37 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapActions } from 'vuex'
-import DioTab from '~/components/tab/DioTab.vue'
-import DioTabGroup from '~/components/tab/DioTabGroup.vue'
-import PageTitle from '~/components/PageTitle.vue'
-import { store } from '~/store'
+import DioTab from '~/components/DioTab/DioTab.vue'
+import DioTabGroup from '~/components/DioTab/DioTabGroup.vue'
+import PageTitle from '~/components/PageTitle/PageTitle.vue'
+import { NavSteps, PolicyConfiguration, store } from '~/store'
+import nav from '~/mixins/nav'
 
 export default Vue.extend({
     components: { PageTitle, DioTab, DioTabGroup },
-    layout: 'policymaker-v2',
+    layout: 'policymaker',
 
-    data() {
-        return {
-            sections: [
-                { route: '/policymaker/download/vdp', name: 'Vulnerability Disclosure Policy' },
-                { route: '/policymaker/download/securitytxt', name: 'Security.txt' },
-                { route: '/policymaker/download/dnssecuritytxt', name: 'DNS Security.txt' },
-            ]
+    mixins: [nav],
+
+    created() {
+        const vm = this as any
+        if (!this.validAll) {
+            vm.goto(1)
+        } else {
+            store.dispatch('policymaker/fetchTerms').then(() => {
+                this.$router.push(this.sections[0].route)
+            })
         }
-    },
 
-    mounted() {
-        // Check validation
-
-        store.dispatch('policymaker/fetchTerms').then(() => {
-            this.$router.push(this.sections[0].route)
-        })
         
     },
 
     computed: {
-        configuration: () => store.getters['policymaker/getConfiguration']
-    },
-
-    methods: {
-        goto: (step: number) => store.dispatch('policymaker/gotoStep', step)
-
+        configuration: () => store.getters['policymaker/getConfiguration'] as PolicyConfiguration,
+        sections: () => store.getters['policymaker/getDownloadSections'] as NavSteps,
+        validAll: () => store.getters['policymaker/validAll'] as boolean
     }
+
 })
 </script>
 

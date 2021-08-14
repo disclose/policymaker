@@ -8,6 +8,8 @@ import _join from 'lodash/join'
 
 import '~/store/types'
 
+import { Channel, Channels, PolicyConfiguration } from '~/store'
+
 export function renderTemplate(template: string, config: PolicyConfiguration) {
 
     let policy = template

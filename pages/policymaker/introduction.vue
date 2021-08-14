@@ -14,41 +14,26 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import ProgressSteps from '@/components/ProgressSteps.vue'
-import ProgressStep from '@/components/ProgressStep.vue'
-import PageTitle from '~/components/PageTitle.vue'
-import DioLink from '~/components/DioLink.vue'
-import { store } from '~/store'
+import PageTitle from '~/components/PageTitle/PageTitle.vue'
+import DioLink from '~/components/DioLink/DioLink.vue'
+import nav from '~/mixins/nav'
 
 export default Vue.extend({
-    layout: 'policymaker-v2',
+    layout: 'policymaker',
     components: {
-        ProgressSteps,
-        ProgressStep,
         PageTitle,
         DioLink
     },
+
+    mixins: [nav],
 
     async asyncData({ $content, params, route}) {
         const content = await $content(route.fullPath).fetch()
         return {
             content
         }
-    },
+    }
 
-    data() {
-        return {
-        }
-    },
-
-    computed: {},
-
-    methods: {
-        goto: (step: number) => store.dispatch('policymaker/gotoStep', step)
-    },
-
-    watch: {}
-    
 })
 </script>
 

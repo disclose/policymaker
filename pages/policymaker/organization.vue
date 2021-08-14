@@ -40,20 +40,19 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import DioField from '~/components/input/DioField.vue'
-import DioFieldGroup from '~/components/input/DioFieldGroup.vue'
-import InputChannels from '~/components/input/InputChannels.vue'
-import InputText from '~/components/input/InputText.vue'
-import PageTitle from '~/components/PageTitle.vue'
+import DioField from '~/components/DioField/DioField.vue'
+import DioFieldGroup from '~/components/DioField/DioFieldGroup.vue'
+import InputChannels from '~/components/InputChannel/InputChannels.vue'
+import InputText from '~/components/InputText/InputText.vue'
+import PageTitle from '~/components/PageTitle/PageTitle.vue'
 import { store } from '~/store'
+import nav from '~/mixins/nav'
 
 export default Vue.extend({
     components: { PageTitle, InputText, InputChannels, DioField, DioFieldGroup },
-    layout: 'policymaker-v2',
+    layout: 'policymaker',
 
-    mounted() {
-        const vm = this as any
-    },
+    mixins: [nav],
 
     computed: {
         configuration: () => store.getters['policymaker/getConfiguration'],
@@ -66,8 +65,7 @@ export default Vue.extend({
     methods: {
         updateOrganisationName(name: string): void {
             store.commit('policymaker/setOrganizationName', name)
-        },
-        goto: (step: number) => store.dispatch('policymaker/gotoStep', step)
+        }
 
     }
 })
