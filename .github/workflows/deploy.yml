@@ -27,7 +27,7 @@ jobs:
       # Build the artifact under `dist`
       - name: Install and Build
         run: |
-          npm install
+          yarn install
           npx nuxt generate
 
       # Deploy to gh-pages
