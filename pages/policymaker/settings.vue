@@ -45,7 +45,7 @@ import { store } from '@/store'
 
 export default Vue.extend({
     components: { PageTitle, InputChannel, DioDropdown, DioField, DioFieldGroup },
-    layout: 'policymaker-v2',
+    layout: 'policymaker',
 
     data() {
         return {

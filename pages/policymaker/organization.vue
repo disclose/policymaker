@@ -49,7 +49,7 @@ import { store } from '~/store'
 
 export default Vue.extend({
     components: { PageTitle, InputText, InputChannels, DioField, DioFieldGroup },
-    layout: 'policymaker-v2',
+    layout: 'policymaker',
 
     mounted() {
         const vm = this as any

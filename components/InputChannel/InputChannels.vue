@@ -60,10 +60,6 @@ export default Vue.extend({
         removeChannel(index: number): void {
             store.commit('policymaker/removeChannel', index)
         },
-        updateChannel($event: any, index: number): void {
-            const vm = this as any
-            store.commit('policymaker/updateChannel', { value: $event, index })
-        },
         emit(): void {
             const vm = this as any
             vm.$emit('input', vm.channels)

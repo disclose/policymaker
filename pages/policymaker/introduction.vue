@@ -19,7 +19,7 @@ import DioLink from '~/components/DioLink/DioLink.vue'
 import { store } from '~/store'
 
 export default Vue.extend({
-    layout: 'policymaker-v2',
+    layout: 'policymaker',
     components: {
         PageTitle,
         DioLink

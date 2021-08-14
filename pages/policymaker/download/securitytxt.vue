@@ -51,15 +51,7 @@ export default Vue.extend({
                 eventAction: 'download'
             }
         },
-    },
-
-    methods: {
-        select(value: any) {
-            console.log("Component select", value);
-            
-        }
     }
-
 })
 </script>
 

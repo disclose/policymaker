@@ -25,7 +25,7 @@ import { store } from '~/store'
 
 export default Vue.extend({
     components: { PageTitle, DioTab, DioTabGroup },
-    layout: 'policymaker-v2',
+    layout: 'policymaker',
 
     data() {
         return {
@@ -39,6 +39,9 @@ export default Vue.extend({
 
     mounted() {
         // Check validation
+        if (!this.validAll) {
+            this.$router.replace(this.getNavSteps[0].route)
+        }
 
         store.dispatch('policymaker/fetchTerms').then(() => {
             this.$router.push(this.sections[0].route)
@@ -47,7 +50,9 @@ export default Vue.extend({
     },
 
     computed: {
-        configuration: () => store.getters['policymaker/getConfiguration']
+        configuration: () => store.getters['policymaker/getConfiguration'],
+        validAll: () => store.getters['policymaker/validAll'],
+        getNavSteps: () => store.getters['policymaker/getNavSteps']
     },
 
     methods: {

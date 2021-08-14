@@ -10,6 +10,8 @@ import _findIndex from 'lodash/findIndex'
 import _startsWith from 'lodash/startsWith'
 
 import { renderTemplate, renderSecurityTxt } from '~/utils/mdTemplate'
+import { Channel, Channels, DropdownOptions, NavStep, NavSteps, PolicyConfiguration, SetTemplateTextRequest, TemplateSources, UpdateChannelRequest } from './types'
+export * from './types'
 
 Vue.use(Vuex)
 
@@ -28,7 +30,7 @@ export class PolicyMaker extends VuexModule {
     // Wizard
     currentStep: number = 1
 
-    navSteps: Array<any> = [
+    navSteps: NavSteps = [
         { route: '/policymaker/introduction', name: 'Introduction' },
         { route: '/policymaker/organization', name: 'Organization details' },
         { route: '/policymaker/settings', name: 'Policy settings' },
@@ -53,17 +55,18 @@ export class PolicyMaker extends VuexModule {
     }
 
     // CVD Timeline Options
-    cvdTimelineOptions = [
+    cvdTimelineOptions: DropdownOptions = [
         { value: 180, label: '180 days (6 months)' },
         { value: 120, label: '120 days (4 months)' },
         { value: 90, label: '90 days (3 months)' },
         { value: 60, label: '60 days (2 months)' },
         { value: 45, label: '45 days (1.5 months)' },
         { value: 30, label: '30 days (1 month)' },
-        { value: 0, label: 'Opt-out of CVD Timeline' }]
+        { value: 0, label: 'Opt-out of CVD Timeline' }
+    ]
 
     // Term Templates
-    templates: any = {
+    templates: TemplateSources = {
         vdp: { url: 'templates/disclose-io-vdp/{{locale}}.md', text: '' },
         vdp_with_cvd: { url: 'templates/disclose-io-vdp-with-cvd/{{locale}}.md', text: '' },
         safe_harbor: { url: 'templates/disclose-io-safe-harbor/{{locale}}.md', text: '' },
@@ -74,11 +77,11 @@ export class PolicyMaker extends VuexModule {
         return this.currentStep
     }
 
-    get getNavSteps(): Array<any> {
+    get getNavSteps(): NavSteps {
         return this.navSteps
     }
 
-    get getConfiguration(): object {
+    get getConfiguration(): PolicyConfiguration {
         return this.policyConfiguration
     }
 
@@ -118,6 +121,10 @@ export class PolicyMaker extends VuexModule {
         return !_isEmpty(this.policyConfiguration.hostUrl.address)
     }
 
+    get validAll(): boolean {
+        return this.validOrganizationName && this.validChannels && this.validHostUrl
+    }
+
     @Mutation
     setStep(stepNumber: number) {
         this.currentStep = stepNumber
@@ -140,12 +147,6 @@ export class PolicyMaker extends VuexModule {
         } else {
             this.policyConfiguration.channels.push({ prefix: '', type: '', address: ''})
         }
-    }
-
-    @Mutation
-    updateChannel(payload: any) {
-        this.policyConfiguration.channels[payload.index] = payload.value
-        this.policyConfiguration.channels = _cloneDeep(this.policyConfiguration.channels)
     }
 
     @Mutation
@@ -200,7 +201,7 @@ export class PolicyMaker extends VuexModule {
     @Action
     syncStepFromRoute(route: string) {
         
-        let index = _findIndex(this.context.getters['getNavSteps'], (step: any) => { 
+        let index = _findIndex(this.context.getters['getNavSteps'], (step: NavStep) => { 
             return _startsWith(route, step.route)
         })
         index ++
