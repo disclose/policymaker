@@ -37,6 +37,12 @@ export class PolicyMaker extends VuexModule {
         { route: '/policymaker/download', name: 'Download' }
     ]
 
+    downloadSections: NavSteps = [
+        { route: '/policymaker/download/vdp', name: 'Vulnerability Disclosure Policy' },
+        { route: '/policymaker/download/securitytxt', name: 'Security.txt' },
+        { route: '/policymaker/download/dnssecuritytxt', name: 'DNS Security.txt' },
+    ]
+
     templateRoot: string = '/templates'
 
     // Policy settings
@@ -79,6 +85,10 @@ export class PolicyMaker extends VuexModule {
 
     get getNavSteps(): NavSteps {
         return this.navSteps
+    }
+
+    get getDownloadSections(): NavSteps {
+        return this.downloadSections
     }
 
     get getConfiguration(): PolicyConfiguration {
@@ -188,14 +198,6 @@ export class PolicyMaker extends VuexModule {
                 this.setTemplateText({ type: key, text })
             })
         )
-    }
-
-    @Action
-    gotoStep(step: number) {
-        this.context.commit('setStep', step)
-        
-        // @ts-ignore
-        $nuxt.$router.push(this.context.getters['getNavSteps'][step-1].route)
     }
 
     @Action

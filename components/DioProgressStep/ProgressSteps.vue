@@ -40,15 +40,6 @@ export default Vue.extend({
         }
     },
 
-    data() {
-        return {
-        }
-    },
-
-    mounted() {
-        const vm = this as any
-    },
-
     computed: {
         activeStep: () => store.getters['policymaker/getCurrentStep'],
             

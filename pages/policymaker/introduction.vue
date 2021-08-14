@@ -16,7 +16,7 @@
 import Vue from 'vue'
 import PageTitle from '~/components/PageTitle/PageTitle.vue'
 import DioLink from '~/components/DioLink/DioLink.vue'
-import { store } from '~/store'
+import nav from '~/mixins/nav'
 
 export default Vue.extend({
     layout: 'policymaker',
@@ -25,26 +25,15 @@ export default Vue.extend({
         DioLink
     },
 
+    mixins: [nav],
+
     async asyncData({ $content, params, route}) {
         const content = await $content(route.fullPath).fetch()
         return {
             content
         }
-    },
+    }
 
-    data() {
-        return {
-        }
-    },
-
-    computed: {},
-
-    methods: {
-        goto: (step: number) => store.dispatch('policymaker/gotoStep', step)
-    },
-
-    watch: {}
-    
 })
 </script>
 

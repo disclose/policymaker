@@ -21,44 +21,34 @@ import Vue from 'vue'
 import DioTab from '~/components/DioTab/DioTab.vue'
 import DioTabGroup from '~/components/DioTab/DioTabGroup.vue'
 import PageTitle from '~/components/PageTitle/PageTitle.vue'
-import { store } from '~/store'
+import { NavSteps, PolicyConfiguration, store } from '~/store'
+import nav from '~/mixins/nav'
 
 export default Vue.extend({
     components: { PageTitle, DioTab, DioTabGroup },
     layout: 'policymaker',
 
-    data() {
-        return {
-            sections: [
-                { route: '/policymaker/download/vdp', name: 'Vulnerability Disclosure Policy' },
-                { route: '/policymaker/download/securitytxt', name: 'Security.txt' },
-                { route: '/policymaker/download/dnssecuritytxt', name: 'DNS Security.txt' },
-            ]
-        }
-    },
+    mixins: [nav],
 
-    mounted() {
-        // Check validation
+    created() {
+        const vm = this as any
         if (!this.validAll) {
-            this.$router.replace(this.getNavSteps[0].route)
+            vm.goto(1)
+        } else {
+            store.dispatch('policymaker/fetchTerms').then(() => {
+                this.$router.push(this.sections[0].route)
+            })
         }
 
-        store.dispatch('policymaker/fetchTerms').then(() => {
-            this.$router.push(this.sections[0].route)
-        })
         
     },
 
     computed: {
-        configuration: () => store.getters['policymaker/getConfiguration'],
-        validAll: () => store.getters['policymaker/validAll'],
-        getNavSteps: () => store.getters['policymaker/getNavSteps']
-    },
-
-    methods: {
-        goto: (step: number) => store.dispatch('policymaker/gotoStep', step)
-
+        configuration: () => store.getters['policymaker/getConfiguration'] as PolicyConfiguration,
+        sections: () => store.getters['policymaker/getDownloadSections'] as NavSteps,
+        validAll: () => store.getters['policymaker/validAll'] as boolean
     }
+
 })
 </script>
 

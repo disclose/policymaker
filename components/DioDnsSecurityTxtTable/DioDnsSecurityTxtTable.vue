@@ -60,7 +60,7 @@ export default Vue.extend({
         },
         domainName() {
             const vm = this as any
-            if (this.domain) {
+            if (vm.domain) {
                 return vm.domain
             } else {
                 return 'domain.com'

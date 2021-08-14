@@ -42,10 +42,13 @@ import DioDropdown from '~/components/DioDropdown/DioDropdown.vue'
 import DioField from '~/components/DioField/DioField.vue'
 import DioFieldGroup from '~/components/DioField/DioFieldGroup.vue'
 import { store } from '@/store'
+import nav from '~/mixins/nav'
 
 export default Vue.extend({
     components: { PageTitle, InputChannel, DioDropdown, DioField, DioFieldGroup },
     layout: 'policymaker',
+
+    mixins: [nav],
 
     data() {
         return {
@@ -53,10 +56,19 @@ export default Vue.extend({
         }
     },
 
+    created() {
+        const vm = this as any
+
+        if (!vm.validOrganizationName || !vm.validChannels) {
+            vm.goto(1)
+        }
+    },
+
     computed: {
         configuration: () => store.getters['policymaker/getConfiguration'],
         cvdTimelineOptions: () => (store.state as any).policymaker.cvdTimelineOptions,
-
+        validOrganizationName: () => store.getters['policymaker/validOrganizationName'],
+        validChannels: () => store.getters['policymaker/validChannels'],
         cvdTimeline: {
             get () {
                 const vm = this as any
@@ -90,7 +102,6 @@ export default Vue.extend({
         addChannel: () => {
             store.commit('policymaker/addChannel')
         },
-        goto: (step: number) => store.dispatch('policymaker/gotoStep', step),
         updateValid(isValid: boolean) {
             const vm = this as any
             vm.localValid = isValid
