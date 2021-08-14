@@ -32,6 +32,7 @@ export default Vue.extend({
             sections: [
                 { route: '/policymaker/download/vdp', name: 'Vulnerability Disclosure Policy' },
                 { route: '/policymaker/download/securitytxt', name: 'Security.txt' },
+                { route: '/policymaker/download/dnssecuritytxt', name: 'DNS Security.txt' },
             ]
         }
     },
