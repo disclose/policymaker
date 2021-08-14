@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[25],{654:function(n,e,d){"use strict";d.r(e);var t=d(0).a.extend({middleware:function(n){return(0,n.redirect)("/policymaker/introduction")}}),r=d(34),component=Object(r.a)(t,undefined,undefined,!1,null,null,null);e.default=component.exports}}]);

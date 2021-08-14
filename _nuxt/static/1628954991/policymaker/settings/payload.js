@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/policymaker/settings", {data:[{}],fetch:{},mutations:[]});
