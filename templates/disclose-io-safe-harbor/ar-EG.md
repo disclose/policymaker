@@ -1,4 +1,3 @@
-
 ## <p dir='rtl' align='right'> قانون الملاذ الامن</p>
 
 <p dir='rtl' align='right'>
