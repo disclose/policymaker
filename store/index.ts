@@ -10,7 +10,8 @@ import _findIndex from 'lodash/findIndex'
 import _startsWith from 'lodash/startsWith'
 
 import { renderTemplate, renderSecurityTxt } from '~/utils/mdTemplate'
-import { Channel, Channels, DropdownOptions, NavStep, NavSteps, PolicyConfiguration, SetTemplateTextRequest, TemplateSources, UpdateChannelRequest } from './types'
+import { Channel, Channels, DropdownOptions, NavStep, NavSteps, PolicyConfiguration, SetTemplateTextRequest, TemplateSources, UpdateChannelRequest, Templates, VDPTemplateSet, VDPLanguageTemplateSet } from './types'
+import { cloneDeep, join } from 'lodash'
 export * from './types'
 
 Vue.use(Vuex)
@@ -43,12 +44,9 @@ export class PolicyMaker extends VuexModule {
         { route: '/policymaker/download/dnssecuritytxt', name: 'DNS Security.txt' },
     ]
 
-    templateRoot: string = '/templates'
-
     // Policy settings
     policyConfiguration: PolicyConfiguration = {
         language: 'en',
-        region: 'US',
         organizationName: '',
         organizationDomain: '',
         channels: <Channels>[{ prefix: '', type:'', address:'' }],
@@ -59,6 +57,8 @@ export class PolicyMaker extends VuexModule {
             address: ''
         }
     }
+
+    vdpLanguageOptions: Array<string> = []
 
     // CVD Timeline Options
     cvdTimelineOptions: DropdownOptions = [
@@ -71,13 +71,19 @@ export class PolicyMaker extends VuexModule {
         { value: 0, label: 'Opt-out of CVD Timeline' }
     ]
 
-    // Term Templates
-    templates: TemplateSources = {
-        vdp: { url: 'templates/disclose-io-vdp/{{locale}}.md', text: '' },
-        vdp_with_cvd: { url: 'templates/disclose-io-vdp-with-cvd/{{locale}}.md', text: '' },
-        safe_harbor: { url: 'templates/disclose-io-safe-harbor/{{locale}}.md', text: '' },
-        securitytxt: { url: 'templates/securitytxt/securitytxt.md', text: '' }
+    vdpTemplateBase: VDPTemplateSet = {
+        base: 'templates/disclose-io-vdp/{{locale}}.md',
+        with_cvd: 'templates/disclose-io-vdp-with-cvd/{{locale}}.md',
+        safe_harbor: 'templates/disclose-io-safe-harbor/{{locale}}.md',
     }
+
+    tpls: Templates = {
+        vdp: {},
+        securitytxt: {
+            base: { url: 'templates/securitytxt/securitytxt.md', text: '' }
+        }
+    }
+
 
     get getCurrentStep(): number {
         return this.currentStep
@@ -100,23 +106,35 @@ export class PolicyMaker extends VuexModule {
     }
 
     get getCurrentLocale(): string {
-        return `${this.policyConfiguration.language.toLowerCase()}-${this.policyConfiguration.region.toUpperCase()}`
+        return join([
+            this.policyConfiguration.language.toLowerCase(),
+            this.policyConfiguration.region?.toUpperCase()].filter((component) => component != null),
+            '-')
     }
 
     get getTermsVDP(): string {
-        return renderTemplate(this.templates.vdp.text, this.policyConfiguration)
+        if (!this.tpls.vdp[this.policyConfiguration.language]) {
+            return ""
+        }
+        return renderTemplate(this.tpls.vdp[this.policyConfiguration.language].base, this.policyConfiguration)
     }
 
     get getTermsVDPCVD(): string {
-        return renderTemplate(this.templates.vdp_with_cvd.text, this.policyConfiguration)
+        if (!this.tpls.vdp[this.policyConfiguration.language]) {
+            return ""
+        }
+        return renderTemplate(this.tpls.vdp[this.policyConfiguration.language].with_cvd, this.policyConfiguration)
     }
 
     get getTermsSafeHarbor(): string {
-        return renderTemplate(this.templates.safe_harbor.text, this.policyConfiguration)
+        if (!this.tpls.vdp[this.policyConfiguration.language]) {
+            return ""
+        }
+        return renderTemplate(this.tpls.vdp[this.policyConfiguration.language].safe_harbor, this.policyConfiguration)
     }
 
     get getSecurityTxt(): string {
-        return renderSecurityTxt(this.templates.securitytxt.text, this.policyConfiguration)
+        return renderSecurityTxt(this.tpls.securitytxt.base.text, this.policyConfiguration)
     }
 
     get validOrganizationName(): boolean {
@@ -133,6 +151,10 @@ export class PolicyMaker extends VuexModule {
 
     get validAll(): boolean {
         return this.validOrganizationName && this.validChannels && this.validHostUrl
+    }
+    
+    get getVDPLanguageOptions(): Array<string> {
+        return this.vdpLanguageOptions
     }
 
     @Mutation
@@ -176,7 +198,16 @@ export class PolicyMaker extends VuexModule {
 
     @Mutation
     setTemplateText(request: SetTemplateTextRequest) {
-        this.templates[request.type].text = request.text
+        // Check if language is loaded
+        if (!this.tpls.vdp.hasOwnProperty(request.language)) {
+            this.tpls.vdp[request.language] = {
+                base: "",
+                with_cvd: "",
+                safe_harbor: ""
+            }
+        }
+
+        this.tpls.vdp[request.language][request.type] = request.text
     }
 
     @Mutation
@@ -184,20 +215,43 @@ export class PolicyMaker extends VuexModule {
         this.policyConfiguration.hostUrl = channel
     }
 
+    @Mutation
+    setVDPLanguageOptions(languages: Array<string>) {
+        this.vdpLanguageOptions = languages
+    }
+    
+    @Mutation
+    setVDPTemplatesForLanguage(templateSet: VDPLanguageTemplateSet) {
+        this.tpls.vdp[templateSet.language] = cloneDeep(templateSet.templates)
+    }
+
     @Action({ rawError: true })
     async fetchTerms() {
-        
+        // Check if needs loading
+        if (this.tpls.vdp.hasOwnProperty(this.policyConfiguration.language)) {
+            return Promise.resolve(true)
+        }
+
         return Promise.all(
-            _map(this.templates, async (template, key) => {
+            _map(this.vdpTemplateBase, async (template, key: (keyof VDPTemplateSet)) => {
                 // @ts-ignore
-                let url = `${$nuxt.$router.options.base}${template.url}`
+                let url = `${$nuxt.$router.options.base}${template}`
                 url = url.replace("{{locale}}", this.getCurrentLocale)
                 // console.log("Loading template ", url);
                 const response = await fetch(url)
                 const text = await response.text()
-                this.setTemplateText({ type: key, text })
+                this.setTemplateText({ language: this.policyConfiguration.language, type: key, text })
             })
         )
+    }
+
+    @Action
+    async fetchLanguages() {
+        // @ts-ignore
+        let url = `${$nuxt.$router.options.base}templates/languages.json`
+        const response = await fetch(url)
+        const responseJson = await response.json()
+        this.setVDPLanguageOptions(responseJson.languages)
     }
 
     @Action

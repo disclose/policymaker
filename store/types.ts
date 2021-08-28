@@ -12,15 +12,17 @@ export type UpdateChannelRequest = {
     index: number
 }
 
+export type TemplateType = keyof VDPTemplateSet
 export type SetTemplateTextRequest = {
-    type: string,
+    language: string,
+    type: TemplateType,
     text: string
 }
 
 // Policy configuration store
 export type PolicyConfiguration = {
     language: string,
-    region: string,
+    region?: string,
     organizationName: string,
     organizationDomain: string,
     channels: Channels,
@@ -48,4 +50,23 @@ export type TemplateSources = Record<string, TemplateSource>
 export type TemplateSource = {
     url: string,
     text: string
+}
+
+export type Templates = {
+    vdp: {
+        [lang: string]: VDPTemplateSet
+    },
+    securitytxt: {
+        base: TemplateSource
+    }
+}
+export type VDPLanguageTemplateSet = {
+    language: string,
+    templates: VDPTemplateSet
+}
+
+export type VDPTemplateSet = {
+    base: string,
+    with_cvd: string,
+    safe_harbor: string
 }

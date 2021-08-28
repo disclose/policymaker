@@ -105,8 +105,10 @@ export default {
 
   markdownit: {
     preset: 'default',
-    linkify: true,
+    linkify: false,
     breaks: true,
+    html: true,
+    typographer: true,
     use: [
       'markdown-it-div',
       'markdown-it-attrs'

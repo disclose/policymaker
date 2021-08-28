@@ -3,7 +3,7 @@
 
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-row items-center gap-x-2">
-                <input-dropdown :options="[]" v-model="language" v-if="showLanguage">
+                <input-dropdown :options="languages" v-model="language" v-if="showLanguage">
                     <template v-slot:selectedValue="{ value }">
                         {{ $t(`language.${value}`) }}
                     </template>
@@ -46,6 +46,9 @@ export default Vue.extend({
             default: 'text/plain'
         },
         downloads: {
+            type: Array
+        },
+        languages: {
             type: Array
         },
         showLanguage: {
@@ -91,6 +94,12 @@ export default Vue.extend({
             const event = { ...vm.trackingEvent, ...download.trackingEvent }
             
             vm.$ga.event(event)
+        }
+    },
+
+    watch: {
+        "language": function(newLanguage) {
+            this.$emit("languageUpdate", newLanguage)
         }
     }
 

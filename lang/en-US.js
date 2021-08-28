@@ -3,10 +3,11 @@ export default async (context, locale) => {
         welcome: 'Welcome',
         language: {
             en: 'English',
-            nl: 'Dutch'
+            ar: 'Arabic'
         },
         country: {
             "*": "Global (All regions)",
+            AR: 'Arabic',
             AU: 'Australia',
             CA: 'Canada',
             GB: 'Great Britain (UK)',
@@ -15,6 +16,10 @@ export default async (context, locale) => {
             BE: 'Belgium',
             NL: 'Netherlands'
         },
+        locale: {
+            "en-US": "English",
+            "ar-AR": "Arabic"
+        },  
 
         policymaker: {
             nav: {
