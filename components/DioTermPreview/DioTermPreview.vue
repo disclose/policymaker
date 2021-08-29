@@ -3,7 +3,9 @@
 
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-row items-center gap-x-2">
-                <input-dropdown :options="languages" v-model="language" v-if="showLanguage">
+                <input-dropdown :options="languageOptions" 
+                    v-model="localLanguage" 
+                    v-if="showLanguage">
                     <template v-slot:selectedValue="{ value }">
                         {{ $t(`language.${value}`) }}
                     </template>
@@ -34,6 +36,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import _kebabCase from 'lodash/kebabCase'
+import { store } from '~/store'
+import { isEmpty } from 'lodash'
 
 export default Vue.extend({
     
@@ -48,7 +52,10 @@ export default Vue.extend({
         downloads: {
             type: Array
         },
-        languages: {
+        language: {
+            type: String
+        },
+        languageOptions: {
             type: Array
         },
         showLanguage: {
@@ -63,10 +70,13 @@ export default Vue.extend({
 
     data() {
         return {
-            language: 'en'
+            localLanguage: ''
         }
     },
 
+    mounted() {
+        this.localLanguage = this.language
+    },
 
     methods: {
         download(policyText: string, download: any) {
@@ -98,8 +108,10 @@ export default Vue.extend({
     },
 
     watch: {
-        "language": function(newLanguage) {
-            this.$emit("languageUpdate", newLanguage)
+        "localLanguage": function(newLanguage) {
+            if (!isEmpty(newLanguage)) {
+                store.dispatch('policymaker/updateLanguage', newLanguage)
+            }
         }
     }
 

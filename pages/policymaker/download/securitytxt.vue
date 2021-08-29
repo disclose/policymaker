@@ -3,11 +3,6 @@
 
         <nuxt-content :document="securitytxtCopy"></nuxt-content>
 
-       <dio-field>
-            <p>How long should this security</p>
-            <input-text class="w-64" v-model="expiry" placeholder="How long is this policy valid for?" />
-        </dio-field>
-
         <dio-term-preview 
             format="text/plain"
             :content="securitytxt"
@@ -45,6 +40,10 @@ export default Vue.extend({
                 { type: 'text/plain', label: 'Download', filename: 'security.txt', trackingEvent: { eventLabel: 'text' } },
             ]
         }
+    },
+
+    created() {
+        store.dispatch('policymaker/fetchSecurityTxt')
     },
 
     computed: {

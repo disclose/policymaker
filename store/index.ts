@@ -80,7 +80,7 @@ export class PolicyMaker extends VuexModule {
     tpls: Templates = {
         vdp: {},
         securitytxt: {
-            base: { url: 'templates/securitytxt/securitytxt.md', text: '' }
+            base: ""
         }
     }
 
@@ -113,28 +113,19 @@ export class PolicyMaker extends VuexModule {
     }
 
     get getTermsVDP(): string {
-        if (!this.tpls.vdp[this.policyConfiguration.language]) {
-            return ""
-        }
-        return renderTemplate(this.tpls.vdp[this.policyConfiguration.language].base, this.policyConfiguration)
+        return renderTemplate(this.tpls.vdp[this.policyConfiguration.language]?.base, this.policyConfiguration)
     }
 
     get getTermsVDPCVD(): string {
-        if (!this.tpls.vdp[this.policyConfiguration.language]) {
-            return ""
-        }
-        return renderTemplate(this.tpls.vdp[this.policyConfiguration.language].with_cvd, this.policyConfiguration)
+        return renderTemplate(this.tpls.vdp[this.policyConfiguration.language]?.with_cvd, this.policyConfiguration)
     }
 
     get getTermsSafeHarbor(): string {
-        if (!this.tpls.vdp[this.policyConfiguration.language]) {
-            return ""
-        }
-        return renderTemplate(this.tpls.vdp[this.policyConfiguration.language].safe_harbor, this.policyConfiguration)
+        return renderTemplate(this.tpls.vdp[this.policyConfiguration.language]?.safe_harbor, this.policyConfiguration)
     }
 
     get getSecurityTxt(): string {
-        return renderSecurityTxt(this.tpls.securitytxt.base.text, this.policyConfiguration)
+        return renderSecurityTxt(this.tpls.securitytxt.base, this.policyConfiguration)
     }
 
     get validOrganizationName(): boolean {
@@ -211,6 +202,11 @@ export class PolicyMaker extends VuexModule {
     }
 
     @Mutation
+    setSecurityTxt(text: string) {
+        this.tpls.securitytxt.base = text
+    }
+
+    @Mutation
     setHostUrl(channel: Channel) {
         this.policyConfiguration.hostUrl = channel
     }
@@ -225,10 +221,23 @@ export class PolicyMaker extends VuexModule {
         this.tpls.vdp[templateSet.language] = cloneDeep(templateSet.templates)
     }
 
+    @Action
+    updateLanguage(lang: string) {
+        
+        this.fetchTerms(lang).then(() =>{
+            this.context.commit("setLanguage", lang)
+        })
+    }
+
     @Action({ rawError: true })
-    async fetchTerms() {
+    async fetchTerms(lang: string) {
+        let langToLoad: string = lang
+        if (_isEmpty(lang)) {
+            langToLoad = this.policyConfiguration.language
+        }
+
         // Check if needs loading
-        if (this.tpls.vdp.hasOwnProperty(this.policyConfiguration.language)) {
+        if (this.tpls.vdp.hasOwnProperty(langToLoad)) {
             return Promise.resolve(true)
         }
 
@@ -236,13 +245,31 @@ export class PolicyMaker extends VuexModule {
             _map(this.vdpTemplateBase, async (template, key: (keyof VDPTemplateSet)) => {
                 // @ts-ignore
                 let url = `${$nuxt.$router.options.base}${template}`
-                url = url.replace("{{locale}}", this.getCurrentLocale)
-                // console.log("Loading template ", url);
+                url = url.replace("{{locale}}", langToLoad)
+
                 const response = await fetch(url)
                 const text = await response.text()
-                this.setTemplateText({ language: this.policyConfiguration.language, type: key, text })
+                this.setTemplateText({ 
+                    language: langToLoad,
+                    type: key, 
+                    text })
+                return true
             })
         )
+    }
+
+    @Action
+    async fetchSecurityTxt() {
+        // Check if needs loading
+        if (!_isEmpty(this.tpls.securitytxt.base)) {
+            return Promise.resolve(true)
+        }
+
+        // @ts-ignore
+        let url = `${$nuxt.$router.options.base}templates/securitytxt/securitytxt.md`
+        const response = await fetch(url)
+        const text = await response.text()
+        this.setSecurityTxt(text)
     }
 
     @Action
@@ -261,7 +288,6 @@ export class PolicyMaker extends VuexModule {
             return _startsWith(route, step.route)
         })
         index ++
-        // console.log('Syncing', route, index)
         this.context.commit('setStep', index)
     }
 

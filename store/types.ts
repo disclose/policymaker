@@ -13,7 +13,7 @@ export type UpdateChannelRequest = {
 }
 
 export type TemplateType = keyof VDPTemplateSet
-export type SetTemplateTextRequest = {
+export interface SetTemplateTextRequest {
     language: string,
     type: TemplateType,
     text: string
@@ -57,7 +57,7 @@ export type Templates = {
         [lang: string]: VDPTemplateSet
     },
     securitytxt: {
-        base: TemplateSource
+        base: string
     }
 }
 export type VDPLanguageTemplateSet = {

@@ -12,7 +12,7 @@ import { Channel, Channels, PolicyConfiguration } from '~/store'
 
 export function renderTemplate(template: string, config: PolicyConfiguration) {
 
-    let policy = template
+    let policy = template || ""
     let varRegex, newValue
 
     // Replace Organisation Name
@@ -38,7 +38,7 @@ export function renderTemplate(template: string, config: PolicyConfiguration) {
 
 export function renderSecurityTxt(template: string, config: PolicyConfiguration) {
 
-    let securitytxt = template
+    let securitytxt = template || ""
     let varRegex, newValue
 
     // Replace Organisation Name
