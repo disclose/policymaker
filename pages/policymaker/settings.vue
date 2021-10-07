@@ -35,7 +35,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState, mapGetters, mapMutations } from 'vuex'
 import PageTitle from '~/components/PageTitle/PageTitle.vue'
 import InputChannel from '~/components/InputChannel/InputChannel.vue'
 import DioDropdown from '~/components/DioDropdown/DioDropdown.vue'

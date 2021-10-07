@@ -40,7 +40,7 @@ import DioButton from '../DioButton/DioButton.vue'
 import InputText from '../InputText/InputText.vue'
 
 const DEFAULT_URLPREFIX = 'https://'
-const DEFAULT_EMAILPREFIX = 'mailto://'
+const DEFAULT_EMAILPREFIX = 'mailto:'
 
 export default Vue.extend({
   components: { DioButton, InputText },
@@ -140,8 +140,8 @@ export default Vue.extend({
             const vm = this as any
             
             if (vm.isEmail) {
-                if (vm.localValue.address.match(/^mailto:(\/\/)?/gim)) {
-                    const match = vm.localValue.address.match(/(mailto:(\/\/)?)/gim)
+                if (vm.localValue.address.match(/^mailto:/gim)) {
+                    const match = vm.localValue.address.match(/(mailto:)/gim)
                     return (match) ? DEFAULT_EMAILPREFIX : ""
                 } else {
                     return DEFAULT_EMAILPREFIX
@@ -195,7 +195,7 @@ export default Vue.extend({
         cleanInput(): void {
             const vm = this as any
             if (vm.isEmail) {
-                vm.localValue.address = vm.localValue.address.replace(/mailto:(\/\/)?/gim, '')
+                vm.localValue.address = vm.localValue.address.replace(/mailto:/gim, '')
             }
 
             if (vm.isUrl) {
