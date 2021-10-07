@@ -46,7 +46,7 @@ export class PolicyMaker extends VuexModule {
 
   // Policy settings
   policyConfiguration: PolicyConfiguration = {
-    language: 'en',
+    language: 'en-US',
     organizationName: '',
     organizationDomain: '',
     channels: <Channels>[{ prefix: '', type: '', address: '' }],
@@ -229,36 +229,6 @@ export class PolicyMaker extends VuexModule {
     })
   }
 
-  @Action({ rawError: true })
-  async fetchTerms(lang: string) {
-    let langToLoad: string = lang
-    if (_isEmpty(lang)) {
-      langToLoad = this.policyConfiguration.language
-    }
-
-    // Check if needs loading
-    if (this.tpls.vdp.hasOwnProperty(langToLoad)) {
-      return Promise.resolve(true)
-    }
-
-    return Promise.all(
-      _map(this.vdpTemplateBase, async (template, key: (keyof VDPTemplateSet)) => {
-        // @ts-ignore
-        let url = `${$nuxt.$router.options.base}${template}`
-        url = url.replace("{{locale}}", langToLoad)
-
-        const response = await fetch(url)
-        const text = await response.text()
-        this.setTemplateText({
-          language: langToLoad,
-          type: key,
-          text
-        })
-        return true
-      })
-    )
-  }
-
   @Action
   async fetchSecurityTxt() {
     // Check if needs loading
@@ -292,4 +262,33 @@ export class PolicyMaker extends VuexModule {
     this.context.commit('setStep', index)
   }
 
+  @Action({ rawError: true })
+  async fetchTerms(lang: string) {
+    let langToLoad: string = lang
+    if (_isEmpty(lang)) {
+      langToLoad = this.policyConfiguration.language
+    }
+
+    // Check if needs loading
+    if (this.tpls.vdp.hasOwnProperty(langToLoad)) {
+      return Promise.resolve(true)
+    }
+
+    return Promise.all(
+      _map(this.vdpTemplateBase, async (template, key: (keyof VDPTemplateSet)) => {
+        // @ts-ignore
+        let url = `${$nuxt.$router.options.base}${template}`
+        url = url.replace("{{locale}}", langToLoad)
+
+        const response = await fetch(url)
+        const text = await response.text()
+        this.setTemplateText({
+          language: langToLoad,
+          type: key,
+          text
+        })
+        return true
+      })
+    )
+  }
 }
