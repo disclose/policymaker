@@ -2,71 +2,71 @@
 // Input Channel types
 export type Channels = Channel[]
 export type Channel = {
-    type: string,
-    prefix: string,
-    address: string
+  type: string,
+  prefix: string,
+  address: string
 }
 
 export type UpdateChannelRequest = {
-    channel: Channel,
-    index: number
+  channel: Channel,
+  index: number
 }
 
 export type TemplateType = keyof VDPTemplateSet
 export interface SetTemplateTextRequest {
-    language: string,
-    type: TemplateType,
-    text: string
+  language: string,
+  type: TemplateType,
+  text: string
 }
 
 // Policy configuration store
 export type PolicyConfiguration = {
-    language: string,
-    region?: string,
-    organizationName: string,
-    organizationDomain: string,
-    channels: Channels,
-    cvdTimelineDays: number,
-    hostUrl: Channel
+  language: string,
+  region?: string,
+  organizationName: string,
+  organizationDomain: string,
+  channels: Channels,
+  cvdTimelineDays: number,
+  hostUrl: Channel
 }
 
 // Navigation route steps
 export type NavSteps = NavStep[]
 export type NavStep = {
-    route: string,
-    name: string
+  route: string,
+  name: string
 }
 
 
 // Dropdown types
 export type DropdownOptions = DropdownOption[]
 export type DropdownOption = {
-    value: any,
-    label: string
+  value: any,
+  label: string
 }
 
 // Template sources
 export type TemplateSources = Record<string, TemplateSource>
 export type TemplateSource = {
-    url: string,
-    text: string
+  url: string,
+  text: string
 }
 
 export type Templates = {
-    vdp: {
-        [lang: string]: VDPTemplateSet
-    },
-    securitytxt: {
-        base: string
-    }
+  vdp: {
+    [lang: string]: VDPTemplateSet
+  },
+  securitytxt: {
+    base: string
+  }
 }
 export type VDPLanguageTemplateSet = {
-    language: string,
-    templates: VDPTemplateSet
+  language: string,
+  templates: VDPTemplateSet
 }
 
 export type VDPTemplateSet = {
-    base: string,
-    with_cvd: string,
-    safe_harbor: string
+  base: string,
+  with_cvd: string,
+  safe_harbor: string
 }
