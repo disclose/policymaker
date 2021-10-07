@@ -24,7 +24,7 @@
                     to your organization. Combinations are welcome and supported, however we strongly recommend 
                     keeping the number of communication channels to a minimum to avoid confusion.</p>
                     <br>
-                    <small>Note: Please begin email addresses with mailto:// or webforms with https:// or http://</small>
+                    <small>Note: Please begin email addresses with mailto: or webforms with https:// or http://</small>
                 <input-channels></input-channels>
 
             </dio-field>
