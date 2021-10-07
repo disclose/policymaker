@@ -149,6 +149,10 @@ export default Vue.extend({
 
         ul {
             @apply list-disc list-outside pl-6 pb-4;
+
+            &[dir="rtl"] {
+              @apply pr-6;
+            }
         }
 
         li {
