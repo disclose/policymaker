@@ -102,6 +102,10 @@ export default Vue.extend({
             const vm = this as any
 
             const event = { ...vm.trackingEvent, ...download.trackingEvent }
+
+            if (!isEmpty(vm.localLanguage)) {
+                event.eventLabel = [vm.localLanguage, event.eventLabel].join('_')
+            }
             
             vm.$ga.event(event)
         }
