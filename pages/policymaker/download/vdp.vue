@@ -17,13 +17,16 @@
         </dio-checkbox-panels>
 
         <dio-term-preview 
+            v-if="!isLoading"
+            ref="preview"
             format="text/markdown"
             :downloads="downloads"
-            :showLanguage="false"
+            :language="configuration.language"
+            :languageOptions="languages"
+            :showLanguage="true"
             :content="content"
             :trackingEvent="trackingEvent"
         />
-
 
     </div>
 </template>
@@ -46,6 +49,7 @@ export default Vue.extend({
     data() {
         return {
             isFullVDP: true,
+            isLoading: false
         }
     },
 
@@ -79,7 +83,11 @@ export default Vue.extend({
         vdp: () => store.getters['policymaker/getTermsVDP'],
         vdpCVD: () => store.getters['policymaker/getTermsVDPCVD'],
         safeHarbor: () => store.getters['policymaker/getTermsSafeHarbor'],
-        configuration: () => store.getters['policymaker/getConfiguration']
+        configuration: () => store.getters['policymaker/getConfiguration'],
+        languages: () => store.getters['policymaker/getVDPLanguageOptions']
+    },
+
+    methods: {
     }
 })
 </script>

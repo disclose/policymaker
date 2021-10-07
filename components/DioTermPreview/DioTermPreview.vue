@@ -3,7 +3,9 @@
 
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-row items-center gap-x-2">
-                <input-dropdown :options="[]" v-model="language" v-if="showLanguage">
+                <input-dropdown :options="languageOptions" 
+                    v-model="localLanguage" 
+                    v-if="showLanguage">
                     <template v-slot:selectedValue="{ value }">
                         {{ $t(`language.${value}`) }}
                     </template>
@@ -34,6 +36,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import _kebabCase from 'lodash/kebabCase'
+import { store } from '~/store'
+import { isEmpty } from 'lodash'
 
 export default Vue.extend({
     
@@ -48,6 +52,12 @@ export default Vue.extend({
         downloads: {
             type: Array
         },
+        language: {
+            type: String
+        },
+        languageOptions: {
+            type: Array
+        },
         showLanguage: {
             type: Boolean,
             default: false
@@ -60,10 +70,13 @@ export default Vue.extend({
 
     data() {
         return {
-            language: 'en'
+            localLanguage: ''
         }
     },
 
+    mounted() {
+        this.localLanguage = this.language
+    },
 
     methods: {
         download(policyText: string, download: any) {
@@ -91,6 +104,14 @@ export default Vue.extend({
             const event = { ...vm.trackingEvent, ...download.trackingEvent }
             
             vm.$ga.event(event)
+        }
+    },
+
+    watch: {
+        "localLanguage": function(newLanguage) {
+            if (!isEmpty(newLanguage)) {
+                store.dispatch('policymaker/updateLanguage', newLanguage)
+            }
         }
     }
 
@@ -128,6 +149,10 @@ export default Vue.extend({
 
         ul {
             @apply list-disc list-outside pl-6 pb-4;
+
+            &[dir="rtl"] {
+              @apply pr-6;
+            }
         }
 
         li {

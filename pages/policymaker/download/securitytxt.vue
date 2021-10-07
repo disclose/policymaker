@@ -35,10 +35,15 @@ export default Vue.extend({
 
     data() {
         return {
+            expiry: null,
             downloads: [
                 { type: 'text/plain', label: 'Download', filename: 'security.txt', trackingEvent: { eventLabel: 'text' } },
             ]
         }
+    },
+
+    created() {
+        store.dispatch('policymaker/fetchSecurityTxt')
     },
 
     computed: {

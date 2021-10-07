@@ -55,6 +55,7 @@ export default Vue.extend({
 
     mounted() {
         this.$nextTick(() => {
+            store.dispatch('policymaker/fetchLanguages')
             store.dispatch('policymaker/syncStepFromRoute', this.$route.fullPath)
         })
     },
