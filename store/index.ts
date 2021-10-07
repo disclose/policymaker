@@ -236,7 +236,6 @@ export class PolicyMaker extends VuexModule {
       return Promise.resolve(true)
     }
 
-    // @ts-ignore
     let url = `${$nuxt.$router.options.base}templates/securitytxt/securitytxt.md`
     const response = await fetch(url)
     const text = await response.text()
@@ -276,7 +275,6 @@ export class PolicyMaker extends VuexModule {
 
     return Promise.all(
       _map(this.vdpTemplateBase, async (template, key: (keyof VDPTemplateSet)) => {
-        // @ts-ignore
         let url = `${$nuxt.$router.options.base}${template}`
         url = url.replace("{{locale}}", langToLoad)
 
