@@ -6,7 +6,7 @@ name: Build and Deploy
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: 
+    branches:
       - develop
 
   # Allows you to run this workflow manually from the Actions tab
@@ -32,7 +32,7 @@ jobs:
 
       # Deploy to gh-pages
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: dist
