@@ -3,7 +3,8 @@ export default async (context, locale) => {
     welcome: 'Welcome',
     language: {
       "en-US": 'English',
-      ar: 'Arabic'
+      ar: 'Arabic',
+      "np-NP": 'Nepalese'
     },
     country: {
       "*": "Global (All regions)",
@@ -18,7 +19,8 @@ export default async (context, locale) => {
     },
     locale: {
       "en-US": "English",
-      "ar-AR": "Arabic"
+      "ar-AR": "Arabic",
+      "np-NP": "Nepalese"
     },
 
     policymaker: {
