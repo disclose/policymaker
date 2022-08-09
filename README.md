@@ -5,7 +5,7 @@
 ## This repo has three operating trees:
 
 ### main: 
-This tree contains the terms. To make recommendations for updates or changes against the primary disclose.io terms, please submit a PR or create an issue against the en-US.md files under the templates/ directory. Please follow the file naming and folder standard if you're translating terms or want to add something new.
+This tree contains the terms. To make recommendations for updates or changes against the primary disclose.io terms, please submit a PR or create an issue against the en-US.md files under each subdirectory of the `/static/templates` directory. Please follow the file naming and folder standard if you're translating terms or want to add something new.
 ### [develop](https://github.com/disclose/policymaker/tree/develop): 
 This tree contains the nuxt template for http://policymaker.disclose.io. Any typos, changes, or recommendations to the cobebase of the web app itself can be made via PR here. A README.MD, which outlines how to spin up a working copy of Policymaker, is available on this tree.
 ### [gh-pages](https://github.com/disclose/policymaker/tree/gh-pages): 
@@ -23,7 +23,7 @@ Our goal is to constantly improve the accessiblility, relevance, and usability o
 
 **Language translation:** 
 - We'd love to make policy templates avaiable in your native language!
-- If you're creating a language translation, please use the most recent en-US.md in disclose/policymaker/templates as your source, and reference the file in your PR.
+- If you're creating a language translation, please use the most recent en-US.md in each of the subdirectories under `static/templates` as your source, and reference the files in your PR.
 
 **Site and experience feedback:** 
 - If you have other feedback or suggestions for the [Policymaker](https://policymaker.disclose.io) web app itself, please raise [an issue](https://github.com/disclose/policymaker/issues). 
