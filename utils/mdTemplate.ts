@@ -1,4 +1,3 @@
-
 import _reduce from 'lodash/reduce'
 import _map from 'lodash/map'
 import _keys from 'lodash/keys'
@@ -63,6 +62,13 @@ export function renderSecurityTxt(template: string, config: PolicyConfiguration)
   // Replace language
   varRegex = new RegExp(`{{languages}}`, 'gm');
   securitytxt = securitytxt.replace(varRegex, config.language)
+  
+  // Replace expires field with a date 1 year in the future
+  varRegex = new RegExp(`{{expires}}`, 'gm');
+  const expiryDate = new Date();
+  expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+  newValue = expiryDate.toISOString().split('.')[0] + 'z'; // Format as per RFC 3339
+  securitytxt = securitytxt.replace(varRegex, newValue)
 
   return securitytxt
 

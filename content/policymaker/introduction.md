@@ -1,5 +1,3 @@
-> This site is currently in Beta. Please leave comments/feedback/suggestions [here](https://community.disclose.io/t/policymaker-is-live-in-beta/255) or in [#2-policymaker](https://disclose-io.slack.com/archives/C029D228WLX) if you are a member of the [disclose.io](http://disclose.io) Slack.
-
 ## **Who is this for?**
 
 *Policymaker is a "one-stop-shop" policy generator for anyone launching a vulnerability disclosure program (VDP) for the first time, looking to update their VDP policy, or wanting to add features to an existing program.*
