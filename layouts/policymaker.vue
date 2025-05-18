@@ -16,7 +16,7 @@
             <div id="content">
                 <Nuxt />          
                 <footer>
-                    &copy; Copyright <a href=https://disclose.io>Disclose.io</a> - Made with ♥️ by Jeremy Manoto and Casey Ellis.
+                    &copy; Copyright {{ new Date().getFullYear() }} The <a href=https://disclose.io>disclose.io</a> Project - Made with ♥️ by Jeremy Manoto and Casey Ellis.
                 </footer>
             </div>
         </main>
