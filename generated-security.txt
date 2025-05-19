@@ -1,0 +1,15 @@
+# Test Organization security contacts and policy
+
+# Our security contact channels
+Contact: Contact: mailto:security@example.com
+Contact: https://example.com/security
+
+# Link to our vulnerability disclosure policy
+Policy: https://example.com/policy
+
+# Languages that our team speaks and understands
+Preferred-Languages: en-US
+
+# Expiration date for this security.txt file
+Expires: 2026-05-18T09:42:17z
+
