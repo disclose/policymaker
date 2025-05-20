@@ -1,1 +1,0 @@
-window.__NUXT__=(function(a){return {staticAssetsBase:"\u002F_nuxt\u002Fstatic\u002F1747748028",layout:"policymaker",error:a,state:{types:{},module:{policymaker:{}},i18n:{routeParams:{}}},serverRendered:true,routePath:"\u002Fpolicymaker\u002Fdownload",config:{_app:{basePath:"\u002F",assetsPath:"\u002F_nuxt\u002F",cdnURL:a},content:{dbHash:"e97659c9"}},__i18n:{langs:{}}}}(null));
