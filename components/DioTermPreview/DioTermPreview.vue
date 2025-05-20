@@ -3,8 +3,8 @@
 
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-row items-center gap-x-2">
-                <input-dropdown :options="languageOptions" 
-                    v-model="localLanguage" 
+                <InputDropdown :options="languageOptions"
+                    v-model="localLanguage"
                     v-if="showLanguage">
                     <template v-slot:selectedValue="{ value }">
                         {{ $t(`language.${value}`) }}
@@ -12,9 +12,9 @@
                     <template v-slot:option="{ option }">
                         {{ $t(`language.${option}`) }}
                     </template>
-                </input-dropdown>
+                </InputDropdown>
             </div>
-            
+
             <div>
                 <template v-for="(downloadButton, index) in downloads">
                     <dio-button v-if="downloadButton.type === 'text/plain'" :key="index" theme="transparent" @click="download(content, downloadButton)">{{ downloadButton.label }}</dio-button>
@@ -38,9 +38,11 @@ import Vue from 'vue'
 import _kebabCase from 'lodash/kebabCase'
 import { store } from '~/store'
 import { isEmpty } from 'lodash'
+import InputDropdown from '../InputDropdown/InputDropdown.vue'
 
 export default Vue.extend({
-    
+    components: {InputDropdown},
+
     props: {
         content: {
             type: String
@@ -106,7 +108,7 @@ export default Vue.extend({
             if (!isEmpty(vm.localLanguage)) {
                 event.eventLabel = [vm.localLanguage, event.eventLabel].join('_')
             }
-            
+
             vm.$ga.event(event)
         }
     },

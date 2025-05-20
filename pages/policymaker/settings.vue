@@ -5,10 +5,10 @@
         <dio-field-group>
             <dio-field>
                 <label>Coordinated Vulnerability Disclosure Timeline</label>
-                <p>Vulnerability finders often wish to publish their reports after 
+                <p>Vulnerability finders often wish to publish their reports after
                     the issue has been fixed, and some will provide their own timeline when reporting security issues.
                     We strongly recommend that you take a proactive approach to setting your own timeline, and to make this clear within your VDP.</p>
-                <dio-dropdown 
+                <dio-dropdown
                     v-model="cvdTimeline"
                     :options="cvdTimelineOptions"
                     />
@@ -18,7 +18,7 @@
 
             <dio-field>
                 <label>Where do you intend to host this policy? *</label>
-                <p>Enter the web address where people can find this policy on your website, . Note that this only impacts 
+                <p>Enter the web address where people can find this policy on your website, . Note that this only impacts
                     security.txt and DNS Security TXT records, and can be changed before deployment if needed.</p>
                 <input-channel :index="0" v-model="hostUrl" @valid="updateValid"></input-channel>
                 <!-- <small>* required for security.txt / DNS security.txt</small> -->
@@ -26,10 +26,10 @@
         </dio-field-group>
 
         <div class="dio__action-bar">
-            <dio-button @click="goto(4)" :disabled="!isValid">Next</dio-button>
-            <dio-button @click="goto(2)" theme="muted">Back</dio-button>
+            <DioButton @click="goto(4)" :disabled="!isValid">Next</DioButton>
+            <DioButton @click="goto(2)" theme="muted">Back</DioButton>
         </div>
-        
+
     </div>
 </template>
 
@@ -42,9 +42,10 @@ import DioField from '~/components/DioField/DioField.vue'
 import DioFieldGroup from '~/components/DioField/DioFieldGroup.vue'
 import { store } from '@/store'
 import nav from '~/mixins/nav'
+import DioButton from '~/components/DioButton/DioButton.vue'
 
 export default Vue.extend({
-    components: { PageTitle, InputChannel, DioDropdown, DioField, DioFieldGroup },
+    components: { PageTitle, InputChannel, DioDropdown, DioField, DioFieldGroup, DioButton },
     layout: 'policymaker',
 
     mixins: [nav],

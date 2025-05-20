@@ -1,18 +1,30 @@
+import Vue from 'vue'
 import { store, NavSteps, NavStep } from "~/store";
 
+declare module 'vue/types/vue' {
+  interface Vue {
+    navSteps: NavSteps
+    goto(step: number): void
+  }
+}
 
-export default {
+export interface NavMixin {
+  navSteps: NavSteps
+  goto(step: number): void
+}
 
+export default Vue.extend({
   computed: {
-    navSteps: () => store.getters['policymaker/getNavSteps'] as NavSteps
+    navSteps(): NavSteps {
+      return store.getters['policymaker/getNavSteps']
+    }
   },
 
   methods: {
-    goto(step: number) {
-      const vm = this as any;
+    goto(step: number): void {
       store.commit('policymaker/setStep', step)
-
-      vm.$router.push((vm.navSteps[step - 1] as NavStep).route)
+      const currentStep = this.navSteps[step - 1] as NavStep
+      this.$router.push(currentStep.route)
     }
   }
-}
+})

@@ -1,22 +1,21 @@
 <template>
     <div>
-
-        <dio-checkbox-panels v-model="isFullVDP" class="mt-4 mb-16">
-            <dio-checkbox-panel :value="true">
+        <DioCheckboxPanels v-model="isFullVDP" class="mt-4 mb-16">
+            <DioCheckboxPanel :value="true">
                 <label>Full Vulnerability Disclosure Policy</label>
                 <p>Use this version if you're creating a brand new VDP or fully replacing an existing VDP policy.</p>
                 <small class="dio__pill">Version 2021.1</small>
-            </dio-checkbox-panel>
-            <dio-checkbox-panel :value="false">
+            </DioCheckboxPanel>
+            <DioCheckboxPanel :value="false">
                 <div class="dio__checkbox-label">
                     <label>Safe Harbor clause only</label>
                     <p>Use this version if you already have a VDP policy in place and would like to add a Safe Harbor clause.</p>
                     <small class="dio__pill">Version 2021.1</small>
                 </div>
-            </dio-checkbox-panel>
-        </dio-checkbox-panels>
+            </DioCheckboxPanel>
+        </DioCheckboxPanels>
 
-        <dio-term-preview 
+        <DioTermPreview
             v-if="!isLoading"
             ref="preview"
             format="text/markdown"
@@ -33,11 +32,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import DioButton from '~/components/DioButton/DioButton.vue'
+import DioCheckboxPanel from '~/components/DioCheckboxPanel/DioCheckboxPanel.vue'
+import DioCheckboxPanels from '~/components/DioCheckboxPanel/DioCheckboxPanels.vue'
+import DioTermPreview from '~/components/DioTermPreview/DioTermPreview.vue'
 import { store } from '~/store'
 
 export default Vue.extend({
-    components: { DioButton },
+    components: { DioCheckboxPanels, DioCheckboxPanel, DioTermPreview },
 
     async asyncData({ $content, params, route}) {
         const copy = await $content("policymaker/vdp").fetch()
@@ -45,7 +46,7 @@ export default Vue.extend({
             copy
         }
     },
-    
+
     data() {
         return {
             isFullVDP: true,

@@ -7,7 +7,7 @@
         <nuxt-content :document="content"></nuxt-content>
 
         <div class="dio__action-bar">
-            <dio-button @click="goto(2)">Begin</dio-button>
+            <DioButton @click="goto(2)">Begin</DioButton>
         </div>
     </div>
 </template>
@@ -17,23 +17,30 @@ import Vue from 'vue'
 import PageTitle from '~/components/PageTitle/PageTitle.vue'
 import DioLink from '~/components/DioLink/DioLink.vue'
 import nav from '~/mixins/nav'
+import DioButton from '~/components/DioButton/DioButton.vue'
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    content: any
+  }
+}
 
 export default Vue.extend({
     layout: 'policymaker',
     components: {
         PageTitle,
-        DioLink
+        DioLink,
+        DioButton
     },
 
     mixins: [nav],
 
-    async asyncData({ $content, params, route}) {
+    async asyncData({ $content, params, route }) {
         const content = await $content(route.fullPath).fetch()
         return {
             content
         }
     }
-
 })
 </script>
 

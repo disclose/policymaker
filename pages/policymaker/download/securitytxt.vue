@@ -3,7 +3,7 @@
 
         <nuxt-content :document="securitytxtCopy"></nuxt-content>
 
-        <dio-term-preview 
+        <DioTermPreview
             format="text/plain"
             :content="securitytxt"
             :downloads="downloads"
@@ -20,10 +20,24 @@ import Vue from 'vue'
 import DioCheckboxPanel from '~/components/DioCheckboxPanel/DioCheckboxPanel.vue'
 import DioCheckboxPanels from '~/components/DioCheckboxPanel/DioCheckboxPanels.vue'
 import DioDnsSecurityTxtTable from '~/components/DioDnsSecurityTxtTable/DioDnsSecurityTxtTable.vue'
+import DioTermPreview from '~/components/DioTermPreview/DioTermPreview.vue'
 import { store } from '~/store'
 
+declare module 'vue/types/vue' {
+  interface Vue {
+    securitytxtCopy: any
+    downloads: Array<{
+      type: string
+      label: string
+      filename: string
+      trackingEvent: { eventLabel: string }
+    }>
+    expiry: any
+  }
+}
+
 export default Vue.extend({
-  components: { DioCheckboxPanels, DioCheckboxPanel, DioDnsSecurityTxtTable },
+  components: { DioCheckboxPanels, DioCheckboxPanel, DioDnsSecurityTxtTable, DioTermPreview },
 
     async asyncData({ $content, params, route}) {
         const securitytxtCopy = await $content("policymaker/securitytxt").fetch()

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex, { Store } from 'vuex'
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
+import { NuxtApp } from '@nuxt/types/app'
 
 import _cloneDeep from 'lodash/cloneDeep'
 import _map from 'lodash/map'
@@ -236,10 +237,43 @@ export class PolicyMaker extends VuexModule {
       return Promise.resolve(true)
     }
 
-    let url = `${$nuxt.$router.options.base}templates/securitytxt/securitytxt.md`
-    const response = await fetch(url)
-    const text = await response.text()
-    this.setSecurityTxt(text)
+    // During static generation, use a default template
+    if (process.static) {
+      this.setSecurityTxt(`# {{organization}} security contacts and policy
+
+# Our security contact channels
+{{channel}}
+
+# Link to our vulnerability disclosure policy
+Policy: {{policy_url}}
+
+# Languages that our team speaks and understands
+Preferred-Languages: {{languages}}`)
+      return Promise.resolve(true)
+    }
+
+    // During runtime, fetch from server
+    const base = (this.context as any)?.app?.$router?.options?.base || ''
+    const url = `${base}/templates/securitytxt/securitytxt.md`
+
+    try {
+      const response = await fetch(url)
+      const text = await response.text()
+      this.setSecurityTxt(text)
+    } catch (error) {
+      console.error('Failed to fetch security.txt template:', error)
+      // Set a default template if fetch fails
+      this.setSecurityTxt(`# {{organization}} security contacts and policy
+
+# Our security contact channels
+{{channel}}
+
+# Link to our vulnerability disclosure policy
+Policy: {{policy_url}}
+
+# Languages that our team speaks and understands
+Preferred-Languages: {{languages}}`)
+    }
   }
 
   @Action

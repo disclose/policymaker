@@ -1,12 +1,12 @@
 
 <script lang="ts">
-import Vue, { VNode, CreateElement } from 'vue'
+import Vue, { VNode } from 'vue'
 import _get from 'lodash/get'
 import _set from 'lodash/set'
 import _isEqual from 'lodash/isEqual'
 
 export default Vue.extend({
-    
+
     props: {
         value: {
             type: [Object, String, Boolean]
@@ -23,7 +23,7 @@ export default Vue.extend({
         const vm = this as any
 
         const children = vm.$slots.default.map((child: VNode) => {
-            if (child.componentOptions?.tag === "dio-checkbox-panel") {
+            if (child.componentOptions?.tag === "DioCheckboxPanel") {
                 if (child.data) {
                     child.data.on = {
                         click: this.select.bind(child, _get(child, 'componentOptions.propsData.value'))
@@ -45,7 +45,7 @@ export default Vue.extend({
     },
 
     created() {
-        this.localValue = this.value        
+        this.localValue = this.value
     },
 
     methods: {
@@ -55,7 +55,7 @@ export default Vue.extend({
         },
         panelIsSelected(testValue: any): boolean {
             const isSelected = _isEqual(this.localValue, testValue)
-            
+
             return isSelected
         }
     }

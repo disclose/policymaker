@@ -20,8 +20,8 @@
 
             <dio-field>
                 <label>Who/where are your disclosure points of contact? *</label>
-                <p>Provide at least one email address or webform url for people to send vulnerability information 
-                    to your organization. Combinations are welcome and supported, however we strongly recommend 
+                <p>Provide at least one email address or webform url for people to send vulnerability information
+                    to your organization. Combinations are welcome and supported, however we strongly recommend
                     keeping the number of communication channels to a minimum to avoid confusion.</p>
                     <br>
                     <small>Note: Please begin email addresses with mailto: or webforms with https:// or http://</small>
@@ -31,8 +31,8 @@
         </dio-field-group>
 
         <div class="dio__action-bar">
-            <dio-button route="/policymaker/settings" @click="goto(3)" :disabled="!isValid">Next</dio-button>
-            <dio-button route="/policymaker" theme="muted" @click="goto(1)">Back</dio-button>
+            <DioButton route="/policymaker/settings" @click="goto(3)" :disabled="!isValid">Next</DioButton>
+            <DioButton route="/policymaker" theme="muted" @click="goto(1)">Back</DioButton>
         </div>
 
     </div>
@@ -42,6 +42,7 @@
 import Vue from 'vue'
 import DioField from '~/components/DioField/DioField.vue'
 import DioFieldGroup from '~/components/DioField/DioFieldGroup.vue'
+import DioButton from '~/components/DioButton/DioButton.vue'
 import InputChannels from '~/components/InputChannel/InputChannels.vue'
 import InputText from '~/components/InputText/InputText.vue'
 import PageTitle from '~/components/PageTitle/PageTitle.vue'
@@ -49,7 +50,7 @@ import { store } from '~/store'
 import nav from '~/mixins/nav'
 
 export default Vue.extend({
-    components: { PageTitle, InputText, InputChannels, DioField, DioFieldGroup },
+    components: { PageTitle, InputText, InputChannels, DioField, DioFieldGroup, DioButton },
     layout: 'policymaker',
 
     mixins: [nav],
