@@ -248,7 +248,11 @@ export class PolicyMaker extends VuexModule {
 Policy: {{policy_url}}
 
 # Languages that our team speaks and understands
-Preferred-Languages: {{languages}}`)
+Preferred-Languages: {{languages}}
+
+# Expiration date for this security.txt file
+Expires: {{expires}}
+`)
       return Promise.resolve(true)
     }
 
@@ -272,7 +276,11 @@ Preferred-Languages: {{languages}}`)
 Policy: {{policy_url}}
 
 # Languages that our team speaks and understands
-Preferred-Languages: {{languages}}`)
+Preferred-Languages: {{languages}}
+
+# Expiration date for this security.txt file
+Expires: {{expires}}
+`)
     }
   }
 
