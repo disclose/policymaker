@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[19],{656:function(e,n,d){"use strict";d.r(n);var r=d(0).a.extend({middleware:function(e){return(0,e.redirect)("/policymaker")}}),t=d(35),component=Object(t.a)(r,undefined,undefined,!1,null,null,null);n.default=component.exports}}]);
