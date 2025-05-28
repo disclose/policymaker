@@ -16,7 +16,29 @@
             <div id="content">
                 <Nuxt />          
                 <footer>
-                    &copy; Copyright {{ new Date().getFullYear() }} The <a href=https://disclose.io>disclose.io</a> Project - Made with ♥️ by Jeremy Manoto and Casey Ellis.
+                    &copy; Copyright {{ new Date().getFullYear() }} The <a href=https://disclose.io>disclose.io</a> Project - 
+                    <div class="text-center text-sm text-gray-500">
+                        Made with ❤️ by
+                        <a
+                            href="https://disclose.io"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-blue-600 hover:text-blue-800"
+                        >
+                            disclose.io
+                        </a>
+                    </div>
+                    <div class="text-center text-sm text-gray-500 mt-2">
+                        This website is open-source. If you have suggestion or would like to contribute please visit the repo at
+                        <a
+                            href="https://github.com/disclose/policymaker"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-blue-600 hover:text-blue-800"
+                        >
+                            github.com/disclose/policymaker
+                        </a>
+                    </div>
                 </footer>
             </div>
         </main>
