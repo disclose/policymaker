@@ -41,7 +41,7 @@ export default Vue.extend({
 
     head() {
         return {
-        title: 'Policymaker: Open-source vulnerability disclosure program policy, security.txt, and DNS Security TXT generator - Part of the @disclose_io Project.',
+        title: 'Policymaker | disclose.io',
         meta: [
           // hid is used as unique identifier. Do not use `vmid` for it as it will not work
           {

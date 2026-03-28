@@ -18,7 +18,18 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: 'Generate vulnerability disclosure policies, security.txt files, and DNS Security TXT records. Free open-source tool by disclose.io.' },
+      { hid: 'og:title', property: 'og:title', content: 'Policymaker — VDP Policy Generator | disclose.io' },
+      { hid: 'og:description', property: 'og:description', content: 'Generate vulnerability disclosure policies, security.txt, and DNS Security TXT records.' },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:url', property: 'og:url', content: 'https://policymaker.disclose.io' },
+      { hid: 'og:image', property: 'og:image', content: 'https://disclose.io/uploads/becausemath-2026.png' },
+      { hid: 'og:site_name', property: 'og:site_name', content: 'disclose.io' },
+      { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
+      { hid: 'twitter:site', name: 'twitter:site', content: '@disclose_io' },
+      { hid: 'twitter:title', name: 'twitter:title', content: 'Policymaker — VDP Policy Generator' },
+      { hid: 'twitter:description', name: 'twitter:description', content: 'Generate vulnerability disclosure policies, security.txt, and DNS Security TXT records.' },
+      { hid: 'twitter:image', name: 'twitter:image', content: 'https://disclose.io/uploads/becausemath-2026.png' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
