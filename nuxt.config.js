@@ -59,9 +59,7 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
-    // https://github.com/nuxt-community/google-analytics-module
-    '@nuxtjs/google-analytics'
+    '@nuxtjs/tailwindcss'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -126,9 +124,5 @@ export default {
       'markdown-it-div',
       'markdown-it-attrs'
     ]
-  },
-
-  googleAnalytics: {
-    id: 'UA-143424917-8'
   }
 }

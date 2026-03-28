@@ -31,7 +31,6 @@
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^6.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
-    "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/tailwindcss": "^4.0.1",
     "@types/lodash": "^4.14.170",
     "@types/markdown-it": "^14.1.2",
