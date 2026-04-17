@@ -35,8 +35,20 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: 'https://cdn.usefathom.com/script.js', 'data-site': 'JGSWCLYU', defer: true }
-    ]
+      { src: 'https://www.googletagmanager.com/gtag/js?id=G-LLY1T4DZX7', async: true },
+      {
+        hid: 'gtag-init',
+        innerHTML: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-LLY1T4DZX7');
+        `,
+        type: 'text/javascript',
+        charset: 'utf-8'
+      }
+    ],
+    __dangerouslyDisableSanitizers: ['script']
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
