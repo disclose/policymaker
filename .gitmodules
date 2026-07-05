@@ -1,0 +1,3 @@
+[submodule "vendor/dioterms"]
+	path = vendor/dioterms
+	url = https://github.com/disclose/dioterms.git
