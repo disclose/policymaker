@@ -86,8 +86,8 @@ export default Vue.extend({
 
             const link = document.createElement('a')
 
-            // construct download blob
-            let fileBlob = new Blob([policyText], {type: download.type})
+            // construct download blob (stamped for template-lineage detection)
+            let fileBlob = new Blob([vm.stamp(policyText, download.type)], {type: download.type})
             link.href = URL.createObjectURL(fileBlob)
             link.download = download.filename
             link.click()
@@ -100,6 +100,19 @@ export default Vue.extend({
             }
         },
 
+        // Version stamp: a stable fingerprint phrase + date + unique id, appended as a
+        // format-appropriate comment. Enables lineage detection of published artifacts
+        // (code/web search + diosts scans). Client-side: uniqueness, not cryptographic signing.
+        stamp(policyText: string, mimeType: string): string {
+            const date = new Date().toISOString().slice(0, 10)
+            const id = Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8)
+            const label = `Generated with policymaker.disclose.io (dioterms) | ${date} | id:${id}`
+            if (mimeType === 'text/plain') {
+                return `${policyText.replace(/\s+$/, '')}\n\n# ${label}\n`
+            }
+            return `${policyText.replace(/\s+$/, '')}\n\n<!-- ${label} -->\n`
+        },
+
         track(download: any): void {
             const vm = this as any
 
@@ -109,7 +122,19 @@ export default Vue.extend({
                 event.eventLabel = [vm.localLanguage, event.eventLabel].join('_')
             }
 
-            vm.$ga.event(event)
+            // GA4 (gtag.js) — the previous vm.$ga.event() targeted the removed
+            // vue-analytics/UA plugin, so download events were silently lost after #15.
+            const gtag = (window as any).gtag
+            if (typeof gtag === 'function') {
+                const name = `${event.eventCategory}_${event.eventAction}`
+                    .replace(/[^a-zA-Z0-9_]/g, '_').slice(0, 40)
+                gtag('event', name, {
+                    event_category: event.eventCategory,
+                    event_label: event.eventLabel,
+                    artifact: event.eventCategory,
+                    format: (download.trackingEvent || {}).eventLabel
+                })
+            }
         }
     },
 
