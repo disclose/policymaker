@@ -1,43 +1,32 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Build and Deploy
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches:
       - main
-
-  # Allows you to run this workflow manually from the Actions tab
+  pull_request:
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      # Set up Node.js 16.x
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version-file: .nvmrc
+          cache: npm
 
-      # Build the artifact under `dist`
-      - name: Install and Build
-        run: |
-          npm install --legacy-peer-deps
-          npx nuxt generate
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
 
-      # Deploy to gh-pages
+      - name: Generate static site
+        run: npx nuxt generate
+
       - name: Deploy
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
