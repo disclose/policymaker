@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          submodules: recursive
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -21,6 +23,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps
+
+      # dioterms (vendor/dioterms submodule) is the canonical source for the
+      # policy term templates. Project it into static/templates before generate
+      # so the deployed site always serves the pinned canonical language.
+      - name: Sync templates from dioterms (canonical source)
+        run: node scripts/sync-templates.mjs
 
       - name: Generate static site
         run: npx nuxt generate

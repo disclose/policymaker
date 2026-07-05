@@ -4,7 +4,7 @@ export default async (context, locale) => {
     language: {
       "en-US": 'English',
       ar: 'Arabic',
-      "np-NP": 'Nepalese'
+      "ne-NP": 'Nepalese'
     },
     country: {
       "*": "Global (All regions)",
@@ -20,7 +20,7 @@ export default async (context, locale) => {
     locale: {
       "en-US": "English",
       "ar-AR": "Arabic",
-      "np-NP": "Nepalese"
+      "ne-NP": "Nepalese"
     },
 
     policymaker: {
