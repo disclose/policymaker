@@ -15,7 +15,7 @@
 <a href="https://github.com/disclose/policymaker/issues"><img src="https://img.shields.io/badge/PRs-welcome-5B3AB6" alt="PRs welcome"></a>
 </p>
 
-*Part of [the disclose.io Project](https://disclose.io) · [dioterms](https://github.com/disclose/dioterms) · [directory](https://directory.disclose.io) · [state](https://state.disclose.io) · [dioseal](https://github.com/disclose/dioseal)*
+*Part of **[the disclose.io Project](https://disclose.io)** — the open, vendor-neutral infrastructure for vulnerability disclosure. [Browse the ecosystem →](https://github.com/disclose)*
 
 </div>
 
