@@ -1,0 +1,20 @@
+# Policymaker (disclose.io)
+
+> A free, open-source web tool that generates vulnerability disclosure policies, security.txt files, and DNS Security TXT records from a short guided form.
+
+Canonical: https://policymaker.disclose.io/
+Publisher: disclose.io
+License: open source (see https://github.com/disclose/policymaker)
+
+## What it does
+- Generates a customized **vulnerability disclosure policy (VDP)** / bug bounty policy from the disclose.io framework (dioterms).
+- Produces a **security.txt** file (RFC 9116) with your security contact and policy URLs.
+- Produces a **DNS Security TXT** (`_security` TXT) record for DNS-based security-contact discovery.
+
+## How to use
+Open the site, answer the guided questions (scope, safe harbor, contact, disclosure timelines), and copy or download the generated policy, security.txt, and DNS record.
+
+## Related disclose.io properties
+- The terms it builds on: https://disclose.io/framework/ and https://history.disclose.io/ (their provenance)
+- DNS Security TXT standard: https://dnssecuritytxt.org/
+- Security-contact lookup: https://lookup.disclose.io/

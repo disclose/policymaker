@@ -46,6 +46,24 @@ export default {
         `,
         type: 'text/javascript',
         charset: 'utf-8'
+      },
+      {
+        hid: 'ld-json',
+        type: 'application/ld+json',
+        json: {
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'Policymaker',
+          alternateName: 'disclose.io Policymaker',
+          url: 'https://policymaker.disclose.io/',
+          description: 'Free, open-source generator for vulnerability disclosure policies, security.txt files, and DNS Security TXT records.',
+          applicationCategory: 'SecurityApplication',
+          operatingSystem: 'Web',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+          isAccessibleForFree: true,
+          license: 'https://github.com/disclose/policymaker/blob/main/LICENSE.md',
+          publisher: { '@type': 'Organization', name: 'disclose.io', url: 'https://disclose.io/' }
+        }
       }
     ],
     __dangerouslyDisableSanitizers: ['script']
