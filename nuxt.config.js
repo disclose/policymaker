@@ -40,7 +40,7 @@ export default {
     script: [
       {
         hid: 'theme-init',
-        innerHTML: `(function(){try{var t=localStorage.getItem('dio-theme');if(t==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();`,
+        innerHTML: `(function(){try{var t=localStorage.getItem('dio-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();`,
         type: 'text/javascript'
       },
       { src: 'https://www.googletagmanager.com/gtag/js?id=G-LLY1T4DZX7', async: true },
