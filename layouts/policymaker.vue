@@ -62,7 +62,7 @@ export default Vue.extend({
 
     mounted() {
         const vm = this as any
-        vm.isLight = document.documentElement.getAttribute('data-theme') === 'light'
+        vm.isLight = document.documentElement.getAttribute('data-theme') !== 'dark'
         this.$nextTick(() => {
             store.dispatch('policymaker/fetchLanguages')
             store.dispatch('policymaker/syncStepFromRoute', this.$route.fullPath)
@@ -75,10 +75,10 @@ export default Vue.extend({
             vm.isLight = !vm.isLight
             const root = document.documentElement
             if (vm.isLight) {
-                root.setAttribute('data-theme', 'light')
+                root.removeAttribute('data-theme')
                 try { localStorage.setItem('dio-theme', 'light') } catch (e) {}
             } else {
-                root.removeAttribute('data-theme')
+                root.setAttribute('data-theme', 'dark')
                 try { localStorage.setItem('dio-theme', 'dark') } catch (e) {}
             }
         }
