@@ -1,9 +1,8 @@
 /* ─────────────────────────────────────────────────────────────
- * disclose.io — APP Design System (Policymaker: LIGHT-default)
- * Tokens derived from lookup.disclose.io's app language.
- * Policymaker defaults to LIGHT (:root); dark is opt-in via
- * [data-theme="dark"] on <html>. (lookup itself is dark-default;
- * this app deliberately leads with light.)
+ * disclose.io — APP Design System (Policymaker: light-only)
+ * Tokens derived from lookup.disclose.io's app language, applied
+ * as a single light theme (no theme switcher). (lookup itself is
+ * dark-default; this app leads with — and stays — light.)
  * ───────────────────────────────────────────────────────────── */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -45,30 +44,4 @@
   --shadow:    0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.10), 0 2px 4px rgba(0, 0, 0, 0.06);
   --transition: 0.15s ease;
-}
-
-/* ── Dark theme (opt-in via toggle) ──────────────────────────── */
-[data-theme="dark"] {
-  --bg:            #0a0a0f;
-  --surface:       #12121a;
-  --surface-2:     #1a1a25;
-  --surface-3:     #222230;
-  --border:        #2a2a35;
-  --border-light:  #35354a;
-
-  --text:          #e4e4e8;
-  --text-heading:  #f4f4f5;
-  --text-muted:    #8888a0;
-  --text-dim:      #5a5a70;
-
-  --accent:        #7c5cfc;
-  --accent-hover:  #9580ff;
-  --accent-dim:    rgba(124, 92, 252, 0.12);
-
-  --high-bg:     rgba(34, 197, 94, 0.10);
-  --high-border: rgba(34, 197, 94, 0.25);
-  --medium-bg:   rgba(234, 179, 8, 0.10);
-  --error-bg:    rgba(239, 68, 68, 0.10);
-  --shadow:      0 1px 3px rgba(0, 0, 0, 0.30), 0 1px 2px rgba(0, 0, 0, 0.20);
-  --shadow-lg:   0 4px 12px rgba(0, 0, 0, 0.40), 0 2px 4px rgba(0, 0, 0, 0.30);
 }

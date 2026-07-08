@@ -5,12 +5,6 @@
                 <img src="@/assets/images/logo-disclose-type.svg">
             </NuxtLink>
 
-            <button class="theme-toggle" type="button" @click="toggleTheme"
-                :title="isLight ? 'Switch to dark theme' : 'Switch to light theme'"
-                aria-label="Toggle light/dark theme">
-                <span v-if="isLight">☀</span><span v-else>☾</span>
-            </button>
-
             <nav>
                 <progress-steps orientation="vertical" :steps="navSteps">
                 </Progress-Steps>
@@ -41,9 +35,7 @@ export default Vue.extend({
   components: { ProgressSteps },
     
     data() {
-        return {
-            isLight: false
-        }
+        return {}
     },
 
     head() {
@@ -61,27 +53,10 @@ export default Vue.extend({
     },
 
     mounted() {
-        const vm = this as any
-        vm.isLight = document.documentElement.getAttribute('data-theme') !== 'dark'
         this.$nextTick(() => {
             store.dispatch('policymaker/fetchLanguages')
             store.dispatch('policymaker/syncStepFromRoute', this.$route.fullPath)
         })
-    },
-
-    methods: {
-        toggleTheme(): void {
-            const vm = this as any
-            vm.isLight = !vm.isLight
-            const root = document.documentElement
-            if (vm.isLight) {
-                root.removeAttribute('data-theme')
-                try { localStorage.setItem('dio-theme', 'light') } catch (e) {}
-            } else {
-                root.setAttribute('data-theme', 'dark')
-                try { localStorage.setItem('dio-theme', 'dark') } catch (e) {}
-            }
-        }
     },
 
     computed: {
@@ -122,24 +97,6 @@ header {
 
     nav {
         @apply mt-12 mb-12 hidden lg:block;
-    }
-
-    .theme-toggle {
-        @apply flex items-center justify-center cursor-pointer;
-        width: 36px;
-        height: 36px;
-        margin-left: auto;
-        background: var(--surface-2);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        color: var(--text-muted);
-        font-size: 16px;
-        transition: all var(--transition);
-
-        &:hover {
-            border-color: var(--border-light);
-            color: var(--text);
-        }
     }
 }
 
