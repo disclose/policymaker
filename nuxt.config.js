@@ -38,11 +38,6 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap' }
     ],
     script: [
-      {
-        hid: 'theme-init',
-        innerHTML: `(function(){try{var t=localStorage.getItem('dio-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();`,
-        type: 'text/javascript'
-      },
       { src: 'https://www.googletagmanager.com/gtag/js?id=G-LLY1T4DZX7', async: true },
       {
         hid: 'gtag-init',
