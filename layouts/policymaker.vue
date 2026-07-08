@@ -5,6 +5,12 @@
                 <img src="@/assets/images/logo-disclose-type.svg">
             </NuxtLink>
 
+            <button class="theme-toggle" type="button" @click="toggleTheme"
+                :title="isLight ? 'Switch to dark theme' : 'Switch to light theme'"
+                aria-label="Toggle light/dark theme">
+                <span v-if="isLight">☀</span><span v-else>☾</span>
+            </button>
+
             <nav>
                 <progress-steps orientation="vertical" :steps="navSteps">
                 </Progress-Steps>
@@ -36,6 +42,7 @@ export default Vue.extend({
     
     data() {
         return {
+            isLight: false
         }
     },
 
@@ -54,10 +61,27 @@ export default Vue.extend({
     },
 
     mounted() {
+        const vm = this as any
+        vm.isLight = document.documentElement.getAttribute('data-theme') === 'light'
         this.$nextTick(() => {
             store.dispatch('policymaker/fetchLanguages')
             store.dispatch('policymaker/syncStepFromRoute', this.$route.fullPath)
         })
+    },
+
+    methods: {
+        toggleTheme(): void {
+            const vm = this as any
+            vm.isLight = !vm.isLight
+            const root = document.documentElement
+            if (vm.isLight) {
+                root.setAttribute('data-theme', 'light')
+                try { localStorage.setItem('dio-theme', 'light') } catch (e) {}
+            } else {
+                root.removeAttribute('data-theme')
+                try { localStorage.setItem('dio-theme', 'dark') } catch (e) {}
+            }
+        }
     },
 
     computed: {
@@ -70,10 +94,9 @@ export default Vue.extend({
 
 <style lang="postcss">
 :root {
-    color: var(--dark-purple);
-    background: linear-gradient(90deg, var(--white) 50%, var(--shade-050) 50%);
-    /* font-family: "Noto Sans", Roboto, "Helvetica Neue", ui-sans-serif, system-ui, -apple-system, system-ui; */
-    font-family: "Noto Sans";
+    color: var(--text);
+    background: var(--bg);
+    font-family: var(--font);
 }
 
 #app {
@@ -85,7 +108,8 @@ export default Vue.extend({
 
 
 header {
-    background: var(--white);
+    background: var(--surface);
+    border-right: 1px solid var(--border);
     @apply fixed flex flex-row items-center h-16 px-4 overflow-hidden min-w-max;
     @apply w-full z-10;
     @apply lg:flex-col lg:h-full lg:items-start lg:pt-8 lg:pb-8 lg:w-80 ;
@@ -98,6 +122,24 @@ header {
 
     nav {
         @apply mt-12 mb-12 hidden lg:block;
+    }
+
+    .theme-toggle {
+        @apply flex items-center justify-center cursor-pointer;
+        width: 36px;
+        height: 36px;
+        margin-left: auto;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text-muted);
+        font-size: 16px;
+        transition: all var(--transition);
+
+        &:hover {
+            border-color: var(--border-light);
+            color: var(--text);
+        }
     }
 }
 
@@ -122,7 +164,8 @@ main {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: 'Noto Sans Display'
+    font-family: var(--font);
+    color: var(--text-heading);
 }
 
 h3 {

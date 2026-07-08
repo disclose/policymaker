@@ -1,15 +1,25 @@
+/* Legacy policymaker tokens — REMAPPED onto the disclose.io app design system
+ * (see _app-theme.css). Kept as a compatibility shim so existing component
+ * <style> blocks that reference --purple / --white / --shade-* re-theme
+ * (dark/light) automatically without touching every component.
+ *
+ * NOTE: --white here means the SURFACE background. On-accent TEXT that
+ * previously used var(--white) as a foreground is set to explicit #fff in
+ * DioButton, DioLink, and ProgressStep (dark text on violet would fail). */
 :root {
-    --dark-purple: hsla(262, 22%, 21%, 1);
-    --purple: hsla(262, 52%, 47%, 1);
-    --white: hsla(0, 0%, 100%, 1);
-    --shade-050: hsla(240, 8%, 97%, 1);
-    --shade-100: hsla(240, 10%, 94%, 1);
-    --shade-200: hsla(240, 5%, 89%, 1);
-    --shade-300: hsla(240, 8%, 85%, 1);
-    --shade-400: hsla(240, 7%, 79%, 1);
-    --shade-500: hsla(240, 5%, 74%, 1);
-    --shade-600: hsla(240, 5%, 64%, 1);
-    --shade-700: hsla(240, 3%, 55%, 1);
-    --shade-800: hsla(240, 4%, 47%, 1);
-    --shade-900: hsla(231, 3%, 41%, 1);
+    --dark-purple: var(--text-heading);
+    --purple: var(--accent);
+    --purple-hover: var(--accent-hover);
+    --white: var(--surface);
+
+    --shade-050: var(--bg);
+    --shade-100: var(--surface-2);
+    --shade-200: var(--border);
+    --shade-300: var(--border-light);
+    --shade-400: var(--border-light);
+    --shade-500: var(--text-dim);
+    --shade-600: var(--text-muted);
+    --shade-700: var(--text-muted);
+    --shade-800: var(--text);
+    --shade-900: var(--text-heading);
 }

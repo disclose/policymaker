@@ -49,7 +49,7 @@ export default Vue.extend({
         /* Themes */
         &-solid {
             background: var(--purple);
-            color: var(--white);
+            color: #fff;
         }
 
         &-transparent {

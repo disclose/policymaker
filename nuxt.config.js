@@ -32,9 +32,17 @@ export default {
       { hid: 'twitter:image', name: 'twitter:image', content: 'https://disclose.io/uploads/becausemath-2026.png' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap' }
     ],
     script: [
+      {
+        hid: 'theme-init',
+        innerHTML: `(function(){try{var t=localStorage.getItem('dio-theme');if(t==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();`,
+        type: 'text/javascript'
+      },
       { src: 'https://www.googletagmanager.com/gtag/js?id=G-LLY1T4DZX7', async: true },
       {
         hid: 'gtag-init',
@@ -71,6 +79,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/css/_app-theme.css',
     '@/assets/css/_fonts.css',
     '@/assets/css/_variables.css'
   ],
