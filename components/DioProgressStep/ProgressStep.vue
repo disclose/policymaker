@@ -100,7 +100,7 @@ export default Vue.extend({
             color: var(--dark-purple);
             
             .dio__step-anchor {
-                color: var(--white);
+                color: #fff;
                 background: var(--purple);
                 border-color: var(--purple);
             }
