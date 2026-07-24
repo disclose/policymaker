@@ -22,7 +22,7 @@
     "lodash": "^4.17.21",
     "markdown-it-attrs": "^4.0.0",
     "markdown-it-div": "^1.1.0",
-    "nuxt": "^2.14.0",
+    "nuxt": "^2.18.1",
     "nuxt-i18n": "^6.27.0",
     "vue-country-flag": "^2.1.1"
   },
