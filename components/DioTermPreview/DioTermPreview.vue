@@ -134,6 +134,10 @@ export default Vue.extend({
                     artifact: event.eventCategory,
                     format: (download.trackingEvent || {}).eventLabel
                 })
+                gtag('event', 'artifact_download', {
+                    artifact: event.eventCategory,
+                    format: (download.trackingEvent || {}).eventLabel
+                })
             }
         }
     },

@@ -27,9 +27,15 @@ export default Vue.extend({
         }
     },
 
+    mounted() {
+        const gtag = (window as any).gtag
+        if (typeof gtag === 'function') {
+            gtag('event', 'security_txt_generated', { variant: 'dns_record' })
+        }
+    },
+
     computed: {
         configuration: () => store.getters['policymaker/getConfiguration'],
     }
 })
 </script>
-

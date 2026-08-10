@@ -45,7 +45,17 @@ export default {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-LLY1T4DZX7');
+          gtag('config', 'G-LLY1T4DZX7', {
+            linker: {
+              domains: [
+                'disclose.io',
+                'directory.disclose.io',
+                'lookup.disclose.io',
+                'policymaker.disclose.io',
+                'vault.disclose.io'
+              ]
+            }
+          });
         `,
         type: 'text/javascript',
         charset: 'utf-8'

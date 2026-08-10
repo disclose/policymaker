@@ -46,7 +46,7 @@ export default Vue.extend({
           {
             hid: 'description',
             name: 'description',
-            content: 'Disclose.io policymaker'
+            content: 'Generate a vulnerability disclosure policy, safe-harbor clause, security.txt file, and DNS Security TXT record with the free disclose.io Policymaker.'
           }
         ]
       }

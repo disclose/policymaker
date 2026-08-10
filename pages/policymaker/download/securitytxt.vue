@@ -57,7 +57,14 @@ export default Vue.extend({
     },
 
     created() {
-        store.dispatch('policymaker/fetchSecurityTxt')
+        store.dispatch('policymaker/fetchSecurityTxt').then(() => {
+            if (process.client) {
+                const gtag = (window as any).gtag
+                if (typeof gtag === 'function') {
+                    gtag('event', 'security_txt_generated', { variant: 'rfc9116_file' })
+                }
+            }
+        })
     },
 
     computed: {
