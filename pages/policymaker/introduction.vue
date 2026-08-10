@@ -7,7 +7,7 @@
         <nuxt-content :document="content"></nuxt-content>
 
         <div class="dio__action-bar">
-            <DioButton @click="goto(2)">Begin</DioButton>
+            <DioButton @click="begin">Begin</DioButton>
         </div>
     </div>
 </template>
@@ -39,6 +39,16 @@ export default Vue.extend({
         const content = await $content(route.fullPath).fetch()
         return {
             content
+        }
+    },
+
+    methods: {
+        begin(): void {
+            const gtag = (window as any).gtag
+            if (typeof gtag === 'function') {
+                gtag('event', 'policymaker_start', { entry_point: 'wizard_introduction' })
+            }
+            ;(this as any).goto(2)
         }
     }
 })

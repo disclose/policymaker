@@ -36,6 +36,15 @@ export default Vue.extend({
             vm.goto(1)
         } else {
             store.dispatch('policymaker/fetchTerms').then(() => {
+                if (process.client) {
+                    const gtag = (window as any).gtag
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'policy_generated', {
+                            artifact: 'vulnerability_disclosure_policy',
+                            cvd_enabled: (this.configuration as any).cvdTimelineDays > 0
+                        })
+                    }
+                }
                 this.$router.push(this.sections[0].route)
             })
         }
