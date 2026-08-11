@@ -1,4 +1,19 @@
+import { trackDownload, type TrackedArtifact } from './analytics'
 import type { DownloadDescriptor } from './types'
+
+/**
+ * Every download is tracked here rather than at the call sites.
+ *
+ * The "Download DNS records" button was added without a trackDownload() call and shipped that way,
+ * so dnssecuritytxt_download read zero for the life of the feature — indistinguishable from
+ * nobody using it. Requiring this argument makes that omission impossible to repeat.
+ */
+export type DownloadTracking = {
+  artifact: TrackedArtifact
+  format: 'html' | 'markdown' | 'text' | 'zip'
+  locale?: string
+  policyId?: string
+}
 
 type StampOptions = {
   generatedAt?: Date
@@ -26,14 +41,24 @@ export function stampArtifact(
   return `${trimmed}\n\n<!-- ${label} -->\n`
 }
 
-export function downloadArtifact(content: string, descriptor: DownloadDescriptor): void {
+export function downloadArtifact(
+  content: string,
+  descriptor: DownloadDescriptor,
+  tracking: DownloadTracking,
+): void {
   downloadBlob(
     new Blob([stampArtifact(content, descriptor.type)], { type: descriptor.type }),
     descriptor.filename,
+    tracking,
   )
 }
 
-export function downloadBlob(blob: Blob, filename: string): void {
+export function downloadBlob(blob: Blob, filename: string, tracking: DownloadTracking): void {
+  trackDownload(tracking.artifact, tracking.format, {
+    locale: tracking.locale,
+    policyId: tracking.policyId,
+  })
+
   const link = document.createElement('a')
   const href = URL.createObjectURL(blob)
   link.href = href

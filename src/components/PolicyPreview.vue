@@ -2,11 +2,12 @@
 import { computed } from 'vue'
 
 import { LANGUAGE_LABELS } from '@/config'
-import { trackDownload } from '@/domain/analytics'
+import { policyId } from '@/domain/analytics'
 import { downloadArtifact } from '@/domain/downloads'
 import type { DownloadDescriptor } from '@/domain/types'
 import { policySource, type SupportedLocale } from '@/generated/policies'
 import { renderMarkdown } from '@/markdown'
+import { usePolicymaker } from '@/state/policymaker'
 
 const props = withDefaults(
   defineProps<{
@@ -29,17 +30,18 @@ const emit = defineEmits<{
   'update:language': [value: SupportedLocale]
 }>()
 
+const { configuration } = usePolicymaker()
 const html = computed(() => renderMarkdown(props.content))
 const visibleLocales = computed(() => props.locales ?? policySource.locales)
 
 function download(descriptor: DownloadDescriptor): void {
   const content = descriptor.type === 'text/html' ? html.value : props.content
-  downloadArtifact(content, descriptor)
-  trackDownload(
-    props.artifact,
-    descriptor.eventLabel,
-    props.showLanguage ? props.language : undefined,
-  )
+  downloadArtifact(content, descriptor, {
+    artifact: props.artifact,
+    format: descriptor.eventLabel,
+    locale: props.showLanguage ? props.language : undefined,
+    policyId: policyId(configuration),
+  })
 }
 </script>
 

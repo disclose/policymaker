@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import AppButton from '@/components/AppButton.vue'
 import AppField from '@/components/AppField.vue'
 import ChannelList from '@/components/ChannelList.vue'
 import TextInput from '@/components/TextInput.vue'
+import { trackWizardStep } from '@/domain/analytics'
 import { usePolicymaker } from '@/state/policymaker'
+
+onMounted(() => trackWizardStep('organization'))
 
 const router = useRouter()
 const { configuration, validOrganizationName, validOrganizationStep } = usePolicymaker()

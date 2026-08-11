@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import AppButton from '@/components/AppButton.vue'
@@ -8,7 +8,10 @@ import ChannelInput from '@/components/ChannelInput.vue'
 import TextInput from '@/components/TextInput.vue'
 import { CVD_TIMELINE_OPTIONS } from '@/config'
 import { normalizeReportingLanguages } from '@/domain/languages'
+import { trackWizardStep } from '@/domain/analytics'
 import { usePolicymaker } from '@/state/policymaker'
+
+onMounted(() => trackWizardStep('settings'))
 
 const router = useRouter()
 const { configuration, validReportingLanguages, validSettings } = usePolicymaker()

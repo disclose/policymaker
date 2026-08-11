@@ -3,6 +3,7 @@ import { strToU8, zipSync } from 'fflate'
 import { renderMarkdown } from '@/markdown'
 
 import { buildBindZone, buildDnsRecords, dnsVerificationCommand, effectiveDnsDomain } from './dns'
+import { policyId } from './analytics'
 import { downloadBlob, stampArtifact } from './downloads'
 import { availableLocale, renderPolicy, canonicalPolicy, selectVdpFamily } from './policies'
 import { renderSecurityTxt } from './securityTxt'
@@ -90,5 +91,6 @@ export function downloadPolicyBundle(configuration: PolicyConfiguration): void {
   downloadBlob(
     new Blob([Uint8Array.from(zip)], { type: 'application/zip' }),
     'policymaker-deployment-bundle.zip',
+    { artifact: 'deployment_bundle', format: 'zip', policyId: policyId(configuration) },
   )
 }

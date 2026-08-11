@@ -3,17 +3,19 @@ import { onMounted } from 'vue'
 
 import DownloadTabs from '@/components/DownloadTabs.vue'
 import AppButton from '@/components/AppButton.vue'
-import { trackBundleDownload, trackPolicyGenerated } from '@/domain/analytics'
+import { policyId, trackBundleDownload, trackPolicyGenerated, trackWizardStep } from '@/domain/analytics'
 import { downloadPolicyBundle } from '@/domain/bundle'
 import { usePolicymaker } from '@/state/policymaker'
 
 const { configuration } = usePolicymaker()
 
-onMounted(() => trackPolicyGenerated(configuration.cvdTimelineDays > 0))
+onMounted(() => {
+  trackWizardStep('download')
+  trackPolicyGenerated(configuration)
+})
 
 function downloadAll(): void {
   downloadPolicyBundle(configuration)
-  trackBundleDownload()
 }
 </script>
 

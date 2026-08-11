@@ -8,6 +8,7 @@ import {
   domainFromPolicyUrl,
   normalizeDomainInput,
 } from '@/domain/dns'
+import { policyId, trackCopy } from '@/domain/analytics'
 import { downloadBlob, stampArtifact } from '@/domain/downloads'
 import { usePolicymaker } from '@/state/policymaker'
 
@@ -36,18 +37,30 @@ function normalizeDomain(): void {
   if (normalizedDomain.value) configuration.organizationDomain = normalizedDomain.value
 }
 
-async function copy(text: string, label: string): Promise<void> {
+// Fires from the resolved promise, not the click: writeText rejects on non-secure contexts and
+// on some permission paths, and tracking the click would count those failures as copies.
+async function copy(
+  text: string,
+  label: string,
+  target: 'dns_record' | 'dns_zone' | 'verification_command',
+): Promise<void> {
   try {
     await navigator.clipboard.writeText(text)
     copyStatus.value = `${label} copied.`
+    trackCopy(target, 'ok', { policyId: policyId(configuration) })
   } catch {
     copyStatus.value = `Could not copy ${label.toLowerCase()}; select the text manually.`
+    trackCopy(target, 'failed', { policyId: policyId(configuration) })
   }
 }
 
 function downloadZone(): void {
   const content = stampArtifact(zone.value, 'text/plain')
-  downloadBlob(new Blob([content], { type: 'text/plain' }), 'dns-security.txt')
+  downloadBlob(new Blob([content], { type: 'text/plain' }), 'dns-security.txt', {
+    artifact: 'dns',
+    format: 'text',
+    policyId: policyId(configuration),
+  })
 }
 </script>
 
@@ -68,7 +81,7 @@ function downloadZone(): void {
     </AppField>
 
     <div v-if="records.length" class="dns-actions">
-      <AppButton size="small" theme="transparent" @click="copy(zone, 'All DNS records')">Copy all records</AppButton>
+      <AppButton size="small" theme="transparent" @click="copy(zone, 'All DNS records', 'dns_zone')">Copy all records</AppButton>
       <AppButton size="small" theme="transparent" @click="downloadZone">Download DNS records</AppButton>
     </div>
 
@@ -93,7 +106,7 @@ function downloadZone(): void {
                 class="copy-control"
                 type="button"
                 :aria-label="`Copy ${record.value.split('=')[0]?.replace('&quot;', '')} record`"
-                @click="copy(buildBindZone([record]).trim(), 'DNS record')"
+                @click="copy(buildBindZone([record]).trim(), 'DNS record', 'dns_record')"
               >Copy</button>
             </td>
           </tr>
@@ -104,7 +117,7 @@ function downloadZone(): void {
     <section v-if="records.length" class="verification-command" aria-labelledby="dns-verify-heading">
       <h3 id="dns-verify-heading">Verify after publishing</h3>
       <code>{{ verificationCommand }}</code>
-      <button class="copy-control" type="button" @click="copy(verificationCommand, 'Verification command')">Copy command</button>
+      <button class="copy-control" type="button" @click="copy(verificationCommand, 'Verification command', 'verification_command')">Copy command</button>
     </section>
     <p class="copy-status" aria-live="polite">{{ copyStatus }}</p>
   </div>

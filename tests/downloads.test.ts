@@ -22,11 +22,12 @@ describe('download descriptors', () => {
 
   it('downloads a stamped artifact with the configured filename', () => {
     vi.useFakeTimers()
+    window.gtag = vi.fn()
     const createObjectUrl = vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:policymaker-test')
     const revokeObjectUrl = vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => undefined)
     const click = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => undefined)
 
-    downloadArtifact('# Policy', VDP_DOWNLOADS[0])
+    downloadArtifact('# Policy', VDP_DOWNLOADS[0], { artifact: 'vdp', format: 'markdown' })
 
     expect(createObjectUrl).toHaveBeenCalledOnce()
     expect(click).toHaveBeenCalledOnce()
