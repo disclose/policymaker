@@ -34,11 +34,11 @@ Verify the complete wizard in a real browser at both desktop and mobile widths. 
 
 After the `Build and Deploy` workflow finishes:
 
-1. Open `https://policymaker.disclose.io/policymaker/introduction` with cache bypassed.
+1. Open `https://policymaker.disclose.io/` with cache bypassed and confirm the introduction prose renders beneath the hero.
 2. Complete the wizard with a test organization and at least one reporting channel.
 3. Inspect VDP, safe-harbor, security.txt, and DNS outputs.
 4. Download the deployment ZIP and inspect its seven-file inventory.
-5. Confirm direct navigation to each public route returns the application.
+5. Confirm direct navigation to each public route returns the application, including that the two legacy paths `/policymaker` and `/policymaker/introduction` return HTTP 200 and land on `/`.
 6. Confirm the production console contains no application errors.
 
 Do not treat a successful HTTP probe alone as browser verification; GitHub Pages routing and cached browser assets must be exercised through the user path.

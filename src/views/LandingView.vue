@@ -2,7 +2,9 @@
 import { useRouter } from 'vue-router'
 
 import AppButton from '@/components/AppButton.vue'
+import introduction from '@/content/introduction.md?raw'
 import { trackStart } from '@/domain/analytics'
+import { renderMarkdown } from '@/markdown'
 
 const router = useRouter()
 
@@ -22,22 +24,11 @@ function begin(): void {
         a customizable VDP, optional coordinated-disclosure timeline, standalone safe-harbor
         language, an RFC 9116 security.txt file, and draft DNS Security TXT records.
       </p>
-      <div class="action-bar"><AppButton @click="begin">Build your policy</AppButton></div>
     </header>
 
-    <section class="landing__summary" aria-labelledby="what-you-get">
-      <h2 id="what-you-get">What Policymaker produces</h2>
-      <ul>
-        <li><strong>Vulnerability Disclosure Policy:</strong> a complete policy for a new or replacement program.</li>
-        <li><strong>Safe Harbor:</strong> standardized language that can be added to an existing policy.</li>
-        <li><strong>security.txt:</strong> an RFC 9116 file that directs researchers to the correct reporting channel.</li>
-        <li><strong>DNS Security TXT:</strong> a DNS record that publishes security-contact information.</li>
-      </ul>
-      <p>
-        The generated language comes from the disclose.io Framework's canonical, publicly reviewed
-        terms. Policymaker is a starting point for implementation and does not provide legal advice.
-      </p>
-    </section>
+    <div class="markdown-content" v-html="renderMarkdown(introduction)" />
 
+    <!-- Label is "Begin" because the prose above ends with: Ready to start? Hit "Begin". -->
+    <div class="action-bar"><AppButton @click="begin">Begin</AppButton></div>
   </article>
 </template>

@@ -46,7 +46,7 @@ const organizationError = computed(() =>
     </div>
 
     <div class="action-bar">
-      <AppButton theme="muted" @click="router.push('/policymaker/introduction')">Back</AppButton>
+      <AppButton theme="muted" @click="router.push('/')">Back</AppButton>
       <AppButton :disabled="!validOrganizationStep" @click="router.push('/policymaker/settings')">Next</AppButton>
     </div>
   </article>

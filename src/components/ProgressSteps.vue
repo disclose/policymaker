@@ -6,9 +6,13 @@ import { NAV_STEPS } from '@/config'
 
 const route = useRoute()
 
+// '/' is a prefix of every path, so the landing step must match exactly or it would claim
+// every route. Download is checked first because its children are nested one level deeper.
 const activeStep = computed(() => {
-  const index = NAV_STEPS.findIndex((step) => route.path.startsWith(step.route))
-  if (route.path.startsWith('/policymaker/download')) return 4
+  if (route.path.startsWith('/policymaker/download')) return NAV_STEPS.length
+  const index = NAV_STEPS.findIndex((step) =>
+    step.route === '/' ? route.path === '/' : route.path.startsWith(step.route),
+  )
   return index >= 0 ? index + 1 : 1
 })
 

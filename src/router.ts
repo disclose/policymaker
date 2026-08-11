@@ -2,7 +2,6 @@ import { createRouter, createWebHistory, type RouteRecordRaw, type RouterHistory
 
 import DownloadView from '@/views/DownloadView.vue'
 import DnsSecurityTxtView from '@/views/DnsSecurityTxtView.vue'
-import IntroductionView from '@/views/IntroductionView.vue'
 import LandingView from '@/views/LandingView.vue'
 import OrganizationView from '@/views/OrganizationView.vue'
 import SafeHarborView from '@/views/SafeHarborView.vue'
@@ -13,8 +12,10 @@ import { usePolicymaker } from '@/state/policymaker'
 
 export const routeRecords: RouteRecordRaw[] = [
   { path: '/', component: LandingView, name: 'landing' },
-  { path: '/policymaker', redirect: '/policymaker/introduction' },
-  { path: '/policymaker/introduction', component: IntroductionView, name: 'introduction' },
+  // The introduction prose lives on the landing page. Both legacy paths stay in ROUTES so the
+  // static build still emits a 200 entry for them, and redirect here so inbound links resolve.
+  { path: '/policymaker', redirect: '/' },
+  { path: '/policymaker/introduction', redirect: '/' },
   {
     path: '/policymaker/organization',
     component: OrganizationView,
@@ -26,7 +27,7 @@ export const routeRecords: RouteRecordRaw[] = [
     name: 'settings',
     beforeEnter: () => {
       const { validOrganizationStep } = usePolicymaker()
-      return validOrganizationStep.value || '/policymaker/introduction'
+      return validOrganizationStep.value || '/policymaker/organization'
     },
   },
   {
@@ -34,7 +35,7 @@ export const routeRecords: RouteRecordRaw[] = [
     component: DownloadView,
     beforeEnter: () => {
       const { validAll } = usePolicymaker()
-      return validAll.value || '/policymaker/introduction'
+      return validAll.value || '/policymaker/organization'
     },
     children: [
       { path: '', redirect: '/policymaker/download/vdp' },

@@ -4,6 +4,12 @@ export function trackEvent(name: string, parameters: AnalyticsParameters): void 
   window.gtag?.('event', name, parameters)
 }
 
+/**
+ * `wizard_introduction` is retained for GA continuity only. The standalone introduction step was
+ * merged into the landing page on 2026-08-11 and no longer emits this entry point; the member
+ * stays so existing funnel reports keyed on the literal do not read as a traffic collapse.
+ * @deprecated since 2026-08-11 — no call site emits `wizard_introduction`.
+ */
 export function trackStart(entryPoint: 'landing_page' | 'wizard_introduction'): void {
   trackEvent('policymaker_start', { entry_point: entryPoint })
 }

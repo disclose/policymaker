@@ -14,7 +14,7 @@ export const ROUTES = [
 ] as const
 
 export const NAV_STEPS = [
-  { route: '/policymaker/introduction', name: 'Introduction' },
+  { route: '/', name: 'Introduction' },
   { route: '/policymaker/organization', name: 'Organization details' },
   { route: '/policymaker/settings', name: 'Policy settings' },
   { route: '/policymaker/download', name: 'Download' },

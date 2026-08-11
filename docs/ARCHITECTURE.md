@@ -40,9 +40,9 @@ flowchart LR
 
 Vite builds one single-page application. `scripts/generate-static-routes.ts` then writes direct static entries so GitHub Pages can serve every historical path without relying on a server rewrite:
 
-- `/`
-- `/policymaker`
-- `/policymaker/introduction`
+- `/` — landing page, carries the introduction prose from `src/content/introduction.md`
+- `/policymaker` — legacy path, redirects to `/`
+- `/policymaker/introduction` — legacy path, redirects to `/`
 - `/policymaker/organization`
 - `/policymaker/settings`
 - `/policymaker/download`
@@ -51,7 +51,7 @@ Vite builds one single-page application. `scripts/generate-static-routes.ts` the
 - `/policymaker/download/securitytxt`
 - `/policymaker/download/dnssecuritytxt`
 
-`404.html` provides the static-host fallback. Router guards send incomplete protected flows back to the introduction.
+The two legacy paths stay in `ROUTES` so the static build still emits a 200-status entry for each; the router redirects them to `/`, where the introduction prose now lives. `404.html` provides the static-host fallback. Router guards send incomplete protected flows back to `/policymaker/organization`, the first input step.
 
 ## Standards boundaries
 
