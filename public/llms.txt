@@ -1,0 +1,24 @@
+# Policymaker (disclose.io)
+
+> A free, open-source, account-free web tool that generates a deployable vulnerability-disclosure package from a four-step wizard.
+
+Canonical: https://policymaker.disclose.io/
+Publisher: disclose.io
+License: open source (see https://github.com/disclose/policymaker)
+
+## What it does
+- Generates a customized **vulnerability disclosure policy (VDP)** from the pinned canonical language in disclose.io DIOTerms.
+- Generates a standalone **safe-harbor clause**.
+- Produces a **security.txt** file (RFC 9116) with your security contact and policy URLs.
+- Produces normative **DNS Security TXT** records at `_security.<domain>`.
+- Downloads individual artifacts or a seven-file ZIP with deployment instructions.
+- Keeps answers only in the current browser tab; there is no policymaker account or backend persistence.
+
+## How to use
+Open the site, provide an organization and reporting channels, choose the disclosure timeline and safe-harbor options, then preview, copy, or download the outputs. Only semantically complete locale and policy combinations from the pinned DIOTerms revision are offered.
+
+## Related disclose.io properties
+- Canonical policy source: https://github.com/disclose/dioterms
+- Application source and maintainer documentation: https://github.com/disclose/policymaker
+- DNS Security TXT standard: https://dnssecuritytxt.org/
+- Security-contact lookup: https://lookup.disclose.io/

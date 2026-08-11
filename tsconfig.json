@@ -1,40 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
-    "lib": [
-      "ESNext",
-      "ESNext.AsyncIterable",
-      "DOM"
-    ],
-    "esModuleInterop": true,
-    "allowJs": true,
-    "sourceMap": true,
+    "moduleResolution": "Bundler",
     "strict": true,
-    "noEmit": true,
-    "experimentalDecorators": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["bun-types", "vite/client", "vitest/globals"],
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "./*"
-      ],
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["src/*"]
     },
-    "types": [
-      "@nuxt/types",
-      "@nuxtjs/axios",
-      "@nuxt/content",
-      "@types/node",
-      "nuxt-i18n",
-      "@types/lodash"
-    ]
+    "skipLibCheck": true,
+    "noEmit": true
   },
-  "exclude": [
-    "node_modules",
-    ".nuxt",
-    "dist"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.vue", "scripts/**/*.ts", "tests/**/*.ts", "vite.config.ts"],
+  "exclude": ["dist", "node_modules"]
 }

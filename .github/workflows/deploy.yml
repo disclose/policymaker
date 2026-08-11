@@ -7,6 +7,13 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+concurrency:
+  group: policymaker-pages
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,23 +22,16 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version-file: .nvmrc
-          cache: npm
+          bun-version: 1.3.6
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: bun install --frozen-lockfile
 
-      # dioterms (vendor/dioterms submodule) is the canonical source for the
-      # policy term templates. Project it into static/templates before generate
-      # so the deployed site always serves the pinned canonical language.
-      - name: Sync templates from dioterms (canonical source)
-        run: node scripts/sync-templates.mjs
-
-      - name: Generate static site
-        run: npx nuxt generate
+      - name: Verify and build static site
+        run: bun run verify
 
       - name: Deploy
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
