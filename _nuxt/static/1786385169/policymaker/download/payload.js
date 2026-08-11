@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/policymaker/download", {data:[{}],fetch:{},mutations:[]});
