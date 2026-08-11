@@ -41,6 +41,6 @@
     "postcss": "^8.4.31",
     "postcss-css-variables": "^0.18.0",
     "postcss-nested": "^6.0.1",
-    "vuex-module-decorators": "^1.0.1"
+    "vuex-module-decorators": "^2.0.0"
   }
 }
