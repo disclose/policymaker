@@ -1,14 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-
 import logo from '@/assets/logo-disclose-type.svg'
 import ProgressSteps from '@/components/ProgressSteps.vue'
-
-const route = useRoute()
-const showSessionNotice = computed(() =>
-  route.path.startsWith('/policymaker/') && route.path !== '/policymaker/introduction',
-)
 </script>
 
 <template>
@@ -21,9 +13,6 @@ const showSessionNotice = computed(() =>
     </header>
     <main class="main">
       <div class="content-shell">
-        <p v-if="showSessionNotice" class="session-note">
-          <strong>Private by design:</strong> your answers stay in this tab and reset if you refresh or close it.
-        </p>
         <RouterView />
         <footer>
           &copy; Copyright {{ new Date().getFullYear() }} The

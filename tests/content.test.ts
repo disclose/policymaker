@@ -1,3 +1,6 @@
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+
 import { describe, expect, it } from 'vitest'
 
 import dnsSecurityTxt from '@/content/dnssecuritytxt.md?raw'
@@ -5,7 +8,6 @@ import introduction from '@/content/introduction.md?raw'
 import securityTxt from '@/content/securitytxt.md?raw'
 
 describe('guidance content', () => {
-  const app = readFileSync(join(process.cwd(), 'src/App.vue'), 'utf8')
   const downloadView = readFileSync(join(process.cwd(), 'src/views/DownloadView.vue'), 'utf8')
   const landingView = readFileSync(join(process.cwd(), 'src/views/LandingView.vue'), 'utf8')
   it('retains all introduction sections', () => {
@@ -33,13 +35,10 @@ describe('guidance content', () => {
     expect(landingView).not.toContain('renderMarkdown(introduction)')
   })
 
-  it('surfaces privacy and standards-aware deployment guidance in the workflow', () => {
-    expect(app).toContain('your answers stay in this tab and reset if you refresh or close it')
+  it('surfaces standards-aware deployment guidance in the workflow', () => {
     for (const step of ['Publish the policy', '/.well-known/security.txt', '_security.&lt;domain&gt;', 'renew them before their expiry']) {
       expect(downloadView).toContain(step)
     }
     expect(downloadView).toContain('Download all (.zip)')
   })
 })
-import { readFileSync } from 'node:fs'
-import { join } from 'node:path'

@@ -453,16 +453,6 @@ footer {
   font-size: 0.875rem;
 }
 
-.session-note {
-  max-width: 920px;
-  padding: 0.7rem 0.9rem;
-  margin: 0 0 1.5rem;
-  color: var(--muted);
-  font-size: 0.875rem;
-  background: var(--surface);
-  border-left: 3px solid var(--accent);
-}
-
 .markdown-content {
   max-width: 920px;
   line-height: 1.55;
