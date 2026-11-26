@@ -38,6 +38,8 @@
       // boundary in docs/ARCHITECTURE.md. Session recording is off because the wizard's inputs are
       // an organisation's name and contact addresses. Autocapture, dead-click capture and heatmaps are off (the project's remote config enables dead clicks): explicit events only.
       ;(function () {
+        // Production host only: local, preview and test runs never reach the shared project.
+        if (window.location.hostname !== 'policymaker.disclose.io') return
         var host = 'https://us.i.posthog.com'
         var script = document.createElement('script')
         script.async = true
