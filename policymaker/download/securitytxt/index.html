@@ -32,6 +32,33 @@
         },
       })
     </script>
+    <script>
+      // PostHog (project shared with lookup.disclose.io). Same events as GA4, via trackEvent().
+      // persistence 'memory': nothing is written to cookies or storage, keeping the no-persistence
+      // boundary in docs/ARCHITECTURE.md. Session recording is off because the wizard's inputs are
+      // an organisation's name and contact addresses. Autocapture is off: explicit events only.
+      ;(function () {
+        var host = 'https://us.i.posthog.com'
+        var script = document.createElement('script')
+        script.async = true
+        script.src = host + '/static/array.js'
+        script.onload = function () {
+          if (!window.posthog) return
+          window.posthog.init('phc_rmyXAYbHuciDyeTpjmwuh6wqm4wmJkWtNrJBFpM2QuM8', {
+            api_host: host,
+            persistence: 'memory',
+            autocapture: false,
+            capture_pageview: 'history_change',
+            capture_pageleave: true,
+            disable_session_recording: true,
+            disable_surveys: true,
+            capture_exceptions: { capture_unhandled_errors: true, capture_unhandled_rejections: true, capture_console_errors: false },
+          })
+          window.dispatchEvent(new Event('posthog:ready'))
+        }
+        document.head.appendChild(script)
+      })()
+    </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -48,7 +75,7 @@
         "publisher": { "@type": "Organization", "name": "disclose.io", "url": "https://disclose.io/" }
       }
     </script>
-    <script type="module" crossorigin src="/assets/index-DOI9Ww6b.js"></script>
+    <script type="module" crossorigin src="/assets/index-BahkmPKX.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-WghD_H25.css">
   </head>
   <body>
