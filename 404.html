@@ -36,7 +36,7 @@
       // PostHog (project shared with lookup.disclose.io). Same events as GA4, via trackEvent().
       // persistence 'memory': nothing is written to cookies or storage, keeping the no-persistence
       // boundary in docs/ARCHITECTURE.md. Session recording is off because the wizard's inputs are
-      // an organisation's name and contact addresses. Autocapture is off: explicit events only.
+      // an organisation's name and contact addresses. Autocapture, dead-click capture and heatmaps are off (the project's remote config enables dead clicks): explicit events only.
       ;(function () {
         var host = 'https://us.i.posthog.com'
         var script = document.createElement('script')
@@ -48,6 +48,8 @@
             api_host: host,
             persistence: 'memory',
             autocapture: false,
+            capture_dead_clicks: false,
+            capture_heatmaps: false,
             capture_pageview: 'history_change',
             capture_pageleave: true,
             disable_session_recording: true,
