@@ -4,9 +4,39 @@ export type AnalyticsParameters = Record<string, boolean | number | string>
 
 export type TrackedArtifact = 'deployment_bundle' | 'dns' | 'safe-harbor' | 'security.txt' | 'vdp'
 
+type PendingEvent = [name: string, parameters: AnalyticsParameters]
+const pendingPostHogEvents: PendingEvent[] = []
+const PENDING_LIMIT = 50
+
+/**
+ * Every event goes to both GA4 and PostHog through this one function, so no call site can reach
+ * one and miss the other. posthog-js loads asynchronously from index.html; an event fired before
+ * it is ready (a fast first click) is held and flushed on `posthog:ready` instead of being lost.
+ * The same parameters go to both: only the wizard's enumerated answers and the policy_id hash,
+ * never what the user typed.
+ */
 export function trackEvent(name: string, parameters: AnalyticsParameters): void {
   window.gtag?.('event', name, parameters)
+  const posthog = window.posthog
+  if (posthog?.__loaded) {
+    posthog.capture(name, parameters)
+  } else if (pendingPostHogEvents.length < PENDING_LIMIT) {
+    pendingPostHogEvents.push([name, parameters])
+  }
 }
+
+export function flushPendingPostHogEvents(): void {
+  const posthog = window.posthog
+  if (!posthog?.__loaded) return
+  for (const [name, parameters] of pendingPostHogEvents.splice(0)) posthog.capture(name, parameters)
+}
+
+/** Test seam: the queue above is module state. */
+export function resetPendingPostHogEvents(): void {
+  pendingPostHogEvents.length = 0
+}
+
+if (typeof window !== 'undefined') window.addEventListener('posthog:ready', flushPendingPostHogEvents)
 
 /**
  * Stable, non-identifying id for one policy configuration.

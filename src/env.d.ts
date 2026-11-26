@@ -9,6 +9,10 @@ declare global {
   interface Window {
     dataLayer: unknown[]
     gtag?: (...args: unknown[]) => void
+    posthog?: {
+      __loaded?: boolean
+      capture: (event: string, properties?: Record<string, unknown>) => void
+    }
   }
 }
 
