@@ -55,6 +55,10 @@
             capture_heatmaps: false,
             capture_pageview: 'history_change',
             capture_pageleave: true,
+            // Send each event immediately. With batching, events from the last ~2 s before a tab
+            // closes (the step a visitor abandoned on, and $pageleave) were lost: reproduced twice
+            // on production 2026-11-26. Traffic is low, so one request per event costs nothing.
+            request_batching: false,
             session_recording: { maskAllInputs: true },
             disable_surveys: true,
             capture_exceptions: { capture_unhandled_errors: true, capture_unhandled_rejections: true, capture_console_errors: false },
