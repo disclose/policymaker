@@ -67,7 +67,7 @@ These contracts live in pure functions and are exercised with examples plus prop
 
 The production bundle contains only static assets. Configuration is not written to local storage, session storage, IndexedDB, a cookie, or a backend. Generated downloads are assembled locally with browser object URLs.
 
-Analytics go to GA4 and PostHog through one function, `trackEvent` in `src/domain/analytics.ts`. Events carry only enumerated wizard answers (locale, channel count, CVD days, artifact, format) and the `policy_id` hash, never typed values. PostHog runs with `persistence: 'memory'` (no cookie or storage), autocapture off and session recording off, configured in `index.html`.
+Analytics go to GA4 and PostHog through one function, `trackEvent` in `src/domain/analytics.ts`. Events carry only enumerated wizard answers (locale, channel count, CVD days, artifact, format) and the `policy_id` hash, never typed values. PostHog runs with `persistence: 'memory'` (no cookie or storage), autocapture, dead clicks and heatmaps off, and session replay on with all inputs masked (rendered text such as the policy preview is recorded), configured in `index.html`.
 
 `scripts/check-architecture.ts` guards the no-backend, no-runtime-policy-fetch, and no-persistence boundaries. `scripts/check-legacy.ts` prevents old Nuxt surfaces or duplicate runtime policy templates from returning.
 
