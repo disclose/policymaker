@@ -35,8 +35,9 @@
     <script>
       // PostHog (project shared with lookup.disclose.io). Same events as GA4, via trackEvent().
       // persistence 'memory': nothing is written to cookies or storage, keeping the no-persistence
-      // boundary in docs/ARCHITECTURE.md. Session recording is off because the wizard's inputs are
-      // an organisation's name and contact addresses. Autocapture, dead-click capture and heatmaps are off (the project's remote config enables dead clicks): explicit events only.
+      // boundary in docs/ARCHITECTURE.md. Session replay is on (Casey, 2026-11-26) with every
+      // form input masked, so typed answers are not recorded as keystrokes or field values; text the
+      // page itself renders (the policy preview) is recorded as shown. Autocapture, dead-click capture and heatmaps are off (the project's remote config enables dead clicks): explicit events only.
       ;(function () {
         // Production host only: local, preview and test runs never reach the shared project.
         if (window.location.hostname !== 'policymaker.disclose.io') return
@@ -54,7 +55,7 @@
             capture_heatmaps: false,
             capture_pageview: 'history_change',
             capture_pageleave: true,
-            disable_session_recording: true,
+            session_recording: { maskAllInputs: true },
             disable_surveys: true,
             capture_exceptions: { capture_unhandled_errors: true, capture_unhandled_rejections: true, capture_console_errors: false },
           })
